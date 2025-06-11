@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presales Discovery & ROI Tool</title>
     <!-- Document Icon (Favicon) - Simple SVG document icon in base64 -->
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBwdiI+PHBhdGggZD0iTTE1IDJINmEyIDIgMCAwIDAtMiAydjE2YTIgMiAwIDAgMCAyIDJoMTJhMiAyIDAgMCAwIDItMlY3WiIvPjxwYXRoIGQ9Ik0xNCAydjRhMiAyIDAgMCAyIDJoNCIvPjxwYXRoIGQ9Ik0xMCA5SDh2NHoiLz48cGF0aCBkPSJNMTYgMTNoNCIvPjxwYXRoGkQ9Ik0xNiAxN2g0Ii8+PC9zdmc+" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBwdiI+PHBhdGggZD0iTTE1IDJINmEyIDIgMCAwIDAtMiAydjE2YTIgMiAwIDAgMCAyIDJoMTJhMiAyIDAgMCAwIDItMlY3WiIvPjxwYXRoIGQ9Ik0xNCAydjRhMiAyIDAgMCAyIDJoNCIvPjxwYXRoGkQ9Ik0xMCA5SDh2NHoiLz48cGF0aCBkPSJNMTYgMTNoNCIvPjxwYXRoGkQ9Ik0xNiAxN2g0Ii8+PC9zdmc+" type="image/svg+xml">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1103,6 +1103,7 @@
 
         function hideConfirmationModal() {
             confirmationModal.classList.add('hidden');
+            confirmationModal.style.display = 'none'; // Explicitly set display to none
         }
 
         // Execute Clear Form Function (after confirmation)
