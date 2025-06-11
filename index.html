@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presales Discovery & ROI Tool</title>
     <!-- Document Icon (Favicon) - Simple SVG document icon in base64 -->
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWNhcD0icm91bmQicHZiPjxwYXRoIGQ9Ik0xNSAySDZhMiAyIDAgMCAwLTIgMnYxNmEyIDIgMCAwIDAgMiAyaDEyYTIgMiAwIDAgMCAyLTJWN1oiLz48cGF0aCBkPSJNMTQgMnY0YTIyIDAgMCAyIDJoNCIvPjxwYXRoIGQ9Ik0xMCA5SDh2NHoiLz48cGF0aCBkPSJNMTYgMTNoNCIvPjxwYXRoGkQ9Ik0xNiAxN2g0Ii8+PC9zdmc+" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBwdiI+PHBhdGggZD0iTTE1IDJINmEyIDIgMCAwIDAtMiAydjE2YTIgMiAwIDAgMCAyIDJoMTJhMiAyIDAgMCAwIDItMlY3WiIvPjxwYXRoIGQ9Ik0xNCAydjRhMiAyIDAgMCAyIDJoNCIvPjxwYXRoIGQ9Ik0xMCA5SDh2NHoiLz48cGF0aCBkPSJNMTYgMTNoNCIvPjxwYXRoGkQ9Ik0xNiAxN2g0Ii8+PC9zdmc+" type="image/svg+xml">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,6 +41,33 @@
         button:hover {
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
         }
     </style>
 </head>
@@ -129,9 +156,20 @@
         </div>
     </div>
 
+    <!-- Clear Form Confirmation Modal -->
+    <div id="confirmation-modal" class="modal hidden">
+        <div class="modal-content">
+            <p class="text-lg font-semibold mb-4">Are you sure you want to clear the form?</p>
+            <div class="flex justify-center gap-4">
+                <button id="confirm-clear-button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-lg shadow-md transition-all duration-300">OK</button>
+                <button id="cancel-clear-button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md transition-all duration-300">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Copyright Notice -->
     <footer class="mt-8 text-gray-500 text-sm">
-        (c) Brad Whatman
+        (c) Brad Whatman 2025
     </footer>
 
     <script>
@@ -164,7 +202,8 @@
                     { id: 'roi_ar1', text: 'Average cost to manually process one invoice ($) (Per Invoice)', type: 'number' },
                     { id: 'roi_ar2', text: 'Number of full-time employees (FTEs) dedicated to AR collections (FTEs)', type: 'number' },
                     { id: 'roi_ar3', text: 'Average annual salary + benefits for AR staff ($) (Annual)', type: 'number' },
-                    { id: 'roi_ar4', text: 'Percentage of invoices requiring manual intervention (%) (Percentage)', type: 'number' },
+                    { id: 'roi_ar4_current_manual_intervention_pct', text: 'Current percentage of invoices requiring manual intervention (%)', type: 'number' },
+                    { id: 'roi_ar4_target_manual_intervention_pct', text: 'Target percentage of invoices requiring manual intervention (%)', type: 'number' },
                     { id: 'roi_ar5', text: 'Current annual cost of printing, postage, and archiving invoices ($) (Annual)', type: 'number' },
                     { id: 'roi_ar6', text: 'Number of customer disputes (Monthly)', type: 'number' },
                     { id: 'roi_ar7', text: 'Average time spent resolving one dispute (Hours) (Per Dispute)', type: 'number' },
@@ -200,10 +239,10 @@
                     { id: 'roi_om1', text: 'Average cost to manually process one sales order ($) (Per Order)', type: 'number' },
                     { id: 'roi_om2', text: 'Number of full-time employees (FTEs) dedicated to order entry and processing (FTEs)', type: 'number' },
                     { id: 'roi_om3', text: 'Average annual salary + benefits for OM staff ($) (Annual)', type: 'number' },
-                    { id: 'roi_om4', text: 'Percentage of orders requiring manual data entry (%) (Percentage)', type: 'number' },
+                    { id: 'roi_om4_current_manual_entry_pct', text: 'Current percentage of orders requiring manual data entry (%)', type: 'number' },
+                    { id: 'roi_om4_target_manual_entry_pct', text: 'Target percentage of orders requiring manual data entry (%)', type: 'number' },
                     { id: 'roi_om5', text: 'Average cost of correcting an order error ($) (Per Error)', type: 'number' },
                     { id: 'roi_om6', text: 'Number of order errors (Monthly)', type: 'number' },
-                    { id: 'roi_om7', text: 'Average time spent on order status inquiries (Minutes) (Per Inquiry)', type: 'number' },
                     { id: 'roi_om8', text: 'Annual volume of sales orders processed (Annual)', type: 'number' },
                     { id: 'roi_om9', text: 'Average revenue per order ($) (Per Order)', type: 'number' },
                     { id: 'roi_om10', text: 'Current order cycle time (Days) (Days)', type: 'number' },
@@ -271,7 +310,8 @@
                     { id: 'roi_ci2', text: 'Number of full-time employees (FTEs) dedicated to customer enquiries (FTEs)', type: 'number' },
                     { id: 'roi_ci3', text: 'Average annual salary + benefits for enquiry staff ($) (Annual)', type: 'number' },
                     { id: 'roi_ci4', text: 'Annual volume of customer enquiries (Annual)', type: 'number' },
-                    { id: 'roi_ci5', text: 'Percentage of enquiries resolved on first contact (%) (Percentage)', type: 'number' },
+                    { id: 'roi_ci5_current_fcr_pct', text: 'Current First Contact Resolution (FCR) percentage (%)', type: 'number' },
+                    { id: 'roi_ci5_target_fcr_pct', text: 'Target First Contact Resolution (FCR) percentage (%)', type: 'number' },
                     { id: 'roi_ci6', text: 'Average time spent on each enquiry (Minutes) (Per Enquiry)', type: 'number' },
                     { id: 'roi_ci7', text: 'Cost of lost customer due to poor service ($) (Annual)', type: 'number' },
                 ],
@@ -304,7 +344,8 @@
                     { id: 'roi_ca2', text: 'Number of full-time employees (FTEs) dedicated to cash application (FTEs)', type: 'number' },
                     { id: 'roi_ca3', text: 'Average annual salary + benefits for cash application staff ($) (Annual)', type: 'number' },
                     { id: 'roi_ca4', text: 'Annual volume of payments received (Annual)', type: 'number' },
-                    { id: 'roi_ca5', text: 'Percentage of payments requiring manual intervention (%) (Percentage)', type: 'number' },
+                    { id: 'roi_ca5_current_manual_intervention_pct', text: 'Current percentage of payments requiring manual intervention (%)', type: 'number' },
+                    { id: 'roi_ca5_target_manual_intervention_pct', text: 'Target percentage of payments requiring manual intervention (%)', type: 'number' },
                     { id: 'roi_ca6', text: 'Average time spent resolving unapplied cash (Hours) (Per Unapplied Item)', type: 'number' },
                     { id: 'roi_ca7', text: 'Annual value of unapplied cash ($) (Annual)', type: 'number' },
                     { id: 'roi_ca8', text: 'Cost of capital (annual interest rate for outstanding receivables, %) (Percentage)', type: 'number' },
@@ -371,7 +412,8 @@
                     { id: 'roi_p2', text: 'Number of full-time employees (FTEs) dedicated to procurement (FTEs)', type: 'number' },
                     { id: 'roi_p3', text: 'Average annual salary + benefits for procurement staff ($) (Annual)', type: 'number' },
                     { id: 'roi_p4', text: 'Annual volume of purchase orders (Annual)', type: 'number' },
-                    { id: 'roi_p5', text: 'Percentage of "maverick spend" (%) (Percentage)', type: 'number' },
+                    { id: 'roi_p5_current_maverick_spend_pct', text: 'Current percentage of "maverick spend" (%)', type: 'number' },
+                    { id: 'roi_p5_target_maverick_spend_pct', text: 'Target percentage of "maverick spend" (%)', type: 'number' },
                     { id: 'roi_p6', text: 'Average time spent on manual PO approval (Hours) (Per PO)', type: 'number' },
                     { id: 'roi_p7', text: 'Annual cost of PO errors ($) (Annual)', type: 'number' },
                     { id: 'roi_p8', text: 'Total annual spend ($) (Annual)', type: 'number' },
@@ -407,7 +449,8 @@
                     { id: 'roi_sm4', text: 'Annual volume of new supplier onboarding (Annual)', type: 'number' },
                     { id: 'roi_sm5', text: 'Average time spent on manual supplier data entry (Hours) (Per Supplier)', type: 'number' },
                     { id: 'roi_sm6', text: 'Annual cost of supplier non-compliance issues ($) (Annual)', type: 'number' },
-                    { id: 'roi_sm7', text: 'Percentage of suppliers with incomplete or inaccurate data (%) (Percentage)', type: 'number' },
+                    { id: 'roi_sm7_current_inaccurate_data_pct', text: 'Current percentage of suppliers with incomplete or inaccurate data (%)', type: 'number' },
+                    { id: 'roi_sm7_target_inaccurate_data_pct', text: 'Target percentage of suppliers with incomplete or inaccurate data (%)', type: 'number' },
                 ],
             },
             'Sourcing': {
@@ -440,7 +483,8 @@
                     { id: 'roi_s4', text: 'Annual volume of sourcing events (Annual)', type: 'number' },
                     { id: 'roi_s5', text: 'Average sourcing cycle time (Days) (Days)', type: 'number' },
                     { id: 'roi_s6', text: 'Total annual spend under management ($) (Annual)', type: 'number' },
-                    { id: 'roi_s7', text: 'Current average savings from sourcing (%) (Percentage)', type: 'number' },
+                    { id: 'roi_s7_current_avg_savings_pct', text: 'Current average savings from sourcing (%)', type: 'number' },
+                    { id: 'roi_s7_target_avg_savings_pct', text: 'Target average savings from sourcing (%)', type: 'number' },
                 ],
             },
             'Claims & Deductions': {
@@ -473,7 +517,8 @@
                     { id: 'roi_cd4', text: 'Annual volume of claims/deductions received (Annual)', type: 'number' },
                     { id: 'roi_cd5', text: 'Average time spent resolving one claim (Hours) (Per Claim)', type: 'number' },
                     { id: 'roi_cd6', text: 'Annual value of invalid claims/deductions ($) (Annual)', type: 'number' },
-                    { id: 'roi_cd7', text: 'Percentage of claims requiring manual research (%) (Percentage)', type: 'number' },
+                    { id: 'roi_cd7_current_manual_research_pct', text: 'Current percentage of claims requiring manual research (%)', type: 'number' },
+                    { id: 'roi_cd7_target_manual_research_pct', text: 'Target percentage of claims requiring manual research (%)', type: 'number' },
                 ],
             },
             'Invoice Delivery': {
@@ -504,12 +549,134 @@
                     { id: 'roi_id2', text: 'Number of full-time employees (FTEs) involved in invoice delivery (FTEs)', type: 'number' },
                     { id: 'roi_id3', text: 'Average annual salary + benefits for invoice delivery staff ($) (Annual)', type: 'number' },
                     { id: 'roi_id4', text: 'Annual volume of invoices delivered (Annual)', type: 'number' },
-                    { id: 'roi_id5', text: 'Percentage of invoices requiring manual intervention (%) (Percentage)', type: 'number' },
+                    { id: 'roi_id5_current_manual_intervention_pct', text: 'Current percentage of invoices requiring manual intervention (%)', type: 'number' },
+                    { id: 'roi_id5_target_manual_intervention_pct', text: 'Target percentage of invoices requiring manual intervention (%)', type: 'number' },
                     { id: 'roi_id6', text: 'Average time spent resolving failed deliveries (Hours) (Per Failed Delivery)', type: 'number' },
                     { id: 'roi_id7', text: 'Cost of lost early payment discounts due to delayed delivery ($) (Annual)', type: 'number' },
                 ],
             },
         };
+
+        // Demo data for ROI calculation fields (excluding annual subscription, professional services, and years utilised)
+        const demoRoiData = {
+            'Accounts Receivable': {
+                roi_ar1: 3.50,
+                roi_ar2: 5,
+                roi_ar3: 75000,
+                roi_ar4_current_manual_intervention_pct: 70,
+                roi_ar4_target_manual_intervention_pct: 15,
+                roi_ar5: 15000,
+                roi_ar6: 50,
+                roi_ar7: 2,
+                roi_ar8: 5,
+                roi_ar9: 50000,
+                roi_ar10: 120000,
+            },
+            'Order Management': {
+                roi_om1: 4.00,
+                roi_om2: 4,
+                roi_om3: 70000,
+                roi_om4_current_manual_entry_pct: 65,
+                roi_om4_target_manual_entry_pct: 10,
+                roi_om5: 25,
+                roi_om6: 30,
+                roi_om8: 72000,
+                roi_om9: 500,
+                roi_om10: 5,
+            },
+            'Collections Management': {
+                roi_cm1: 2.00,
+                roi_cm2: 3,
+                roi_cm3: 65000,
+                roi_cm4: 10000,
+                roi_cm5: 50000,
+                roi_cm6: 1000,
+                roi_cm7: 45,
+                roi_cm8: 5,
+            },
+            'Customer Inquiries': {
+                roi_ci1: 2.00,
+                roi_ci2: 3,
+                roi_ci3: 60000,
+                roi_ci4: 10000,
+                roi_ci5_current_fcr_pct: 60,
+                roi_ci5_target_fcr_pct: 85,
+                roi_ci6: 15,
+                roi_ci7: 10000,
+            },
+            'Cash Application': {
+                roi_ca1: 2.50,
+                roi_ca2: 2,
+                roi_ca3: 65000,
+                roi_ca4: 50000,
+                roi_ca5_current_manual_intervention_pct: 50,
+                roi_ca5_target_manual_intervention_pct: 5,
+                roi_ca6: 4,
+                roi_ca7: 200000,
+                roi_ca8: 4,
+            },
+            'Credit Management': {
+                roi_crm1: 7.00,
+                roi_crm2: 2,
+                roi_crm3: 70000,
+                roi_crm4: 1000,
+                roi_crm5: 2,
+                roi_crm6: 75000,
+                roi_crm7: 20000,
+            },
+            'Procurement': {
+                roi_p1: 8.00,
+                roi_p2: 3,
+                roi_p3: 70000,
+                roi_p4: 24000,
+                roi_p5_current_maverick_spend_pct: 15,
+                roi_p5_target_maverick_spend_pct: 5,
+                roi_p6: 1,
+                roi_p7: 10000,
+                roi_p8: 5000000,
+            },
+            'Supplier Management': {
+                roi_sm1: 15.00,
+                roi_sm2: 1,
+                roi_sm3: 65000,
+                roi_sm4: 200,
+                roi_sm5: 3,
+                roi_sm6: 5000,
+                roi_sm7_current_inaccurate_data_pct: 30,
+                roi_sm7_target_inaccurate_data_pct: 5,
+            },
+            'Sourcing': {
+                roi_s1: 20.00,
+                roi_s2: 2,
+                roi_s3: 80000,
+                roi_s4: 50,
+                roi_s5: 14,
+                roi_s6: 10000000,
+                roi_s7_current_avg_savings_pct: 2,
+                roi_s7_target_avg_savings_pct: 5,
+            },
+            'Claims & Deductions': {
+                roi_cd1: 6.00,
+                roi_cd2: 2,
+                roi_cd3: 68000,
+                roi_cd4: 1200,
+                roi_cd5: 1.5,
+                roi_cd6: 40000,
+                roi_cd7_current_manual_research_pct: 60,
+                roi_cd7_target_manual_research_pct: 10,
+            },
+            'Invoice Delivery': {
+                roi_id1: 1.50,
+                roi_id2: 1,
+                roi_id3: 60000,
+                roi_id4: 150000,
+                roi_id5_current_manual_intervention_pct: 40,
+                roi_id5_target_manual_intervention_pct: 5,
+                roi_id6: 0.5,
+                roi_id7: 15000,
+            },
+        };
+
 
         // Mapping for copying Discovery Questions to ROI Calculator fields
         const discoveryToRoiMapping = {
@@ -567,7 +734,7 @@
         let currentView = 'discovery'; // 'discovery' or 'roi'
         let eskerSubscriptionCost = {}; // Stores annual subscription cost per module
         let eskerProfessionalServicesCost = {}; // Stores upfront professional services cost per module
-        let numberOfYearsUtilized = {}; // Stores number of years software will be utilized for
+        let numberOfYearsUtilized = {}; // Stores number of years software will be utilised for
         let additionalDiscoveryNotes = {}; // Stores additional free text notes per module
 
         // DOM elements
@@ -579,6 +746,10 @@
         const closeValidationErrorButton = document.getElementById('close-validation-error');
         const clearFormButton = document.getElementById('clear-form-button');
         const exportDataButton = document.getElementById('export-data-button');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const confirmClearButton = document.getElementById('confirm-clear-button');
+        const cancelClearButton = document.getElementById('cancel-clear-button');
+
 
         // Helper function to render Lucide icons (as SVGs)
         function getLucideIcon(iconName, classes = '') {
@@ -597,10 +768,25 @@
             appContent.innerHTML = ''; // Clear previous content
 
             if (!selectedModule) {
+                // Display a message prompting user to select a module
+                appContent.innerHTML = `
+                    <div class="text-center py-10 text-gray-500 text-xl">
+                        Please select a module from the dropdown above to begin.
+                    </div>
+                `;
                 return;
             }
 
             const moduleData = eskerModules[selectedModule];
+            if (!moduleData) {
+                console.error(`Error: Module data not found for selected module: ${selectedModule}`);
+                appContent.innerHTML = `
+                    <div class="text-center py-10 text-red-500 text-xl">
+                        Error loading module data. Please try again or select a different module.
+                    </div>
+                `;
+                return;
+            }
 
             // Navigation Tabs
             const navTabsHtml = `
@@ -769,11 +955,15 @@
                     roiHtml += `</div>`;
                 });
                 roiHtml += `
-                    <div class="flex justify-center mt-6">
-                        <button id="calculate-roi-button" class="flex items-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-4 mt-6">
+                        <button id="calculate-roi-button" class="flex-1 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                             <!-- Calculator icon from Lucide -->
                             <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v4m0-4h6m-6 0H9m6 0a1 1 0 11-2 0 1 1 0 012 0zM12 10V4m0 6a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2a2 2 0 012-2h2z"></path></svg>
                             Calculate ROI
+                        </button>
+                        <button id="populate-demo-data-button" class="flex-1 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                             <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            Demo Data
                         </button>
                     </div>
                 `;
@@ -881,6 +1071,8 @@
 
                 // Attach event listener for calculate ROI button
                 document.getElementById('calculate-roi-button').addEventListener('click', calculateRoi);
+                // Attach event listener for demo data button
+                document.getElementById('populate-demo-data-button').addEventListener('click', populateDemoData);
             }
         }
 
@@ -894,19 +1086,6 @@
             }
         }
 
-        // Handle module selection change
-        moduleSelect.addEventListener('change', (e) => {
-            selectedModule = e.target.value;
-            discoveryAnswers = {}; // Reset answers
-            roiAnswers = {}; // Reset answers
-            calculatedRoi = null; // Reset ROI
-            additionalDiscoveryNotes[selectedModule] = additionalDiscoveryNotes[selectedModule] || []; // Ensure notes are initialised but not reset
-            hideMessage(exportSuccessMessage);
-            hideMessage(copySuccessMessage); // Hide copy success message on module change
-            hideMessage(validationErrorMessage);
-            renderAppContent();
-        });
-
         // Show/Hide messages
         function showMessage(element) {
             element.classList.remove('hidden');
@@ -916,12 +1095,18 @@
             element.classList.add('hidden');
         }
 
-        closeValidationErrorButton.addEventListener('click', () => {
-            hideMessage(validationErrorMessage);
-        });
+        // Show/hide confirmation modal
+        function showConfirmationModal() {
+            confirmationModal.classList.remove('hidden');
+            confirmationModal.style.display = 'flex'; // Ensure flexbox for centering
+        }
 
-        // Clear Form Function
-        function clearForm() {
+        function hideConfirmationModal() {
+            confirmationModal.classList.add('hidden');
+        }
+
+        // Execute Clear Form Function (after confirmation)
+        function executeClearForm() {
             // Reset all state variables
             selectedModule = '';
             discoveryAnswers = {};
@@ -938,11 +1123,12 @@
 
             // Hide messages
             hideMessage(exportSuccessMessage);
-            hideMessage(copySuccessMessage); // Hide copy success message on clear
+            hideMessage(copySuccessMessage);
             hideMessage(validationErrorMessage);
 
             // Re-render app content to reflect cleared state
             renderAppContent();
+            hideConfirmationModal(); // Hide the modal after clearing
         }
 
         // Add Note to Additional Discovery Notes
@@ -1053,6 +1239,30 @@
             renderAppContent();
         }
 
+        // Function to populate ROI fields with demo data
+        function populateDemoData() {
+            if (!selectedModule) {
+                console.warn('No module selected to populate demo data.');
+                return;
+            }
+
+            const demoDataForModule = demoRoiData[selectedModule];
+            if (!demoDataForModule) {
+                console.warn(`No demo data defined for module: ${selectedModule}`);
+                return;
+            }
+
+            // Populate roiAnswers with demo data, preserving existing cost/years fields
+            for (const key in demoDataForModule) {
+                roiAnswers[key] = demoDataForModule[key];
+            }
+
+            // Re-render the ROI tab to show the populated values
+            renderAppContent();
+            // Optionally, run calculation immediately after populating demo data
+            calculateRoi();
+        }
+
 
         // Calculate ROI based on selected module and answers
         function calculateRoi() {
@@ -1078,7 +1288,14 @@
             const isYearsUtilizedValid = !isNaN(yearsUtilized) && isFinite(yearsUtilized) && yearsUtilized > 0;
 
             const allRoiQuestionsValid = currentModule.roiQuestions.every(q => {
-                if (q.type === 'number') {
+                // For 'current' and 'target' percentage fields, ensure they are numbers
+                if (q.id.includes('_current_') || q.id.includes('_target_')) {
+                     const value = parseFloat(roiAnswers[q.id]);
+                     // Allow empty string for current/target percentage fields if they are not yet filled,
+                     // but the calculation will treat them as 0, or they will be caught by the validation.
+                     // The problem statement says "ensure all required fields are filled", so empty is not allowed.
+                     return !isNaN(value) && isFinite(value) && value >= 0;
+                } else if (q.type === 'number') {
                     const value = parseFloat(roiAnswers[q.id]);
                     return !isNaN(value) && isFinite(value) && value >= 0; // Check if it's a valid non-negative number
                 }
@@ -1112,7 +1329,8 @@
                 const manualProcessCostPerInvoice = parseFloat(roiAnswers.roi_ar1 || 0);
                 const fteAR = parseFloat(roiAnswers.roi_ar2 || 0);
                 const avgAnnualSalaryAR = parseFloat(roiAnswers.roi_ar3 || 0);
-                const manualInterventionPct = parseFloat(roiAnswers.roi_ar4 || 0) / 100;
+                const currentManualInterventionPct = parseFloat(roiAnswers.roi_ar4_current_manual_intervention_pct || 0) / 100;
+                const targetManualInterventionPct = parseFloat(roiAnswers.roi_ar4_target_manual_intervention_pct || 0) / 100;
                 const annualPrintPostageArchivingCost = parseFloat(roiAnswers.roi_ar5 || 0);
                 const monthlyDisputes = parseFloat(roiAnswers.roi_ar6 || 0);
                 const timePerDisputeHours = parseFloat(roiAnswers.roi_ar7 || 0);
@@ -1121,14 +1339,13 @@
                 const annualVolumeInvoices = parseFloat(roiAnswers.roi_ar10 || 0);
 
                 // Assumptions for impact
-                const manualProcessingReductionPct = 0.7; // 70% reduction in manual processing efforts
                 const printCostReductionPct = 0.8; // 80% reduction in print/postage costs
                 const disputeResolutionTimeReductionPct = 0.5; // 50% reduction in dispute resolution time
                 const badDebtReductionPct = 0.15; // 15% reduction in bad debt
 
                 // Savings Calculations
-                const manualProcessingSavings = (annualVolumeInvoices * manualInterventionPct) * manualProcessCostPerInvoice * manualProcessingReductionPct;
-                detailedSavingsBreakdown.manualProcessingSavingsCalculation = `(${annualVolumeInvoices} invoices/year * ${manualInterventionPct * 100}% manual * $${manualProcessCostPerInvoice}/invoice * ${manualProcessingReductionPct * 100}% reduction) = $${manualProcessingSavings.toFixed(2)}`;
+                const manualProcessingSavings = (annualVolumeInvoices * (currentManualInterventionPct - targetManualInterventionPct)) * manualProcessCostPerInvoice;
+                detailedSavingsBreakdown.manualProcessingSavingsCalculation = `(${annualVolumeInvoices} invoices/year * (${(currentManualInterventionPct * 100).toFixed(0)}% current - ${(targetManualInterventionPct * 100).toFixed(0)}% target) * $${manualProcessCostPerInvoice}/invoice) = $${manualProcessingSavings.toFixed(2)}`;
 
                 const printCostSavings = annualPrintPostageArchivingCost * printCostReductionPct;
                 detailedSavingsBreakdown.printCostSavingsCalculation = `($${annualPrintPostageArchivingCost}/year * ${printCostReductionPct * 100}% reduction) = $${printCostSavings.toFixed(2)}`;
@@ -1164,35 +1381,30 @@
                 const manualProcessCostPerOrder = parseFloat(roiAnswers.roi_om1 || 0);
                 const fteOM = parseFloat(roiAnswers.roi_om2 || 0);
                 const avgAnnualSalaryOM = parseFloat(roiAnswers.roi_om3 || 0);
-                const manualEntryPct = parseFloat(roiAnswers.roi_om4 || 0) / 100;
+                const currentManualEntryPct = parseFloat(roiAnswers.roi_om4_current_manual_entry_pct || 0) / 100;
+                const targetManualEntryPct = parseFloat(roiAnswers.roi_om4_target_manual_entry_pct || 0) / 100;
                 const costCorrectingError = parseFloat(roiAnswers.roi_om5 || 0);
                 const monthlyOrderErrors = parseFloat(roiAnswers.roi_om6 || 0);
-                const timePerInquiryMinutes = parseFloat(roiAnswers.roi_om7 || 0);
                 const annualVolumeSalesOrders = parseFloat(roiAnswers.roi_om8 || 0);
 
                 // Assumptions for impact
-                const manualEntryReductionPct = 0.6; // 60% reduction in manual order entry efforts
                 const errorReductionPct = 0.7; // 70% reduction in order errors
-                const inquiryTimeReductionPct = 0.4; // 40% reduction in inquiry resolution time
+                // Removed inquiryTimeReductionPct as per request
 
                 // Savings Calculations
-                const manualProcessingSavings = (annualVolumeSalesOrders * manualEntryPct) * manualProcessCostPerOrder * manualEntryReductionPct;
-                detailedSavingsBreakdown.manualProcessingSavingsCalculation = `(${annualVolumeSalesOrders} orders/year * ${manualEntryPct * 100}% manual * $${manualProcessCostPerOrder}/order * ${manualEntryReductionPct * 100}% reduction) = $${manualProcessingSavings.toFixed(2)}`;
+                const manualProcessingSavings = (annualVolumeSalesOrders * (currentManualEntryPct - targetManualEntryPct)) * manualProcessCostPerOrder;
+                detailedSavingsBreakdown.manualProcessingSavingsCalculation = `(${annualVolumeSalesOrders} orders/year * (${(currentManualEntryPct * 100).toFixed(0)}% current - ${(targetManualEntryPct * 100).toFixed(0)}% target) * $${manualProcessCostPerOrder}/order) = $${manualProcessingSavings.toFixed(2)}`;
                 
                 const annualOrderErrors = monthlyOrderErrors * 12;
                 const errorCorrectionSavings = annualOrderErrors * costCorrectingError * errorReductionPct;
                 detailedSavingsBreakdown.errorCorrectionSavingsCalculation = `(${annualOrderErrors} errors/year * $${costCorrectingError}/error * ${errorReductionPct * 100}% reduction) = $${errorCorrectionSavings.toFixed(2)}`;
 
-                const hourlyCostOM = fteOM > 0 ? (avgAnnualSalaryOM / FTE_HOURS_PER_YEAR) : 0;
-                const inquiryTimeSavings = annualVolumeSalesOrders * (timePerInquiryMinutes / 60) * hourlyCostOM * inquiryTimeReductionPct;
-                detailedSavingsBreakdown.inquiryTimeSavingsCalculation = `(${annualVolumeSalesOrders} inquiries/year * ${timePerInquiryMinutes} mins/inquiry / 60 * $${hourlyCostOM.toFixed(2)}/hour * ${inquiryTimeReductionPct * 100}% reduction) = $${inquiryTimeSavings.toFixed(2)}`;
-
-                totalAnnualSavings = manualProcessingSavings + errorCorrectionSavings + inquiryTimeSavings;
+                // Removed inquiryTimeSavings calculation as per request
+                totalAnnualSavings = manualProcessingSavings + errorCorrectionSavings;
 
                 roiResult.details = {
                     ManualProcessingSavings: manualProcessingSavings.toFixed(2),
                     ErrorCorrectionSavings: errorCorrectionSavings.toFixed(2),
-                    InquiryTimeSavings: inquiryTimeSavings.toFixed(2),
                 };
             } else if (selectedModule === 'Collections Management') {
                 // Inputs
@@ -1233,26 +1445,27 @@
                 const fteCI = parseFloat(roiAnswers.roi_ci2 || 0);
                 const avgAnnualSalaryCI = parseFloat(roiAnswers.roi_ci3 || 0);
                 const annualInquiries = parseFloat(roiAnswers.roi_ci4 || 0);
-                const firstContactResolutionPct = parseFloat(roiAnswers.roi_ci5 || 0) / 100;
+                const currentFCR = parseFloat(roiAnswers.roi_ci5_current_fcr_pct || 0) / 100;
+                const targetFCR = parseFloat(roiAnswers.roi_ci5_target_fcr_pct || 0) / 100;
                 const avgTimePerInquiryMinutes = parseFloat(roiAnswers.roi_ci6 || 0);
                 const annualCostLostCustomer = parseFloat(roiAnswers.roi_ci7 || 0);
 
                 // Assumptions for impact
                 const inquiryAutomationSavingsPct = 0.5; // 50% automation of manual inquiries
-                const firstContactResolutionImprovementPct = 0.2; // 20% improvement in FCR (reduces re-contacts)
                 const timePerInquiryReductionPct = 0.3; // 30% reduction in inquiry time
                 const lostCustomerReductionPct = 0.1; // 10% reduction in lost customers due to poor service (direct cost saving)
 
                 // Savings Calculations
                 const manualInquirySavings = annualInquiries * avgCostPerManualInquiry * inquiryAutomationSavingsPct;
-                detailedSavingsBreakdown.manualInquirySavingsCalculation = `(${annualInquiries} inquiries/year * $${avgCostPerManualInquiry}/inquiry * ${inquiryAutomationSavingsPct * 100}% automation) = $${manualInquirySavings.toFixed(2)}`;
+                detailedSavingsBreakdown.manualInquirySavingsCalculation = `(${annualInquiries} enquiries/year * $${avgCostPerManualInquiry}/enquiry * ${inquiryAutomationSavingsPct * 100}% automation) = $${manualInquirySavings.toFixed(2)}`;
 
-                const improvedFCRSavings = annualInquiries * (1 - firstContactResolutionPct) * firstContactResolutionImprovementPct * avgCostPerManualInquiry;
-                detailedSavingsBreakdown.improvedFCRSavingsCalculation = `(${annualInquiries} inquiries * ${((1 - firstContactResolutionPct) * firstContactResolutionImprovementPct) * 100}% improved FCR * $${avgCostPerManualInquiry}/inquiry) = $${improvedFCRSavings.toFixed(2)}`;
+                // Savings from improved FCR (reducing re-contacts)
+                const improvedFCRSavings = annualInquiries * ( (1 - currentFCR) - (1 - targetFCR) ) * avgCostPerManualInquiry;
+                detailedSavingsBreakdown.improvedFCRSavingsCalculation = `(${annualInquiries} enquiries * (current re-contact rate: ${((1 - currentFCR) * 100).toFixed(0)}% - target re-contact rate: ${((1 - targetFCR) * 100).toFixed(0)}%) * $${avgCostPerManualInquiry}/enquiry) = $${improvedFCRSavings.toFixed(2)}`;
 
                 const hourlyCostCI = fteCI > 0 ? (avgAnnualSalaryCI / FTE_HOURS_PER_YEAR) : 0;
                 const timeSavings = annualInquiries * (avgTimePerInquiryMinutes / 60) * hourlyCostCI * timePerInquiryReductionPct;
-                detailedSavingsBreakdown.timeSavingsCalculation = `(${annualInquiries} inquiries/year * ${avgTimePerInquiryMinutes} mins/inquiry / 60 * $${hourlyCostCI.toFixed(2)}/hour * ${timePerInquiryReductionPct * 100}% reduction) = $${timeSavings.toFixed(2)}`;
+                detailedSavingsBreakdown.timeSavingsCalculation = `(${annualInquiries} enquiries/year * ${avgTimePerInquiryMinutes} mins/enquiry / 60 * $${hourlyCostCI.toFixed(2)}/hour * ${timePerInquiryReductionPct * 100}% reduction) = $${timeSavings.toFixed(2)}`;
 
                 const lostCustomerSavings = annualCostLostCustomer * lostCustomerReductionPct;
                 detailedSavingsBreakdown.lostCustomerSavingsCalculation = `($${annualCostLostCustomer}/year * ${lostCustomerReductionPct * 100}% reduction) = $${lostCustomerSavings.toFixed(2)}`;
@@ -1271,26 +1484,26 @@
                 const fteCA = parseFloat(roiAnswers.roi_ca2 || 0);
                 const avgAnnualSalaryCA = parseFloat(roiAnswers.roi_ca3 || 0);
                 const annualPaymentsReceived = parseFloat(roiAnswers.roi_ca4 || 0);
-                const manualInterventionPct = parseFloat(roiAnswers.roi_ca5 || 0) / 100;
+                const currentManualInterventionPct = parseFloat(roiAnswers.roi_ca5_current_manual_intervention_pct || 0) / 100;
+                const targetManualInterventionPct = parseFloat(roiAnswers.roi_ca5_target_manual_intervention_pct || 0) / 100;
                 const timeUnappliedCashHours = parseFloat(roiAnswers.roi_ca6 || 0);
                 const annualUnappliedCashValue = parseFloat(roiAnswers.roi_ca7 || 0);
                 const costOfCapital = parseFloat(roiAnswers.roi_ca8 || 0) / 100;
 
                 // Assumptions for impact
-                const automationSavingsPct = 0.8; // 80% automation of manual cash application
                 const unappliedCashReductionPct = 0.3; // 30% reduction in unapplied cash value (financial benefit)
                 const timeReductionUnappliedCashPct = 0.6; // 60% reduction in time to resolve unapplied cash
 
                 // Savings Calculations
-                const manualApplicationSavings = (annualPaymentsReceived * manualInterventionPct) * avgCostManualApplication * automationSavingsPct;
-                detailedSavingsBreakdown.manualApplicationSavingsCalculation = `(${annualPaymentsReceived} payments/year * ${manualInterventionPct * 100}% manual * $${avgCostManualApplication}/payment * ${automationSavingsPct * 100}% automation) = $${manualApplicationSavings.toFixed(2)}`;
+                const manualApplicationSavings = (annualPaymentsReceived * (currentManualInterventionPct - targetManualInterventionPct)) * avgCostManualApplication;
+                detailedSavingsBreakdown.manualApplicationSavingsCalculation = `(${annualPaymentsReceived} payments/year * (${(currentManualInterventionPct * 100).toFixed(0)}% current - ${(targetManualInterventionPct * 100).toFixed(0)}% target) * $${avgCostManualApplication}/payment) = $${manualApplicationSavings.toFixed(2)}`;
 
                 const unappliedCashValueSavings = annualUnappliedCashValue * unappliedCashReductionPct * costOfCapital; // Cost of capital on unapplied cash
                 detailedSavingsBreakdown.unappliedCashValueSavingsCalculation = `($${annualUnappliedCashValue}/year * ${unappliedCashReductionPct * 100}% reduction * ${costOfCapital * 100}% cost of capital) = $${unappliedCashValueSavings.toFixed(2)}`;
                 
                 const hourlyCostCA = fteCA > 0 ? (avgAnnualSalaryCA / FTE_HOURS_PER_YEAR) : 0;
-                const timeResolutionSavings = (annualPaymentsReceived * manualInterventionPct) * timeUnappliedCashHours * hourlyCostCA * timeReductionUnappliedCashPct; // Assuming time is per manual item
-                detailedSavingsBreakdown.timeResolutionSavingsCalculation = `((${annualPaymentsReceived} payments * ${manualInterventionPct * 100}% manual) * ${timeUnappliedCashHours} hours/item * $${hourlyCostCA.toFixed(2)}/hour * ${timeReductionUnappliedCashPct * 100}% reduction) = $${timeResolutionSavings.toFixed(2)}`;
+                const timeResolutionSavings = (annualPaymentsReceived * currentManualInterventionPct) * timeUnappliedCashHours * hourlyCostCA * timeReductionUnappliedCashPct; // Assuming time is per manual item that needs resolution
+                detailedSavingsBreakdown.timeResolutionSavingsCalculation = `((${annualPaymentsReceived} payments * ${(currentManualInterventionPct * 100).toFixed(0)}% manual) * ${timeUnappliedCashHours} hours/item * $${hourlyCostCA.toFixed(2)}/hour * ${timeReductionUnappliedCashPct * 100}% reduction) = $${timeResolutionSavings.toFixed(2)}`;
 
                 totalAnnualSavings = manualApplicationSavings + unappliedCashValueSavings + timeResolutionSavings;
 
@@ -1343,14 +1556,14 @@
                 const fteP = parseFloat(roiAnswers.roi_p2 || 0);
                 const avgAnnualSalaryP = parseFloat(roiAnswers.roi_p3 || 0);
                 const annualPOs = parseFloat(roiAnswers.roi_p4 || 0);
-                const maverickSpendPct = parseFloat(roiAnswers.roi_p5 || 0) / 100;
+                const currentMaverickSpendPct = parseFloat(roiAnswers.roi_p5_current_maverick_spend_pct || 0) / 100;
+                const targetMaverickSpendPct = parseFloat(roiAnswers.roi_p5_target_maverick_spend_pct || 0) / 100;
                 const timeManualPOApprovalHours = parseFloat(roiAnswers.roi_p6 || 0);
                 const annualPOErrorCost = parseFloat(roiAnswers.roi_p7 || 0);
                 const totalAnnualSpend = parseFloat(roiAnswers.roi_p8 || 0); // Used for maverick spend calculation
 
                 // Assumptions for impact
                 const automationSavingsPct = 0.6; // 60% automation of manual POs
-                const maverickSpendReductionPct = 0.15; // 15% reduction in maverick spend (cost avoidance)
                 const poErrorReductionPct = 0.7; // 70% reduction in PO errors
                 const timeApprovalReductionPct = 0.4; // 40% reduction in manual PO approval time
 
@@ -1358,8 +1571,8 @@
                 const manualPOSavings = annualPOs * avgCostManualPO * automationSavingsPct;
                 detailedSavingsBreakdown.manualPOSavingsCalculation = `(${annualPOs} POs/year * $${avgCostManualPO}/PO * ${automationSavingsPct * 100}% automation) = $${manualPOSavings.toFixed(2)}`;
 
-                const maverickSpendSavings = totalAnnualSpend * maverickSpendPct * maverickSpendReductionPct; // Cost avoidance from better control
-                detailedSavingsBreakdown.maverickSpendSavingsCalculation = `($${totalAnnualSpend}/year * ${maverickSpendPct * 100}% maverick spend * ${maverickSpendReductionPct * 100}% reduction) = $${maverickSpendSavings.toFixed(2)}`;
+                const maverickSpendSavings = totalAnnualSpend * (currentMaverickSpendPct - targetMaverickSpendPct); // Cost avoidance from better control
+                detailedSavingsBreakdown.maverickSpendSavingsCalculation = `($${totalAnnualSpend}/year * (${(currentMaverickSpendPct * 100).toFixed(0)}% current - ${(targetMaverickSpendPct * 100).toFixed(0)}% target)) = $${maverickSpendSavings.toFixed(2)}`;
                 
                 const poErrorSavings = annualPOErrorCost * poErrorReductionPct;
                 detailedSavingsBreakdown.poErrorSavingsCalculation = `($${annualPOErrorCost}/year * ${poErrorReductionPct * 100}% reduction) = $${poErrorSavings.toFixed(2)}`;
@@ -1384,12 +1597,12 @@
                 const annualNewSupplierOnboarding = parseFloat(roiAnswers.roi_sm4 || 0);
                 const timeManualDataEntryHours = parseFloat(roiAnswers.roi_sm5 || 0);
                 const annualNonComplianceCost = parseFloat(roiAnswers.roi_sm6 || 0);
-                const incompleteDataPct = parseFloat(roiAnswers.roi_sm7 || 0) / 100;
+                const currentInaccurateDataPct = parseFloat(roiAnswers.roi_sm7_current_inaccurate_data_pct || 0) / 100;
+                const targetInaccurateDataPct = parseFloat(roiAnswers.roi_sm7_target_inaccurate_data_pct || 0) / 100;
 
                 // Assumptions for impact
                 const onboardingAutomationSavingsPct = 0.6; // 60% automation of manual onboarding
                 const nonComplianceReductionPct = 0.2; // 20% reduction in non-compliance costs
-                const dataAccuracyImprovementPct = 0.3; // 30% improvement in data accuracy (indirect cost reduction)
                 const timeDataEntryReductionPct = 0.5; // 50% reduction in manual data entry time
 
                 // Savings Calculations
@@ -1399,8 +1612,8 @@
                 const nonComplianceSavings = annualNonComplianceCost * nonComplianceReductionPct;
                 detailedSavingsBreakdown.nonComplianceSavingsCalculation = `($${annualNonComplianceCost}/year * ${nonComplianceReductionPct * 100}% reduction) = $${nonComplianceSavings.toFixed(2)}`;
                 
-                const dataAccuracySavings = (annualNewSupplierOnboarding * incompleteDataPct * dataAccuracyImprovementPct) * avgCostManualOnboarding; // Simplified: cost savings from fewer errors due to better data
-                detailedSavingsBreakdown.dataAccuracySavingsCalculation = `(${annualNewSupplierOnboarding} onboardings * ${incompleteDataPct * 100}% incomplete data * ${dataAccuracyImprovementPct * 100}% improvement * $${avgCostManualOnboarding}/onboarding) = $${dataAccuracySavings.toFixed(2)}`;
+                const dataAccuracySavings = (annualNewSupplierOnboarding * (currentInaccurateDataPct - targetInaccurateDataPct)) * avgCostManualOnboarding; // Simplified: cost savings from fewer errors due to better data
+                detailedSavingsBreakdown.dataAccuracySavingsCalculation = `(${annualNewSupplierOnboarding} onboardings * (${(currentInaccurateDataPct * 100).toFixed(0)}% current - ${(targetInaccurateDataPct * 100).toFixed(0)}% target) * $${avgCostManualOnboarding}/onboarding) = $${dataAccuracySavings.toFixed(2)}`;
 
                 const hourlyCostSM = fteSM > 0 ? (avgAnnualSalarySM / FTE_HOURS_PER_YEAR) : 0;
                 const timeDataEntrySavings = annualNewSupplierOnboarding * timeManualDataEntryHours * hourlyCostSM * timeDataEntryReductionPct;
@@ -1422,18 +1635,19 @@
                 const annualSourcingEvents = parseFloat(roiAnswers.roi_s4 || 0);
                 const avgSourcingCycleTimeDays = parseFloat(roiAnswers.roi_s5 || 0);
                 const totalAnnualSpendUnderManagement = parseFloat(roiAnswers.roi_s6 || 0);
-                const currentAvgSavingsPct = parseFloat(roiAnswers.roi_s7 || 0) / 100;
+                const currentAvgSavingsPct = parseFloat(roiAnswers.roi_s7_current_avg_savings_pct || 0) / 100;
+                const targetAvgSavingsPct = parseFloat(roiAnswers.roi_s7_target_avg_savings_pct || 0) / 100;
 
                 // Assumptions for impact
                 const automationSavingsPct = 0.5; // 50% automation of manual sourcing events
-                const additionalSavingsImprovementPct = 0.02; // 2% additional savings on total spend (cost avoidance/better pricing)
 
                 // Savings Calculations
                 const manualSourcingSavings = annualSourcingEvents * avgCostManualSourcingEvent * automationSavingsPct;
                 detailedSavingsBreakdown.manualSourcingSavingsCalculation = `(${annualSourcingEvents} events/year * $${avgCostManualSourcingEvent}/event * ${automationSavingsPct * 100}% automation) = $${manualSourcingSavings.toFixed(2)}`;
                 
-                const additionalSavings = totalAnnualSpendUnderManagement * additionalSavingsImprovementPct;
-                detailedSavingsBreakdown.additionalSavingsCalculation = `($${totalAnnualSpendUnderManagement}/year * ${additionalSavingsImprovementPct * 100}% additional savings) = $${additionalSavings.toFixed(2)}`;
+                // Savings from increased average savings (target should be higher than current)
+                const additionalSavings = totalAnnualSpendUnderManagement * (targetAvgSavingsPct - currentAvgSavingsPct);
+                detailedSavingsBreakdown.additionalSavingsCalculation = `($${totalAnnualSpendUnderManagement}/year * (target savings: ${(targetAvgSavingsPct * 100).toFixed(0)}% - current savings: ${(currentAvgSavingsPct * 100).toFixed(0)}%)) = $${additionalSavings.toFixed(2)}`;
 
                 totalAnnualSavings = manualSourcingSavings + additionalSavings;
 
@@ -1449,12 +1663,13 @@
                 const annualClaims = parseFloat(roiAnswers.roi_cd4 || 0);
                 const timeResolveClaimHours = parseFloat(roiAnswers.roi_cd5 || 0);
                 const annualInvalidClaimsValue = parseFloat(roiAnswers.roi_cd6 || 0);
-                const manualResearchPct = parseFloat(roiAnswers.roi_cd7 || 0) / 100;
+                const currentManualResearchPct = parseFloat(roiAnswers.roi_cd7_current_manual_research_pct || 0) / 100;
+                const targetManualResearchPct = parseFloat(roiAnswers.roi_cd7_target_manual_research_pct || 0) / 100;
 
                 // Assumptions for impact
                 const automationSavingsPct = 0.6; // 60% automation of manual claims processing
                 const invalidClaimsReductionPct = 0.25; // 25% reduction in invalid claims value (direct cost reduction)
-                const manualResearchReductionPct = 0.5; // 50% reduction in manual research time
+                // manualResearchReductionPct no longer needed with current/target fields
 
                 // Savings Calculations
                 const manualClaimSavings = annualClaims * avgCostManualClaim * automationSavingsPct;
@@ -1464,8 +1679,8 @@
                 detailedSavingsBreakdown.invalidClaimsSavingsCalculation = `($${annualInvalidClaimsValue}/year * ${invalidClaimsReductionPct * 100}% reduction) = $${invalidClaimsSavings.toFixed(2)}`;
 
                 const hourlyCostCD = fteCD > 0 ? (avgAnnualSalaryCD / FTE_HOURS_PER_YEAR) : 0;
-                const researchTimeSavings = annualClaims * manualResearchPct * timeResolveClaimHours * hourlyCostCD * manualResearchReductionPct;
-                detailedSavingsBreakdown.researchTimeSavingsCalculation = `(${annualClaims} claims/year * ${manualResearchPct * 100}% manual research * ${timeResolveClaimHours} hours/claim * $${hourlyCostCD.toFixed(2)}/hour * ${manualResearchReductionPct * 100}% reduction) = $${researchTimeSavings.toFixed(2)}`;
+                const researchTimeSavings = annualClaims * (currentManualResearchPct - targetManualResearchPct) * timeResolveClaimHours * hourlyCostCD;
+                detailedSavingsBreakdown.researchTimeSavingsCalculation = `(${annualClaims} claims/year * (${(currentManualResearchPct * 100).toFixed(0)}% current - ${(targetManualResearchPct * 100).toFixed(0)}% target) manual research * ${timeResolveClaimHours} hours/claim * $${hourlyCostCD.toFixed(2)}/hour) = $${researchTimeSavings.toFixed(2)}`;
 
                 totalAnnualSavings = manualClaimSavings + invalidClaimsSavings + researchTimeSavings;
 
@@ -1480,22 +1695,22 @@
                 const fteID = parseFloat(roiAnswers.roi_id2 || 0);
                 const avgAnnualSalaryID = parseFloat(roiAnswers.roi_id3 || 0);
                 const annualInvoicesDelivered = parseFloat(roiAnswers.roi_id4 || 0);
-                const manualInterventionPct = parseFloat(roiAnswers.roi_id5 || 0) / 100;
+                const currentManualInterventionPct = parseFloat(roiAnswers.roi_id5_current_manual_intervention_pct || 0) / 100;
+                const targetManualInterventionPct = parseFloat(roiAnswers.roi_id5_target_manual_intervention_pct || 0) / 100;
                 const timeFailedDeliveryHours = parseFloat(roiAnswers.roi_id6 || 0);
                 const lostEarlyPaymentDiscounts = parseFloat(roiAnswers.roi_id7 || 0); // Although a financial benefit, it's a direct loss from manual process
 
                 // Assumptions for impact
-                const automationSavingsPct = 0.7; // 70% automation of manual delivery
                 const failedDeliveryReductionPct = 0.6; // 60% reduction in time resolving failed deliveries
                 const earlyPaymentDiscountRecoveryPct = 0.3; // 30% recovery of lost early payment discounts (direct financial recovery)
 
                 // Savings Calculations
-                const manualDeliverySavings = (annualInvoicesDelivered * manualInterventionPct) * avgCostPerInvoiceDelivery * automationSavingsPct;
-                detailedSavingsBreakdown.manualDeliverySavingsCalculation = `(${annualInvoicesDelivered} invoices/year * ${manualInterventionPct * 100}% manual * $${avgCostPerInvoiceDelivery}/invoice * ${automationSavingsPct * 100}% automation) = $${manualDeliverySavings.toFixed(2)}`;
+                const manualDeliverySavings = (annualInvoicesDelivered * (currentManualInterventionPct - targetManualInterventionPct)) * avgCostPerInvoiceDelivery;
+                detailedSavingsBreakdown.manualDeliverySavingsCalculation = `(${annualInvoicesDelivered} invoices/year * (${(currentManualInterventionPct * 100).toFixed(0)}% current - ${(targetManualInterventionPct * 100).toFixed(0)}% target) * $${avgCostPerInvoiceDelivery}/invoice) = $${manualDeliverySavings.toFixed(2)}`;
                 
                 const hourlyCostID = fteID > 0 ? (avgAnnualSalaryID / FTE_HOURS_PER_YEAR) : 0;
-                const failedDeliveryTimeSavings = (annualInvoicesDelivered * manualInterventionPct) * timeFailedDeliveryHours * hourlyCostID * failedDeliveryReductionPct;
-                detailedSavingsBreakdown.failedDeliveryTimeSavingsCalculation = `((${annualInvoicesDelivered} invoices * ${manualInterventionPct * 100}% manual) * ${timeFailedDeliveryHours} hours/failed delivery * $${hourlyCostID.toFixed(2)}/hour * ${failedDeliveryReductionPct * 100}% reduction) = $${failedDeliveryTimeSavings.toFixed(2)}`;
+                const failedDeliveryTimeSavings = (annualInvoicesDelivered * currentManualInterventionPct) * timeFailedDeliveryHours * hourlyCostID * failedDeliveryReductionPct; // Assuming manual intervention is where failed deliveries originate
+                detailedSavingsBreakdown.failedDeliveryTimeSavingsCalculation = `((${annualInvoicesDelivered} invoices * ${(currentManualInterventionPct * 100).toFixed(0)}% manual) * ${timeFailedDeliveryHours} hours/failed delivery * $${hourlyCostID.toFixed(2)}/hour * ${failedDeliveryReductionPct * 100}% reduction) = $${failedDeliveryTimeSavings.toFixed(2)}`;
                 
                 const earlyPaymentSavings = lostEarlyPaymentDiscounts * earlyPaymentDiscountRecoveryPct;
                 detailedSavingsBreakdown.earlyPaymentSavingsCalculation = `($${lostEarlyPaymentDiscounts}/year * ${earlyPaymentDiscountRecoveryPct * 100}% recovery) = $${earlyPaymentSavings.toFixed(2)}`;
@@ -1637,7 +1852,7 @@
                 content += `* **Total Investment (${data.roiInputs.numberOfYearsUtilized || 3} Years):** $${data.calculatedRoi.totalInvestmentOverYears}\n`;
                 content += `* **Total Benefit (${data.roiInputs.numberOfYearsUtilized || 3} Years):** $${data.calculatedRoi.totalBenefitOverYears}\n`;
                 content += `* **Net Benefit (${data.roiInputs.numberOfYearsUtilized || 3} Years):** $${data.calculatedRoi.netBenefitOverYears}\n`;
-                content += `* **ROI Percentage (${data.roiInputs.numberOfYearsUtilized || 3} Years):** ${data.calculatedRoi.roiPercentage}%\n`;
+                content += `* **ROI Percentage (${data.roiInputs.numberOfYearsUtilised || 3} Years):** ${data.calculatedRoi.roiPercentage}%\n`;
                 content += `* **Payback Period:** ${data.calculatedRoi.paybackPeriodMonths} Months\n\n`;
                 content += `#### Detailed Savings Breakdown:\n`;
                 for (const key in data.calculatedRoi.details) {
@@ -1905,7 +2120,7 @@
             content += `
                     </div>
                     <footer class="mt-8 text-center text-gray-500 text-sm">
-                        (c) Brad Whatman
+                        (c) Brad Whatman 2025
                     </footer>
                 </body>
                 </html>
@@ -1963,8 +2178,19 @@
         }
 
         // Event Listeners for new buttons
-        clearFormButton.addEventListener('click', clearForm);
+        clearFormButton.addEventListener('click', showConfirmationModal); // Changed to show modal
+        confirmClearButton.addEventListener('click', executeClearForm); // New listener for modal OK
+        cancelClearButton.addEventListener('click', hideConfirmationModal); // New listener for modal Cancel
         exportDataButton.addEventListener('click', exportData);
+
+        // Add the missing change event listener for the moduleSelect dropdown
+        moduleSelect.addEventListener('change', (e) => {
+            selectedModule = e.target.value;
+            // When module changes, clear previous ROI calculations and reset view to discovery
+            calculatedRoi = null;
+            currentView = 'discovery';
+            renderAppContent(); // Re-render content based on new selection
+        });
 
 
         // Initial setup on window load
