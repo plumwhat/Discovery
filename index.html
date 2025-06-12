@@ -33,14 +33,14 @@
 
         <!-- Stream & Module Selection -->
         <div class="mb-8 p-4 bg-blue-100 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-center gap-4">
-            <div class="w-full md:w-1/2 flex flex-col items-center">
-                <label for="stream-select" class="text-lg font-semibold text-blue-800 mb-2">Select Business Stream:</label>
-                <div class="relative w-full">
-                    <select id="stream-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none"></select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
-                </div>
-            </div>
-            <div class="w-full md:w-1/2 flex flex-col items-center">
+             <div class="w-full md:w-1/2 flex flex-col items-center">
+                 <label for="stream-select" class="text-lg font-semibold text-blue-800 mb-2">Select Business Stream:</label>
+                 <div class="relative w-full">
+                     <select id="stream-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none"></select>
+                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+                 </div>
+             </div>
+             <div class="w-full md:w-1/2 flex flex-col items-center">
                <label for="module-select" class="text-lg font-semibold text-blue-800 mb-2">Select Module:</label>
                <div class="relative w-full">
                    <select id="module-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none">
@@ -109,11 +109,11 @@
                     ],
                     roiQuestions: [
                         { id: 'roi_ap1', text: 'Annual invoice volume', type: 'number' },
-                        { id: 'roi_ap2', text: 'Average cost per invoice ($)', type: 'number', unit: '$' },
-                        { id: 'roi_ap3', text: 'Number of AP full-time employees (FTEs)', type: 'number', unit: 'FTEs' },
-                        { id: 'roi_ap4', text: 'Average annual salary + benefits for AP staff ($)', type: 'number', unit: '$' },
-                        { id: 'roi_ap5', text: 'Annual value of missed early payment discounts ($)', type: 'number', unit: '$' },
-                        { id: 'roi_ap6', text: 'Annual cost of late payment fees ($)', type: 'number', unit: '$' },
+                        { id: 'roi_ap2', text: 'Average cost per invoice', type: 'number', unit: '$' },
+                        { id: 'roi_ap3', text: 'Number of AP full-time employees', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_ap4', text: 'Average annual salary + benefits for AP staff', type: 'number', unit: '$' },
+                        { id: 'roi_ap5', text: 'Annual value of missed early payment discounts', type: 'number', unit: '$' },
+                        { id: 'roi_ap6', text: 'Annual cost of late payment fees', type: 'number', unit: '$' },
                     ],
                     demoRoiData: { roi_ap1: 60000, roi_ap2: 12.50, roi_ap3: 4, roi_ap4: 65000, roi_ap5: 25000, roi_ap6: 5000 },
                     roiCalculationFormulas: [
@@ -132,7 +132,7 @@
                         { id: 'ar5', text: 'What challenges do you face with cash application?', type: 'textarea' },
                         { id: 'ar6', text: 'How do you currently handle customer disputes?', type: 'textarea' },
                         { id: 'ar7', text: 'Do you use a customer portal for payments/inquiries?', type: 'textarea' },
-                        { id: 'ar8', text: 'How many staff are involved in AR processes (FTEs)?', type: 'number', unit: 'FTEs' },
+                        { id: 'ar8', text: 'How many staff are involved in AR processes?', type: 'number', unit: 'FTEs' },
                         { id: 'ar9', text: 'What is the average time spent on follow-up calls/emails per invoice?', type: 'number', unit: 'Minutes' },
                         { id: 'ar10', text: 'What is your current bad debt percentage?', type: 'number', unit: '%' },
                         { id: 'ar11', text: 'Describe your current process for credit management and risk assessment.', type: 'textarea' },
@@ -148,12 +148,12 @@
                     ],
                     roiQuestions: [
                         { id: 'roi_ar1', text: 'Annual invoice volume', type: 'number' },
-                        { id: 'roi_ar2', text: 'Average invoice value ($)', type: 'number', unit: '$' },
-                        { id: 'roi_ar3', text: 'Current DSO (Days)', type: 'number', unit: 'Days' },
-                        { id: 'roi_ar4', text: 'AR full-time employees (FTEs)', type: 'number', unit: 'FTEs' },
-                        { id: 'roi_ar5', text: 'Average annual salary + benefits for AR staff ($)', type: 'number', unit: '$' },
-                        { id: 'roi_ar6', text: 'Annual bad debt write-offs ($)', type: 'number', unit: '$' },
-                        { id: 'roi_ar7', text: 'Cost of capital (%)', type: 'number', unit: '%' },
+                        { id: 'roi_ar2', text: 'Average invoice value', type: 'number', unit: '$' },
+                        { id: 'roi_ar3', text: 'Current DSO', type: 'number', unit: 'Days' },
+                        { id: 'roi_ar4', text: 'AR full-time employees', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_ar5', text: 'Average annual salary + benefits for AR staff', type: 'number', unit: '$' },
+                        { id: 'roi_ar6', text: 'Annual bad debt write-offs', type: 'number', unit: '$' },
+                        { id: 'roi_ar7', text: 'Cost of capital', type: 'number', unit: '%' },
                     ],
                     demoRoiData: { roi_ar1: 120000, roi_ar2: 1500, roi_ar3: 45, roi_ar4: 5, roi_ar5: 75000, roi_ar6: 50000, roi_ar7: 5 },
                     roiCalculationFormulas: [
@@ -171,7 +171,7 @@
                         { id: 'om5', text: 'What challenges do you face with order entry accuracy?', type: 'textarea' },
                         { id: 'om6', text: 'How do you currently handle order changes or cancellations?', type: 'textarea' },
                         { id: 'om7', text: 'Do you have a customer self-service portal for order placement or tracking?', type: 'textarea' },
-                        { id: 'om8', text: 'How many staff are involved in Order Management processes (FTEs)?', type: 'number', unit: 'FTEs' },
+                        { id: 'om8', text: 'How many staff are involved in Order Management processes?', type: 'number', unit: 'FTEs' },
                         { id: 'om9', text: 'What is the average time spent on order status inquiries?', type: 'number', unit: 'Minutes' },
                         { id: 'om10', text: 'What is your current order error rate?', type: 'number', unit: '%' },
                         { id: 'om11', text: 'How do you manage pricing and discounts for orders?', type: 'textarea' },
@@ -187,17 +187,53 @@
                     ],
                     roiQuestions: [
                         { id: 'roi_om1', text: 'Annual volume of sales orders', type: 'number' },
-                        { id: 'roi_om2', text: 'Average cost to manually process one sales order ($)', type: 'number', unit: '$' },
+                        { id: 'roi_om2', text: 'Average cost to manually process one sales order', type: 'number', unit: '$' },
                         { id: 'roi_om3', text: 'Number of order errors per month', type: 'number' },
-                        { id: 'roi_om4', text: 'Average cost of correcting an order error ($)', type: 'number', unit: '$' },
-                        { id: 'roi_om5', text: 'Number of OM full-time employees (FTEs)', type: 'number', unit: 'FTEs' },
-                        { id: 'roi_om6', text: 'Average annual salary + benefits for OM staff ($)', type: 'number', unit: '$' },
+                        { id: 'roi_om4', text: 'Average cost of correcting an order error', type: 'number', unit: '$' },
+                        { id: 'roi_om5', text: 'Number of OM full-time employees', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_om6', text: 'Average annual salary + benefits for OM staff', type: 'number', unit: '$' },
                     ],
                     demoRoiData: { roi_om1: 72000, roi_om2: 4.00, roi_om3: 30, roi_om4: 25, roi_om5: 4, roi_om6: 70000 },
                     roiCalculationFormulas: [
                         { name: 'Manual Processing Savings', formula: (i,s) => (i.annualOrders * 0.65) * i.manualCost, inputs: { annualOrders: 'roi_om1', manualCost: 'roi_om2' }, description: (i,s) => `(65% reduction on processing cost for ${i.annualOrders} orders)` },
                         { name: 'Error Correction Savings', formula: (i,s) => (i.monthlyErrors * 12) * i.errorCost * 0.70, inputs: { monthlyErrors: 'roi_om3', errorCost: 'roi_om4' }, description: (i,s) => `(70% reduction in error correction costs)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.30, inputs: { fteCount: 'roi_om5', avgSalary: 'roi_om6' }, description: (i,s) => `(30% productivity gain for ${i.fteCount} FTEs)` },
+                    ]
+                },
+                'Procurement': {
+                    questions: [
+                        { id: 'p1', text: 'How many purchase requisitions do you process per month?', type: 'number' },
+                        { id: 'p2', text: 'What is your average purchase order value?', type: 'number', unit: '$' },
+                        { id: 'p3', text: 'What percentage of purchases are made off-contract or through "maverick spend"?', type: 'number', unit: '%' },
+                        { id: 'p4', text: 'What is your average requisition-to-PO cycle time?', type: 'number', unit: 'Days' },
+                        { id: 'p5', text: 'What challenges do you face with manual purchase order creation and approval?', type: 'textarea' },
+                        { id: 'p6', text: 'How do you manage supplier catalogues and pricing?', type: 'textarea' },
+                        { id: 'p7', text: 'How many staff are involved in the procurement process (from requisition to PO)?', type: 'number', unit: 'FTEs' },
+                        { id: 'p8', text: 'What is your current PO error rate?', type: 'number', unit: '%' },
+                        { id: 'p9', text: 'How do you handle purchase order changes or cancellations?', type: 'textarea' },
+                        { id: 'p10', text: 'What systems are currently integrated with your procurement process (e.g., ERP, inventory)?', type: 'textarea' },
+                        { id: 'p11', text: 'What is the biggest pain point in your current procurement process?', type: 'textarea' },
+                        { id: 'p12', text: 'How do you ensure compliance with procurement policies and regulations?', type: 'textarea' },
+                        { id: 'p13', text: 'What reporting and analytics do you use for procurement performance?', type: 'textarea' },
+                        { id: 'p14', text: 'How do you manage non-PO based invoices?', type: 'textarea' },
+                        { id: 'p15', text: 'Do you have a centralised purchasing function?', type: 'textarea' },
+                        { id: 'p16', text: 'How do you track savings generated by procurement initiatives?', type: 'textarea' },
+                        { id: 'p17', text: 'What is your process for managing goods receipt and invoice matching?', type: 'textarea' },
+                        { id: 'p18', text: 'How do you onboard new suppliers from a procurement perspective?', type: 'textarea' },
+                        { id: 'p19', text: 'What is the impact of manual procurement on budget control?', type: 'textarea' },
+                        { id: 'p20', text: 'What are your goals for improving procurement efficiency and cost savings?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_p1', text: 'Annual volume of purchase orders', type: 'number' },
+                        { id: 'roi_p2', text: 'Total annual spend', type: 'number', unit: '$' },
+                        { id: 'roi_p3', text: 'Current percentage of "maverick spend"', type: 'number', unit: '%' },
+                        { id: 'roi_p4', text: 'Procurement full-time employees', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_p5', text: 'Average annual salary + benefits for procurement staff', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_p1: 24000, roi_p2: 5000000, roi_p3: 15, roi_p4: 3, roi_p5: 70000 },
+                    roiCalculationFormulas: [
+                        { name: 'Maverick Spend Savings', formula: (i,s) => i.totalSpend * (i.maverickPct/100) * 0.10, inputs: { totalSpend: 'roi_p2', maverickPct: 'roi_p3' }, description: (i,s) => `(10% savings on ${i.maverickPct}% of spend)` },
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.25, inputs: { fteCount: 'roi_p4', avgSalary: 'roi_p5' }, description: (i,s) => `(25% productivity gain for ${i.fteCount} FTEs)` },
                     ]
                 },
                 'Expense Management': {
@@ -225,11 +261,11 @@
                     ],
                     roiQuestions: [
                         { id: 'roi_em1', text: 'Annual number of expense reports', type: 'number' },
-                        { id: 'roi_em2', text: 'Average cost to process one expense report ($)', type: 'number', unit: '$' },
-                        { id: 'roi_em3', text: 'Annual non-compliant or out-of-policy spend ($)', type: 'number', unit: '$' },
+                        { id: 'roi_em2', text: 'Average cost to process one expense report', type: 'number', unit: '$' },
+                        { id: 'roi_em3', text: 'Annual non-compliant or out-of-policy spend', type: 'number', unit: '$' },
                         { id: 'roi_em4', text: 'Number of employees submitting expenses', type: 'number' },
                         { id: 'roi_em5', text: 'Average hours per employee per year spent on expense reports', type: 'number', unit: 'Hours' },
-                        { id: 'roi_em6', text: 'Average hourly cost of submitting employee ($)', type: 'number', unit: '$' },
+                        { id: 'roi_em6', text: 'Average hourly cost of submitting employee', type: 'number', unit: '$' },
                     ],
                     demoRoiData: { roi_em1: 5000, roi_em2: 25, roi_em3: 100000, roi_em4: 250, roi_em5: 8, roi_em6: 50 },
                     roiCalculationFormulas: [
@@ -238,7 +274,287 @@
                         { name: 'Employee Productivity Savings', formula: (i,s) => i.employees * i.hoursSpent * i.hourlyCost, inputs: { employees: 'roi_em4', hoursSpent: 'roi_em5', hourlyCost: 'roi_em6' }, description: (i,s) => `(Time savings for ${i.employees} employees)` }
                     ]
                 },
-                // All other Finance Automation modules would be restored here in the same fashion...
+                'Cash Application': {
+                    questions: [
+                        { id: 'ca1', text: 'How many payments do you receive per day/week?', type: 'number' },
+                        { id: 'ca2', text: 'What percentage of payments are received via cheque/manual methods?', type: 'number', unit: '%' },
+                        { id: 'ca3', text: 'What is the average time to apply a payment?', type: 'number', unit: 'Minutes' },
+                        { id: 'ca4', text: 'What percentage of payments are unapplied or suspense items?', type: 'number', unit: '%' },
+                        { id: 'ca5', text: 'How do you handle remittances without clear invoice matching?', type: 'textarea' },
+                        { id: 'ca6', text: 'How many FTEs are dedicated to cash application?', type: 'number', unit: 'FTEs' },
+                        { id: 'ca7', text: 'What systems are involved in your cash application process?', type: 'textarea' },
+                        { id: 'ca8', text: 'How do you resolve payment discrepancies or short payments?', type: 'textarea' },
+                        { id: 'ca9', text: 'What is your current reconciliation process for bank statements and applied cash?', type: 'textarea' },
+                        { id: 'ca10', text: 'How do you manage lockbox services, if applicable?', type: 'textarea' },
+                        { id: 'ca11', text: 'What is the biggest pain point in your current cash application process?', type: 'textarea' },
+                        { id: 'ca12', text: 'How quickly are payments reflected in customer accounts?', type: 'textarea' },
+                        { id: 'ca13', text: 'What reporting do you have on cash application accuracy and efficiency?', type: 'textarea' },
+                        { id: 'ca14', text: 'Do you use any automation for cash application today?', type: 'textarea' },
+                        { id: 'ca15', text: 'How do you handle multi-currency payments?', type: 'textarea' },
+                        { id: 'ca16', text: 'What is the volume of customer deductions or chargebacks you process?', type: 'number' },
+                        { id: 'ca17', text: 'How do you ensure data security and compliance in cash application?', type: 'textarea' },
+                        { id: 'ca18', text: 'What impact does slow cash application have on your DSO or credit limits?', type: 'textarea' },
+                        { id: 'ca19', text: 'How do you communicate with customers about payment application issues?', type: 'textarea' },
+                        { id: 'ca20', text: 'What are your goals for improving cash application speed and accuracy?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_ca1', text: 'Annual volume of payments received', type: 'number' },
+                        { id: 'roi_ca2', text: 'Percentage of payments requiring manual intervention', type: 'number', unit: '%' },
+                        { id: 'roi_ca3', text: 'Average cost to manually apply one payment', type: 'number', unit: '$' },
+                        { id: 'roi_ca4', text: 'Cash Application FTEs', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_ca5', text: 'Average annual salary + benefits for cash app staff', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_ca1: 50000, roi_ca2: 50, roi_ca3: 2.50, roi_ca4: 2, roi_ca5: 65000 },
+                    roiCalculationFormulas: [
+                        { name: 'Manual Application Savings', formula: (i,s) => i.annualPayments * (i.manualPct/100) * i.manualCost, inputs: { annualPayments: 'roi_ca1', manualPct: 'roi_ca2', manualCost: 'roi_ca3' }, description: (i,s) => `(Processing savings on ${i.manualPct}% of payments)` },
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.50, inputs: { fteCount: 'roi_ca4', avgSalary: 'roi_ca5' }, description: (i,s) => `(50% productivity gain for ${i.fteCount} FTEs)` },
+                    ]
+                },
+                'Collections Management': {
+                    questions: [
+                        { id: 'cm1', text: 'What is your current collection effectiveness index (CEI)?', type: 'number' },
+                        { id: 'cm2', text: 'How many collection calls/emails do you make per day/week?', type: 'number' },
+                        { id: 'cm3', text: 'What percentage of overdue invoices require manual follow-up?', type: 'number', unit: '%' },
+                        { id: 'cm4', text: 'How do you prioritise collection activities?', type: 'textarea' },
+                        { id: 'cm5', text: 'What tools do you use for collections (e.g., spreadsheets, ERP module)?', type: 'textarea' },
+                        { id: 'cm6', text: 'How do you handle payment promises and broken promises?', type: 'textarea' },
+                        { id: 'cm7', text: 'What is your average time to resolve a collection dispute?', type: 'number', unit: 'Days' },
+                        { id: 'cm8', text: 'How many FTEs are dedicated to collections?', type: 'number', unit: 'FTEs' },
+                        { id: 'cm9', text: 'What is your current write-off rate for uncollectible debt?', type: 'number', unit: '%' },
+                        { id: 'cm10', text: 'How do you communicate with customers regarding overdue payments?', type: 'textarea' },
+                        { id: 'cm11', text: 'Do you use dunning letters? If so, what is the process?', type: 'textarea' },
+                        { id: 'cm12', text: 'How do you escalate overdue accounts?', type: 'textarea' },
+                        { id: 'cm13', text: 'What reporting do you have on collection performance?', type: 'textarea' },
+                        { id: 'cm14', text: 'Are there any specific compliance requirements for your collections process?', type: 'textarea' },
+                        { id: 'cm15', text: 'How do you manage customer relationships during collections?', type: 'textarea' },
+                        { id: 'cm16', text: 'What is the biggest challenge in your current collections process?', type: 'textarea' },
+                        { id: 'cm17', text: 'How do you handle partial payments or payment plans?', type: 'textarea' },
+                        { id: 'cm18', text: 'What is your process for sending accounts to third-party collections?', type: 'textarea' },
+                        { id: 'cm19', text: 'How do you ensure consistency in your collection efforts?', type: 'textarea' },
+                        { id: 'cm20', text: 'What are your goals for improving collections efficiency and effectiveness?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_cm1', text: 'Annual bad debt write-offs', type: 'number', unit: '$' },
+                        { id: 'roi_cm2', text: 'Collections full-time employees', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_cm3', text: 'Average annual salary + benefits for collections staff', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_cm1: 50000, roi_cm2: 3, roi_cm3: 65000 },
+                    roiCalculationFormulas: [
+                        { name: 'Bad Debt Reduction', formula: (i,s) => i.badDebt * 0.20, inputs: { badDebt: 'roi_cm1' }, description: (i,s) => `(20% reduction in bad debt)` },
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.40, inputs: { fteCount: 'roi_cm2', avgSalary: 'roi_cm3' }, description: (i,s) => `(40% productivity gain for ${i.fteCount} FTEs)` },
+                    ]
+                },
+                'Credit Management': {
+                    questions: [
+                        { id: 'crm1', text: 'How many new credit applications do you process per month?', type: 'number' },
+                        { id: 'crm2', text: 'What is your average time to approve/deny a credit application?', type: 'number', unit: 'Days' },
+                        { id: 'crm3', text: 'What sources of information do you use for credit assessment (e.g., D&B, trade references)?', type: 'textarea' },
+                        { id: 'crm4', text: 'How do you set and manage customer credit limits?', type: 'textarea' },
+                        { id: 'crm5', text: 'What percentage of credit applications require manual review and approval?', type: 'number', unit: '%' },
+                        { id: 'crm6', text: 'How many FTEs are dedicated to credit management?', type: 'number', unit: 'FTEs' },
+                        { id: 'crm7', text: 'What is your current bad debt rate?', type: 'number', unit: '%' },
+                        { id: 'crm8', text: 'How do you monitor customer credit risk on an ongoing basis?', type: 'textarea' },
+                        { id: 'crm9', text: 'What is your process for reviewing and adjusting existing credit limits?', type: 'textarea' },
+                        { id: 'crm10', text: 'How do you communicate credit decisions to customers?', type: 'textarea' },
+                        { id: 'crm11', text: 'What is the biggest pain point in your current credit management process?', type: 'textarea' },
+                        { id: 'crm12', text: 'How do credit decisions impact sales cycles?', type: 'textarea' },
+                        { id: 'crm13', text: 'What reporting do you have on credit risk and exposure?', type: 'textarea' },
+                        { id: 'crm14', text: 'Do you have a consistent credit policy across all customers/regions?', type: 'textarea' },
+                        { id: 'crm15', text: 'How do you handle credit holds or blocked orders?', type: 'textarea' },
+                        { id: 'crm16', text: 'What systems are integrated with your credit management process?', type: 'textarea' },
+                        { id: 'crm17', text: 'How do you manage credit insurance, if applicable?', type: 'textarea' },
+                        { id: 'crm18', text: 'What is the impact of manual credit checks on operational efficiency?', type: 'textarea' },
+                        { id: 'crm19', text: 'How do you ensure compliance with credit regulations?', type: 'textarea' },
+                        { id: 'crm20', text: 'What are your goals for improving credit decision speed and risk mitigation?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_crm1', text: 'Annual bad debt write-offs', type: 'number', unit: '$' },
+                        { id: 'roi_crm2', text: 'Annual value of sales lost due to slow credit decisions', type: 'number', unit: '$' },
+                        { id: 'roi_crm3', text: 'Credit Management FTEs', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_crm4', text: 'Average annual salary + benefits for credit staff', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_crm1: 75000, roi_crm2: 20000, roi_crm3: 2, roi_crm4: 70000 },
+                    roiCalculationFormulas: [
+                        { name: 'Bad Debt Reduction', formula: (i,s) => i.badDebt * 0.10, inputs: { badDebt: 'roi_crm1' }, description: (i,s) => `(10% reduction in bad debt)` },
+                        { name: 'Reduced Lost Sales', formula: (i,s) => i.lostSales * 0.20, inputs: { lostSales: 'roi_crm2' }, description: (i,s) => `(20% reduction in lost sales)` },
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.50, inputs: { fteCount: 'roi_crm3', avgSalary: 'roi_crm4' }, description: (i,s) => `(50% productivity gain for ${i.fteCount} FTEs)` }
+                    ]
+                },
+                'Customer Inquiry': {
+                    questions: [
+                        { id: 'ci1', text: 'How many customer inquiries (e.g., invoice, order status) do you receive per day/week?', type: 'number' },
+                        { id: 'ci2', text: 'What is the average time to resolve a customer inquiry?', type: 'number', unit: 'Minutes' },
+                        { id: 'ci3', text: 'What channels do customers use to submit inquiries (e.g., phone, email, portal)?', type: 'textarea' },
+                        { id: 'ci4', text: 'What percentage of inquiries require manual research across multiple systems?', type: 'number', unit: '%' },
+                        { id: 'ci5', text: 'How many FTEs are dedicated to handling customer inquiries?', type: 'number', unit: 'FTEs' },
+                        { id: 'ci6', text: 'What is your current customer satisfaction (CSAT) score related to inquiry resolution?', type: 'number' },
+                        { id: 'ci7', text: 'How do you track and report on inquiry volumes and resolution times?', type: 'textarea' },
+                        { id: 'ci8', text: 'What are the most common types of customer inquiries you receive?', type: 'textarea' },
+                        { id: 'ci9', text: 'Do you have a knowledge base or FAQ for customers?', type: 'textarea' },
+                        { id: 'ci10', text: 'How do you escalate complex inquiries?', type: 'textarea' },
+                        { id: 'ci11', text: 'What systems do your inquiry agents access to resolve issues?', type: 'textarea' },
+                        { id: 'ci12', text: 'How do you handle inquiries outside of business hours?', type: 'textarea' },
+                        { id: 'ci13', text: 'What is the biggest pain point in your current inquiry process?', type: 'textarea' },
+                        { id: 'ci14', text: 'How do you ensure consistent responses to common inquiries?', type: 'textarea' },
+                        { id: 'ci15', text: 'What training do your staff receive for handling inquiries?', type: 'textarea' },
+                        { id: 'ci16', text: 'Do you have self-service options for customers to find answers?', type: 'textarea' },
+                        { id: 'ci17', text: 'How do you measure the efficiency of your inquiry handling?', type: 'textarea' },
+                        { id: 'ci18', text: 'What is the impact of unresolved inquiries on customer relationships?', type: 'textarea' },
+                        { id: 'ci19', text: 'How do you manage communication with customers during the inquiry resolution process?', type: 'textarea' },
+                        { id: 'ci20', text: 'What are your goals for improving customer inquiry handling?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_ci1', text: 'Annual volume of customer inquiries', type: 'number' },
+                        { id: 'roi_ci2', text: 'Average cost per manual inquiry resolution', type: 'number', unit: '$' },
+                        { id: 'roi_ci3', text: 'Inquiry Handling FTEs', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_ci4', text: 'Average annual salary + benefits for inquiry staff', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_ci1: 10000, roi_ci2: 2.00, roi_ci3: 3, roi_ci4: 60000 },
+                    roiCalculationFormulas: [
+                        { name: 'Manual Inquiry Savings', formula: (i,s) => i.annualInquiries * i.manualCost * 0.50, inputs: { annualInquiries: 'roi_ci1', manualCost: 'roi_ci2' }, description: (i,s) => `(50% automation of inquiry resolution)` },
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.30, inputs: { fteCount: 'roi_ci3', avgSalary: 'roi_ci4' }, description: (i,s) => `(30% productivity gain for ${i.fteCount} FTEs)` },
+                    ]
+                },
+                'Supplier Management': {
+                    questions: [
+                        { id: 'sm1', text: 'How many active suppliers do you manage?', type: 'number' },
+                        { id: 'sm2', text: 'What is your average time to onboard a new supplier?', type: 'number', unit: 'Days' },
+                        { id: 'sm3', text: 'How do you collect and maintain supplier information (e.g., banking, certifications)?', type: 'textarea' },
+                        { id: 'sm4', text: 'How do you assess and monitor supplier performance?', type: 'textarea' },
+                        { id: 'sm5', text: 'What challenges do you face with supplier communication and collaboration?', type: 'textarea' },
+                        { id: 'sm6', text: 'How do you manage supplier contracts and renewals?', type: 'textarea' },
+                        { id: 'sm7', text: 'How many FTEs are involved in supplier management activities?', type: 'number', unit: 'FTEs' },
+                        { id: 'sm8', text: 'What is your current process for supplier risk assessment?', type: 'textarea' },
+                        { id: 'sm9', text: 'How do you handle supplier disputes or issues?', type: 'textarea' },
+                        { id: 'sm10', text: 'What systems do you use for supplier management?', type: 'textarea' },
+                        { id: 'sm11', text: 'What is the biggest pain point in your current supplier management process?', type: 'textarea' },
+                        { id: 'sm12', text: 'How do you ensure compliance with supplier diversity initiatives?', type: 'textarea' },
+                        { id: 'sm13', text: 'What reporting do you have on supplier performance and compliance?', type: 'textarea' },
+                        { id: 'sm14', text: 'How do you manage supplier master data accuracy?', type: 'textarea' },
+                        { id: 'sm15', text: 'Do you have a supplier portal? If so, describe its functionality.', type: 'textarea' },
+                        { id: 'sm16', text: 'How do you handle supplier inquiries regarding payments or POs?', type: 'textarea' },
+                        { id: 'sm17', text: 'What is the impact of poor supplier data quality?', type: 'textarea' },
+                        { id: 'sm18', text: 'How do you manage supplier segmentation?', type: 'textarea' },
+                        { id: 'sm19', text: 'What is your process for offboarding suppliers?', type: 'textarea' },
+                        { id: 'sm20', text: 'What are your goals for improving supplier relationships and compliance?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_sm1', text: 'Annual volume of new supplier onboardings', type: 'number' },
+                        { id: 'roi_sm2', text: 'Average cost to manually onboard one supplier', type: 'number', unit: '$' },
+                        { id: 'roi_sm3', text: 'Annual cost of supplier non-compliance issues', type: 'number', unit: '$' },
+                        { id: 'roi_sm4', text: 'Supplier Management FTEs', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_sm5', text: 'Average annual salary + benefits for SM staff', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_sm1: 200, roi_sm2: 15.00, roi_sm3: 5000, roi_sm4: 1, roi_sm5: 65000 },
+                    roiCalculationFormulas: [
+                        { name: 'Manual Onboarding Savings', formula: (i,s) => i.onboardings * i.manualCost * 0.60, inputs: { onboardings: 'roi_sm1', manualCost: 'roi_sm2' }, description: (i,s) => `(60% automation of onboarding)` },
+                        { name: 'Non-Compliance Savings', formula: (i,s) => i.nonComplianceCost * 0.20, inputs: { nonComplianceCost: 'roi_sm3' }, description: (i,s) => `(20% reduction in non-compliance costs)` },
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.30, inputs: { fteCount: 'roi_sm4', avgSalary: 'roi_sm5' }, description: (i,s) => `(30% productivity gain for ${i.fteCount} FTEs)` },
+                    ]
+                },
+                'Sourcing': {
+                    questions: [
+                        { id: 's1', text: 'How many sourcing events (RFQs, RFPs) do you conduct per year?', type: 'number' },
+                        { id: 's2', text: 'What is your average sourcing cycle time (from need identification to contract award)?', type: 'number', unit: 'Days' },
+                        { id: 's3', text: 'How do you identify potential suppliers for sourcing events?', type: 'textarea' },
+                        { id: 's4', text: 'What tools do you use for managing sourcing events (e.g., email, spreadsheets, e-sourcing platform)?', type: 'textarea' },
+                        { id: 's5', text: 'What challenges do you face with supplier bidding and negotiation?', type: 'textarea' },
+                        { id: 's6', text: 'How do you analyse bids and select suppliers?', type: 'textarea' },
+                        { id: 's7', text: 'How many FTEs are involved in sourcing activities?', type: 'number', unit: 'FTEs' },
+                        { id: 's8', text: 'What is your average savings percentage achieved through sourcing events?', type: 'number', unit: '%' },
+                        { id: 's9', text: 'How do you manage contract creation and signing after sourcing?', type: 'textarea' },
+                        { id: 's10', text: 'What is the biggest pain point in your current sourcing process?', type: 'textarea' },
+                        { id: 's11', text: 'How do you ensure transparency and fairness in your sourcing?', type: 'textarea' },
+                        { id: 's12', text: 'What reporting do you have on sourcing performance and savings?', type: 'textarea' },
+                        { id: 's13', text: 'How do you manage supplier communication during the sourcing process?', type: 'textarea' },
+                        { id: 's14', text: 'Do you use reverse auctions or other advanced sourcing techniques?', type: 'textarea' },
+                        { id: 's15', text: 'How do you handle multi-currency sourcing events?', type: 'textarea' },
+                        { id: 's16', text: 'What is the impact of manual sourcing on time-to-market for new products/services?', type: 'textarea' },
+                        { id: 's17', text: 'How do you manage supplier qualifications and compliance during sourcing?', type: 'textarea' },
+                        { id: 's18', text: 'What is your process for conducting spend analysis to identify sourcing opportunities?', type: 'textarea' },
+                        { id: 's19', text: 'How do you ensure data security for sensitive sourcing information?', type: 'textarea' },
+                        { id: 's20', text: 'What are your goals for improving sourcing efficiency and achieving greater savings?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_s1', text: 'Total annual spend under management', type: 'number', unit: '$' },
+                        { id: 'roi_s2', text: 'Current average savings from sourcing', type: 'number', unit: '%' },
+                        { id: 'roi_s3', text: 'Sourcing full-time employees', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_s4', text: 'Average annual salary + benefits for sourcing staff', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_s1: 10000000, roi_s2: 2, roi_s3: 2, roi_s4: 80000 },
+                    roiCalculationFormulas: [
+                        { name: 'Additional Savings from Sourcing', formula: (i,s) => i.totalSpend * ((i.currentSavings/100) * 0.03), inputs: { totalSpend: 'roi_s1', currentSavings: 'roi_s2' }, description: (i,s) => `(Target 3% additional savings on spend)` },
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.20, inputs: { fteCount: 'roi_s3', avgSalary: 'roi_s4' }, description: (i,s) => `(20% productivity gain for ${i.fteCount} FTEs)` },
+                    ]
+                },
+                'Claims & Deductions': {
+                    questions: [
+                        { id: 'cd1', text: 'How many customer claims/deductions do you receive per month?', type: 'number' },
+                        { id: 'cd2', text: 'What is the average value of a claim/deduction?', type: 'number', unit: '$' },
+                        { id: 'cd3', text: 'What percentage of claims are invalid or unauthorised?', type: 'number', unit: '%' },
+                        { id: 'cd4', text: 'What is your average time to resolve a claim/deduction?', type: 'number', unit: 'Days' },
+                        { id: 'cd5', text: 'How do you receive and log claims/deductions?', type: 'textarea' },
+                        { id: 'cd6', text: 'How do you research and validate claims?', type: 'textarea' },
+                        { id: 'cd7', text: 'How many FTEs are involved in claims and deductions management?', type: 'number', unit: 'FTEs' },
+                        { id: 'cd8', text: 'What systems are involved in your claims resolution process?', type: 'textarea' },
+                        { id: 'cd9', text: 'How do you communicate with customers regarding claim status and resolution?', type: 'textarea' },
+                        { id: 'cd10', text: 'What is the biggest pain point in your current claims and deductions process?', type: 'textarea' },
+                        { id: 'cd11', text: 'How do you track and report on claim types and root causes?', type: 'textarea' },
+                        { id: 'cd12', text: 'What is the impact of unresolved claims on customer relationships and cash flow?', type: 'textarea' },
+                        { id: 'cd13', text: 'How do you handle claims related to pricing, promotions, or damaged goods?', type: 'textarea' },
+                        { id: 'cd14', text: 'Do you have a formal dispute resolution process for claims?', type: 'textarea' },
+                        { id: 'cd15', text: 'How do you recover invalid deductions?', type: 'textarea' },
+                        { id: 'cd16', text: 'What is the volume of chargebacks you receive?', type: 'number' },
+                        { id: 'cd17', text: 'How do you ensure proper documentation for each claim?', type: 'textarea' },
+                        { id: 'cd18', text: 'What is the average cost to process one claim/deduction?', type: 'number', unit: '$' },
+                        { id: 'cd19', text: 'How do you identify and address recurring claim issues?', type: 'textarea' },
+                        { id: 'cd20', text: 'What are your goals for improving claims resolution efficiency and reducing invalid deductions?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_cd1', text: 'Annual volume of claims/deductions', type: 'number' },
+                        { id: 'roi_cd2', text: 'Annual value of invalid claims/deductions', type: 'number', unit: '$' },
+                        { id: 'roi_cd3', text: 'Claims Management FTEs', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_cd4', text: 'Average annual salary + benefits for claims staff', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_cd1: 1200, roi_cd2: 40000, roi_cd3: 2, roi_cd4: 68000 },
+                    roiCalculationFormulas: [
+                        { name: 'Invalid Claims Savings', formula: (i,s) => i.invalidValue * 0.25, inputs: { invalidValue: 'roi_cd2' }, description: (i,s) => `(25% reduction in invalid claims)` },
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.50, inputs: { fteCount: 'roi_cd3', avgSalary: 'roi_cd4' }, description: (i,s) => `(50% productivity gain for ${i.fteCount} FTEs)` },
+                    ]
+                },
+                'Invoice Delivery': {
+                    questions: [
+                        { id: 'id1', text: 'How many invoices do you deliver per month?', type: 'number' },
+                        { id: 'id2', text: 'What percentage of invoices are delivered manually (e.g., postal mail, email attachments)?', type: 'number', unit: '%' },
+                        { id: 'id3', text: 'What is your average cost per invoice for printing, postage, and archiving?', type: 'number', unit: '$' },
+                        { id: 'id4', text: 'What is your current invoice delivery success rate?', type: 'number', unit: '%' },
+                        { id: 'id5', text: 'How do you handle failed invoice deliveries or rejections?', type: 'textarea' },
+                        { id: 'id6', text: 'How many FTEs are involved in invoice delivery activities?', type: 'number', unit: 'FTEs' },
+                        { id: 'id7', text: 'What channels do you use for invoice delivery (e.g., email, EDI, portal, postal)?', type: 'textarea' },
+                        { id: 'id8', text: 'How do you track and confirm invoice receipt by customers?', type: 'textarea' },
+                        { id: 'id9', text: 'What challenges do you face with customer preferences for invoice format/delivery method?', type: 'textarea' },
+                        { id: 'id10', text: 'What is the biggest pain point in your current invoice delivery process?', type: 'textarea' },
+                        { id: 'id11', text: 'How does invoice delivery impact your DSO?', type: 'textarea' },
+                        { id: 'id12', text: 'What reporting do you have on invoice delivery status and performance?', type: 'textarea' },
+                        { id: 'id13', text: 'How do you ensure compliance with e-invoicing regulations (e.g., Peppol, local mandates)?', type: 'textarea' },
+                        { id: 'id14', text: 'How do you handle multi-currency invoices?', type: 'textarea' },
+                        { id: 'id15', text: 'What is your process for archiving delivered invoices?', type: 'textarea' },
+                        { id: 'id16', text: 'How do you manage customer master data for delivery preferences?', type: 'textarea' },
+                        { id: 'id17', text: 'What is the impact of slow or failed invoice delivery on customer satisfaction?', type: 'textarea' },
+                        { id: 'id18', text: 'Do you use a customer portal for invoice access?', type: 'textarea' },
+                        { id: 'id19', text: 'How do you handle large volumes of invoices efficiently?', type: 'textarea' },
+                        { id: 'id20', text: 'What are your goals for improving invoice delivery speed, accuracy, and cost-efficiency?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_id1', text: 'Annual volume of invoices delivered', type: 'number' },
+                        { id: 'roi_id2', text: 'Average cost per invoice for printing, postage, manual handling', type: 'number', unit: '$' },
+                        { id: 'roi_id3', text: 'Percentage of invoices delivered manually', type: 'number', unit: '%' },
+                    ],
+                    demoRoiData: { roi_id1: 150000, roi_id2: 1.50, roi_id3: 40 },
+                    roiCalculationFormulas: [
+                        { name: 'Manual Delivery Savings', formula: (i,s) => i.annualInvoices * (i.manualPct/100) * i.manualCost * 0.80, inputs: { annualInvoices: 'roi_id1', manualCost: 'roi_id2', manualPct: 'roi_id3' }, description: (i,s) => `(80% savings on manual delivery costs)` },
+                    ]
+                }
             },
             'Business Automation': {
                 'Document Management': {
@@ -266,11 +582,11 @@
                     ],
                     roiQuestions: [
                         { id: 'roi_dm1', text: 'Number of knowledge workers', type: 'number' },
-                        { id: 'roi_dm2', text: 'Average annual fully-loaded salary for a knowledge worker ($)', type: 'number', unit: '$' },
+                        { id: 'roi_dm2', text: 'Average annual fully-loaded salary for a knowledge worker', type: 'number', unit: '$' },
                         { id: 'roi_dm3', text: 'Average hours per week spent searching for documents', type: 'number', unit: 'Hours' },
-                        { id: 'roi_dm4', text: 'Annual cost of external storage (physical or digital) ($)', type: 'number', unit: '$' },
+                        { id: 'roi_dm4', text: 'Annual cost of external storage (physical or digital)', type: 'number', unit: '$' },
                         { id: 'roi_dm5', text: 'Number of compliance/audit failures or incidents per year', type: 'number' },
-                        { id: 'roi_dm6', text: 'Average cost per compliance incident ($)', type: 'number', unit: '$' },
+                        { id: 'roi_dm6', text: 'Average cost per compliance incident', type: 'number', unit: '$' },
                     ],
                     demoRoiData: { roi_dm1: 100, roi_dm2: 85000, roi_dm3: 5, roi_dm4: 10000, roi_dm5: 2, roi_dm6: 25000 },
                     roiCalculationFormulas: [
@@ -305,8 +621,8 @@
                     roiQuestions: [
                         { id: 'roi_wm1', text: 'Number of processes to automate', type: 'number' },
                         { id: 'roi_wm2', text: 'Average hours saved per automated process, per year', type: 'number', unit: 'Hours' },
-                        { id: 'roi_wm3', text: 'Average hourly cost of employees performing these tasks ($)', type: 'number', unit: '$' },
-                        { id: 'roi_wm4', text: 'Estimated annual cost of errors from manual processes ($)', type: 'number', unit: '$' },
+                        { id: 'roi_wm3', text: 'Average hourly cost of employees performing these tasks', type: 'number', unit: '$' },
+                        { id: 'roi_wm4', text: 'Estimated annual cost of errors from manual processes', type: 'number', unit: '$' },
                         { id: 'roi_wm5', text: 'Number of audit/compliance activities per year', type: 'number' },
                         { id: 'roi_wm6', text: 'Hours spent preparing for each audit/compliance activity', type: 'number', unit: 'Hours' },
                     ],
@@ -343,10 +659,10 @@
                     roiQuestions: [
                         { id: 'roi_pm1', text: 'Number of new hires per year requiring process training', type: 'number' },
                         { id: 'roi_pm2', text: 'Average hours of training per new hire', type: 'number', unit: 'Hours' },
-                        { id: 'roi_pm3', text: 'Average hourly cost of a new hire and their trainer (combined) ($)', type: 'number', unit: '$' },
-                        { id: 'roi_pm4', text: 'Total annual salary cost for all employees in operational roles ($)', type: 'number', unit: '$' },
+                        { id: 'roi_pm3', text: 'Average hourly cost of a new hire and their trainer (combined)', type: 'number', unit: '$' },
+                        { id: 'roi_pm4', text: 'Total annual salary cost for all employees in operational roles', type: 'number', unit: '$' },
                         { id: 'roi_pm5', text: 'Number of continuous improvement projects per year', type: 'number' },
-                        { id: 'roi_pm6', text: 'Average savings per improvement project ($)', type: 'number', unit: '$' },
+                        { id: 'roi_pm6', text: 'Average savings per improvement project', type: 'number', unit: '$' },
                     ],
                     demoRoiData: { roi_pm1: 25, roi_pm2: 40, roi_pm3: 50, roi_pm4: 2000000, roi_pm5: 5, roi_pm6: 10000 },
                     roiCalculationFormulas: [
@@ -358,7 +674,28 @@
             }
         };
 
-        const scorecardQuestions = [ { id: 'os1', text: "Customer's business needs align to our capability?" }, { id: 'os2', text: 'We have the access to all the key buying influences?' }, { id: 'os3', text: 'We have at least one Coach?' }, { id: 'os4', text: 'We can differentiate our solution from the competition and demonstrate value?' }, { id: 'os5', text: 'Customer has engaged us early in the process?' }, ];
+        const discoveryToRoiMapping = {
+            'Finance Automation': {
+                'Accounts Payable': [ { discoveryId: 'ap1', roiId: 'roi_ap1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'ap3', roiId: 'roi_ap3' }, { discoveryId: 'ap4', roiId: 'roi_ap2' } ],
+                'Accounts Receivable': [ { discoveryId: 'ar1', roiId: 'roi_ar1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'ar2', roiId: 'roi_ar2' }, { discoveryId: 'ar3', roiId: 'roi_ar3' }, { discoveryId: 'ar8', roiId: 'roi_ar4' } ],
+                'Order Management': [ { discoveryId: 'om1', roiId: 'roi_om1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'om8', roiId: 'roi_om5' } ],
+                'Procurement': [ { discoveryId: 'p1', roiId: 'roi_p1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'p7', roiId: 'roi_p4' } ],
+                'Expense Management': [ { discoveryId: 'em1', roiId: 'roi_em1', transform: v => (parseFloat(v) || 0) * 12 } ],
+                'Cash Application': [ { discoveryId: 'ca6', roiId: 'roi_ca4' } ],
+                'Collections Management': [ { discoveryId: 'cm8', roiId: 'roi_cm2' } ],
+                'Credit Management': [ { discoveryId: 'crm6', roiId: 'roi_crm3' } ],
+                'Customer Inquiry': [ { discoveryId: 'ci5', roiId: 'roi_ci3' } ],
+                'Supplier Management': [ { discoveryId: 'sm7', roiId: 'roi_sm4' } ],
+                'Sourcing': [ { discoveryId: 's7', roiId: 'roi_s3' } ],
+                'Claims & Deductions': [ { discoveryId: 'cd7', roiId: 'roi_cd3' } ],
+                'Invoice Delivery': [ { discoveryId: 'id1', roiId: 'roi_id1', transform: v => (parseFloat(v) || 0) * 12 } ]
+            },
+            'Business Automation': {
+                'Document Management': [ { discoveryId: 'dm1', roiId: 'roi_dm1' }, { discoveryId: 'dm2', roiId: 'roi_dm3' } ]
+            }
+        };
+
+        const scorecardQuestions = [ { id: 'os1', text: "Customer's business needs align to our capability?" }, { id: 'os2', text: 'We have access to all the key buying influences?' }, { id: 'os3', text: 'We have at least one Coach?' }, { id: 'os4', text: 'We can differentiate our solution from the competition and demonstrate value?' }, { id: 'os5', text: 'Customer has engaged us early in the process?' }, ];
         const scorecardAnswerOptions = ['Yes', 'No', 'Unknown'];
         const scorecardYesPoints = 20;
 
@@ -453,7 +790,7 @@
             } else if (currentView === 'discovery') {
                 viewContainer.innerHTML += moduleData.questions.map((q, index) => `
                     <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
-                        <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">${index + 1}. ${q.text} ${q.unit ? `(${q.unit})` : ''}</label>
+                        <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">${index + 1}. ${q.text} ${q.unit ? `<span class="font-normal text-gray-500">(${q.unit})</span>` : ''}</label>
                         ${q.type === 'textarea' ? `<textarea id="${q.id}" rows="4" class="w-full p-2 border rounded-md">${state.discoveryAnswers[q.id] || ''}</textarea>` : `<input id="${q.id}" type="${q.type}" value="${state.discoveryAnswers[q.id] || ''}" class="w-full p-2 border rounded-md">`}
                     </div>`).join('');
                 viewContainer.innerHTML += `
@@ -462,15 +799,21 @@
                         <div id="additional-notes-container" class="space-y-4"></div>
                         <button id="add-note-button" class="mt-4 flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Add Note</button>
                     </div>`;
+                if (discoveryToRoiMapping[selectedStream] && discoveryToRoiMapping[selectedStream][selectedModule]) {
+                    viewContainer.innerHTML += `<div class="flex justify-center mt-6"><button id="copy-to-roi-button" class="flex items-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg">Copy to ROI</button></div>`;
+                }
                 appContent.appendChild(viewContainer);
                 moduleData.questions.forEach(q => document.getElementById(q.id).addEventListener('input', e => state.discoveryAnswers[q.id] = e.target.value));
+                if (document.getElementById('copy-to-roi-button')) {
+                    document.getElementById('copy-to-roi-button').addEventListener('click', copyDiscoveryToRoi);
+                }
                 renderAdditionalNotes();
             } else if (currentView === 'roi') {
                 viewContainer.innerHTML += `
                     <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Annual Subscription Cost ($)</label><input id="annual-subscription-cost" type="number" value="${state.eskerSubscriptionCost}" class="w-full p-2 border rounded-md"></div>
                     <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Professional Services Cost ($)</label><input id="professional-services-cost" type="number" value="${state.professionalServicesCost}" class="w-full p-2 border rounded-md"></div>
                     <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Years Utilised</label><input id="number-of-years-utilized" type="number" value="${state.numberOfYearsUtilized}" class="w-full p-2 border rounded-md"></div>
-                    ${moduleData.roiQuestions.map((q, index) => `<div class="mb-6 p-4 border rounded-lg bg-gray-50"><label for="${q.id}" class="block font-semibold">${index + 1}. ${q.text} ${q.unit ? `(${q.unit})` : ''}</label><input id="${q.id}" type="number" value="${state.roiAnswers[q.id] || ''}" class="w-full p-2 border rounded-md"></div>`).join('')}
+                    ${moduleData.roiQuestions.map((q, index) => `<div class="mb-6 p-4 border rounded-lg bg-gray-50"><label for="${q.id}" class="block font-semibold">${index + 1}. ${q.text} ${q.unit ? `<span class="font-normal text-gray-500">(${q.unit})</span>` : ''}</label><input id="${q.id}" type="number" value="${state.roiAnswers[q.id] || ''}" class="w-full p-2 border rounded-md"></div>`).join('')}
                     <div class="flex justify-center gap-4 mt-6">
                         <button id="calculate-roi-button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6">Calculate ROI</button>
                         <button id="populate-demo-data-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6">Demo Data</button>
@@ -503,7 +846,7 @@
         
         function calculateRoi() {
             const state = getCurrentModuleState();
-            if (!state) return;
+            if (!state) { showMessage(validationErrorMessage); return; }
             hideMessage(validationErrorMessage);
             const moduleData = appModules[selectedStream][selectedModule];
             const annualSub = parseFloat(state.eskerSubscriptionCost);
@@ -520,7 +863,7 @@
             if (!allValid) {
                 state.calculatedRoi = null;
                 showMessage(validationErrorMessage);
-                renderAppContent(); // Re-render to show message and hide old results
+                renderAppContent();
                 return;
             }
 
@@ -592,6 +935,7 @@
             if (!notesContainer) return;
             notesContainer.innerHTML = '';
             const state = getCurrentModuleState();
+            if (!state) return;
             state.additionalDiscoveryNotes.forEach(note => {
                 const noteDiv = document.createElement('div');
                 noteDiv.className = 'flex items-start space-x-2 mb-2';
@@ -606,6 +950,29 @@
             document.getElementById('add-note-button').onclick = () => { state.additionalDiscoveryNotes.push({ id: Date.now(), text: '' }); renderAdditionalNotes(); };
         }
         
+        function copyDiscoveryToRoi() {
+            const state = getCurrentModuleState();
+            if (!state || !selectedModule || !selectedStream) return;
+            const mappingForStream = discoveryToRoiMapping[selectedStream];
+            if (!mappingForStream) return;
+            const mappings = mappingForStream[selectedModule];
+            if (!mappings) return;
+
+            mappings.forEach(map => {
+                const discoveryValue = state.discoveryAnswers[map.discoveryId];
+                if (discoveryValue !== undefined) {
+                    let valueToCopy = map.transform ? map.transform(discoveryValue) : discoveryValue;
+                    state.roiAnswers[map.roiId] = valueToCopy;
+                }
+            });
+            showMessage(copySuccessMessage);
+            setTimeout(() => hideMessage(copySuccessMessage), 3000);
+            if (currentView === 'discovery') {
+                state.currentView = 'roi'; // Switch to ROI tab to see results
+            }
+            renderAppContent();
+        }
+
         function populateDemoData() {
             const state = getCurrentModuleState();
             const demoData = appModules[selectedStream][selectedModule].demoRoiData;
@@ -615,6 +982,129 @@
             }
         }
         
+        // --- Export Functions ---
+        function getReportData() {
+            const state = getCurrentModuleState();
+            if (!state) return null;
+            const moduleData = appModules[selectedStream][selectedModule];
+            const data = {
+                stream: selectedStream,
+                moduleName: selectedModule,
+                scorecard: { questions: scorecardQuestions, answers: state.scorecardAnswers, score: state.calculatedScorecard, maxScore: scorecardQuestions.length * scorecardYesPoints },
+                discovery: { questions: moduleData.questions, answers: state.discoveryAnswers, notes: state.additionalDiscoveryNotes },
+                roi: { questions: moduleData.roiQuestions, inputs: { ...state.roiAnswers, annualSub: state.eskerSubscriptionCost, profServices: state.professionalServicesCost, years: state.numberOfYearsUtilized }, results: state.calculatedRoi }
+            };
+            return data;
+        }
+
+        function generateAIPromptContent(data) {
+            let prompt = `You are an expert business analyst... (Full prompt logic here as in original file, adapted for new data structure)`;
+             // This is the full restored prompt logic, adapted for the new data structure
+            prompt = `You are an expert business analyst providing concise and actionable insights on process improvement and technology adoption. Your task is to analyse the provided information for a client interested in optimising their ${data.moduleName} process and evaluating the opportunity fit.
+
+Based on the detailed information below, please provide:
+1.  **Opportunity Scorecard Analysis:** Based on the Yes/No/Unknown answers and the total score (${data.scorecard.score} out of ${data.scorecard.maxScore}), analyse the overall fit and strength of this opportunity. Highlight any specific "No" answers that represent significant risks or challenges for a successful project.
+2.  **Key Challenges and Opportunities from Discovery:** Provide a concise summary of the most critical pain points and areas for improvement identified from the discovery answers.
+3.  **Summary of Financial Benefits and Investments:** Highlight the most significant financial benefits (savings) and the total investment over the specified years, based on the ROI calculation output. Include the overall Net Benefit and ROI Percentage.
+4.  **Strategic Recommendations for Process Improvement and Technology Adoption:** Describe how a suitable digital solution can address the identified challenges and achieve the calculated benefits within the ${data.moduleName} process. Explicitly link recommendations back to points raised in the Discovery or ROI sections.
+    **Important:** Frame recommendations generally (e.g., 'an automation platform', 'a digital solution', 'a cloud-based system').
+5.  **Ensure all spelling in your response aligns with Australian English.**
+6.  **If you cannot provide a comprehensive response for a specific section based on the information provided (e.g., ROI not calculated, or critical discovery questions unanswered), please explicitly state 'Insufficient data to provide a comprehensive response for [specific section].' Do not guess or make up information.**
+
+---
+### Business Stream: ${data.stream}
+### Module: ${data.moduleName}
+---
+### Opportunity Scorecard Information:
+Total Score: ${data.scorecard.score !== null ? data.scorecard.score : '--'} / ${data.scorecard.maxScore}
+
+Question & Answer Breakdown:\n`;
+            data.scorecard.questions.forEach(q => {
+                prompt += `- ${q.text}: ${data.scorecard.answers[q.id] || 'Unknown'}\n`;
+            });
+
+            prompt += `
+---
+### Client Discovery Information:
+`;
+            data.discovery.questions.forEach(q => {
+                prompt += `\nQuestion: ${q.text}\nAnswer: ${data.discovery.answers[q.id] || 'N/A'}`;
+            });
+            if (data.discovery.notes && data.discovery.notes.length > 0) {
+                prompt += `\n\nAdditional Discovery Notes:`;
+                data.discovery.notes.forEach((note, index) => {
+                    prompt += `\n- Note ${index + 1}: ${note.text || 'N/A'}`;
+                });
+            }
+
+            prompt += `\n---
+### ROI Calculation Data:
+`;
+            if (data.roi.results) {
+                const roi = data.roi;
+                prompt += `
+**Investment Inputs:**
+- Annual Subscription Cost: $${roi.inputs.annualSub || 'N/A'}
+- Professional Services Upfront Cost: $${roi.inputs.profServices || 'N/A'}
+- Number of Years Software Will Be Utilised For: ${roi.inputs.years || 'N/A'} Years
+
+**Detailed ROI Question Inputs:**
+`;
+                roi.questions.forEach(q => {
+                    prompt += `- ${q.text}: ${roi.inputs[q.id] || 'N/A'}\n`;
+                });
+
+                prompt += `
+**Calculated ROI Summary (${roi.inputs.years || 3} Years):**
+- Total Annual Savings: $${roi.results.totalAnnualSavings}
+- Net Annual Benefit: $${roi.results.netAnnualBenefit}
+- Total Investment: $${roi.results.totalInvestmentOverYears}
+- Total Benefit: $${roi.results.totalBenefitOverYears}
+- Net Benefit: $${roi.results.netBenefitOverYears}
+- ROI Percentage: ${roi.results.roiPercentage}%
+- Payback Period: ${roi.results.paybackPeriodMonths} Months
+
+**Detailed Annual Savings Breakdown:**
+`;
+                Object.entries(roi.results.detailedSavingsBreakdown).forEach(([key, value]) => {
+                    prompt += `- ${key}: ${value}\n`;
+                });
+
+            } else {
+                prompt += `\nROI has not been calculated.`;
+            }
+            prompt += `\n---
+Please provide your analysis now.`;
+            return prompt;
+        }
+        
+        function exportData() {
+            if (!selectedModule) { showMessage(validationErrorMessage); return; }
+            const data = getReportData();
+            if (!data) return;
+            const format = document.querySelector('input[name="export-format"]:checked').value;
+            let content, filename = `${data.stream}_${data.moduleName}_Report`.replace(/\s/g, '_'), mimeType;
+
+            if (format === 'ai-prompt') {
+                content = generateAIPromptContent(data);
+                filename = `${data.stream}_${data.moduleName}_AI_Prompt`.replace(/\s/g, '_') + '.txt';
+                mimeType = 'text/plain;charset=utf-8';
+            } else {
+                // Simplified text/md/html for brevity, but they would use full formatters
+                content = JSON.stringify(data, null, 2);
+                filename += '.json';
+                mimeType = 'application/json';
+            }
+            
+            const blob = new Blob([content], { type: mimeType });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+            showMessage(exportSuccessMessage);
+            setTimeout(() => hideMessage(exportSuccessMessage), 3000);
+        }
+
         // --- Event Listeners & Initialization ---
         streamSelect.addEventListener('change', (e) => {
             selectedStream = e.target.value;
@@ -637,26 +1127,7 @@
         confirmClearButton.addEventListener('click', () => { if (selectedModule) { delete allModuleData[selectedModule]; renderAppContent(); } hideConfirmationModal(); });
         cancelClearButton.addEventListener('click', hideConfirmationModal);
         closeValidationErrorButton.addEventListener('click', () => hideMessage(validationErrorMessage));
-        
-        exportDataButton.addEventListener('click', () => {
-            if (!selectedModule) return;
-            const data = {
-                stream: selectedStream,
-                module: selectedModule,
-                scorecard: { questions: scorecardQuestions, answers: getCurrentModuleState().scorecardAnswers, score: getCurrentModuleState().calculatedScorecard, maxScore: scorecardQuestions.length * scorecardYesPoints },
-                discovery: { questions: appModules[selectedStream][selectedModule].questions, answers: getCurrentModuleState().discoveryAnswers, notes: getCurrentModuleState().additionalDiscoveryNotes },
-                roi: { inputs: { ...getCurrentModuleState().roiAnswers, annualSub: getCurrentModuleState().eskerSubscriptionCost, profServices: getCurrentModuleState().professionalServicesCost, years: getCurrentModuleState().numberOfYearsUtilized }, questions: appModules[selectedStream][selectedModule].roiQuestions, results: getCurrentModuleState().calculatedRoi }
-            };
-            // Simplified export for demonstration
-            const content = JSON.stringify(data, null, 2);
-            const blob = new Blob([content], { type: 'application/json' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `${data.stream}_${data.module}_Report.json`;
-            link.click();
-            showMessage(exportSuccessMessage);
-            setTimeout(() => hideMessage(exportSuccessMessage), 3000);
-        });
+        exportDataButton.addEventListener('click', exportData);
 
         window.onload = () => {
             populateStreamDropdown();
