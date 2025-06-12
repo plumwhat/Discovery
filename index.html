@@ -123,6 +123,10 @@
                         <input type="radio" name="export-format" value="html" class="form-radio text-ms-blue">
                         <span class="ml-2 text-gray-700">HTML (.html)</span>
                     </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="export-format" value="ai-prompt" class="form-radio text-ms-blue">
+                        <span class="ml-2 text-gray-700">AI Prompt (.txt)</span>
+                    </label>
                 </div>
                 <button id="export-data-button" class="flex items-center bg-ms-blue hover:bg-ms-blue-dark text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 ring-ms-blue focus:ring-offset-2 mt-4">
                     <!-- FileText icon from Lucide -->
@@ -2129,6 +2133,100 @@
             return content;
         }
 
+        // Function to generate content for the AI Prompt
+        function generateAIPromptContent(data) {
+            let prompt = `You are an expert business analyst providing concise and actionable insights on process improvement and technology adoption. Your task is to analyse the provided discovery information and ROI data for a client interested in optimising their ${data.module} process.
+
+Based on the detailed information below, please provide:
+1.  **A concise summary of the key challenges and opportunities identified from the discovery answers.** Focus on the most critical pain points and areas for improvement.
+2.  **A summary of the key financial benefits and investments based on the ROI output.** Highlight the most significant savings and the overall net benefit/ROI percentage.
+3.  **Strategic recommendations for process improvement and technology adoption.** Specifically, describe how a suitable digital solution can address the identified challenges and achieve the calculated benefits within the ${data.module} process.
+    **Important:** Do not use the name 'Esker' in your response. Frame recommendations generally (e.g., 'an automation platform', 'a digital solution', 'a cloud-based system').
+4.  **Ensure all spelling in your response aligns with Australian English.**
+5.  **If you cannot provide a recommendation or summary for a specific section based on the information provided, please explicitly state 'Insufficient data to provide a comprehensive response for [specific section].' Do not guess or make up information.**
+
+---
+### Client Discovery Information (for ${data.module} module):
+`;
+
+            // Include Discovery Questions and Answers
+            for (const key in data.discovery) {
+                const q = data.discovery[key];
+                prompt += `
+Question: ${q.text}
+Answer: ${q.answer}`;
+            }
+
+            if (data.additionalNotes && data.additionalNotes.length > 0) {
+                prompt += `\n\nAdditional Discovery Notes:`;
+                data.additionalNotes.forEach((note, index) => {
+                    prompt += `\n- Note ${index + 1}: ${note.text || 'N/A'}`;
+                });
+            }
+
+            prompt += `
+---
+### ROI Calculation Data:
+
+**Investment Inputs:**
+- Annual Subscription Cost: $${data.roiInputs.annualSubscriptionCost || 'N/A'}
+- Professional Services Upfront Cost: $${data.roiInputs.professionalServicesCost || 'N/A'}
+- Number of Years Software Will Be Utilised For: ${data.roiInputs.numberOfYearsUtilized || 'N/A'} Years
+
+**Detailed ROI Question Inputs:**
+`;
+            for (const key in data.roiInputs.roiQuestions) {
+                const q = data.roiInputs.roiQuestions[key];
+                prompt += `- ${q.text}: ${q.input || 'N/A'}`;
+            }
+
+            if (data.calculatedRoi) {
+                prompt += `
+**Calculated ROI Summary:**
+- Total Annual Savings: $${data.calculatedRoi.totalAnnualSavings}
+- Total Annual Investment: $${data.calculatedRoi.annualEskerInvestment}
+- Net Annual Benefit: $${data.calculatedRoi.netAnnualBenefit}
+- Total Investment (${data.roiInputs.numberOfYearsUtilized || 3} Years): $${data.calculatedRoi.totalInvestmentOverYears}
+- Total Benefit (${data.roiInputs.numberOfYearsUtilized || 3} Years): $${data.calculatedRoi.totalBenefitOverYears}
+- Net Benefit (${data.roiInputs.numberOfYearsUtilized || 3} Years): $${data.calculatedRoi.netBenefitOverYears}
+- ROI Percentage (${data.roiInputs.numberOfYearsUtilized || 3} Years): ${data.calculatedRoi.roiPercentage}%
+- Payback Period: ${data.calculatedRoi.paybackPeriodMonths} Months
+
+**Detailed Savings Breakdown (Annual):**
+`;
+                for (const key in data.calculatedRoi.details) {
+                    prompt += `- ${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}: $${data.calculatedRoi.details[key]}\n`;
+                }
+
+                if (data.calculatedRoi.detailedSavingsBreakdown) {
+                    prompt += `
+**Savings Calculation Steps:**
+`;
+                    for (const key in data.calculatedRoi.detailedSavingsBreakdown) {
+                        prompt += `- ${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}: ${data.calculatedRoi.detailedSavingsBreakdown[key]}\n`;
+                    }
+                }
+
+                if (data.calculatedRoi.annualBreakdown && data.calculatedRoi.annualBreakdown.length > 0) {
+                    prompt += `
+**Annual Breakdown (Investment, Savings, ROI):**
+Year | Annual Investment ($) | Annual Savings ($) | Net Annual Benefit ($) | Cumulative Investment ($) | Cumulative Benefit ($) | Cumulative ROI (%)
+-----|-----------------------|--------------------|------------------------|---------------------------|------------------------|--------------------
+`;
+                    data.calculatedRoi.annualBreakdown.forEach(yearData => {
+                        prompt += `${yearData.year} | $${yearData.annualInvestment} | $${yearData.annualSavings} | $${yearData.netAnnualBenefit} | $${yearData.cumulativeInvestment} | $${yearData.cumulativeBenefit} | ${yearData.cumulativeRoiPercentage}%\n`;
+                    });
+                }
+
+            } else {
+                prompt += `\nCalculated ROI: ROI has not been calculated yet.\n`;
+            }
+            prompt += `\n---
+Please provide your analysis and recommendations now.`;
+
+            return prompt;
+        }
+
 
         // Export data to selected file type
         function exportData() {
@@ -2158,6 +2256,11 @@
                     content = generateHtmlReportContent(reportData);
                     filename += '.html';
                     mimeType = 'text/html;charset=utf-8';
+                    break;
+                case 'ai-prompt':
+                    content = generateAIPromptContent(reportData);
+                    filename = `${selectedModule.replace(/\s/g, '_')}_AI_Prompt.txt`;
+                    mimeType = 'text/plain;charset=utf-8';
                     break;
                 default:
                     console.error('Unknown export format');
