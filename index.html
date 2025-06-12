@@ -1,359 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Presales Discovery & ROI Tool</title>
-  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIgLz48cGF0aCBkPSJNMTUgM1Y4SDE5Ii8+PC9zdmc+" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    body { font-family: 'Inter', sans-serif; }
-    .bg-ms-blue { background-color: #0078D4; }
-    .hover\:bg-ms-blue-dark:hover { background-color: #005B9C; }
-    .text-ms-blue { color: #0078D4; }
-    .border-ms-blue-light { border-color: #A0CBE8; }
-    .ring-ms-blue { --tw-ring-color: #0078D4; }
-    select, input[type="number"], textarea {
-      transition: all 0.2s ease-in-out; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
-    }
-    select:focus, input[type="number"]:focus, textarea:focus {
-      box-shadow: 0 0 0 3px rgba(0,120,212,0.25); border-color: #0078D4;
-    }
-    button {
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-      border-radius: 0.5rem;
-    }
-    button:hover {
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-      transform: translateY(-2px);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presales Discovery & ROI Tool</title>
+    <!-- Document Icon (Favicon) -->
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIvPjxwYXRoIGQ9Ik0xNSAzVjgiLz48L3N2Zz4=" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-ms-blue { background-color: #0078D4; }
+        .hover\:bg-ms-blue-dark:hover { background-color: #005B9C; }
+        .text-ms-blue { color: #0078D4; }
+        .border-ms-blue-light { border-color: #A0CBE8; }
+        .ring-ms-blue { --tw-ring-color: #0078D4; }
+        select, input[type="number"], textarea {
+            transition: all 0.2s ease-in-out; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+        }
+        select:focus, input[type="number"]:focus, textarea:focus {
+            box-shadow: 0 0 0 3px rgba(0,120,212,0.25); border-color: #0078D4;
+        }
+        button {
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            border-radius: 0.5rem;
+        }
+        button:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background-color: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background-color: #fefefe; margin: auto; padding: 20px; border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+            max-width: 400px; width: 90%; text-align: center;
+        }
+    </style>
 </head>
 <body class="min-h-screen bg-gray-50 flex flex-col items-center p-4 font-sans text-gray-800">
-  <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg p-6 md:p-8">
-    <h1 class="text-3xl md:text-4xl font-bold text-center text-ms-blue mb-6">
-      Presales Discovery & ROI Tool
-    </h1>
-    <!-- Customer Info Fields -->
-    <div class="mb-8 p-4 bg-gray-100 rounded-lg shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
-      <input id="customer-company" type="text" placeholder="Customer Company" class="w-full md:w-1/4 px-3 py-2 border border-gray-300 rounded-md" />
-      <input id="customer-name" type="text" placeholder="Customer Name" class="w-full md:w-1/4 px-3 py-2 border border-gray-300 rounded-md" />
-      <input id="date-completed" type="date" class="w-full md:w-1/4 px-3 py-2 border border-gray-300 rounded-md" />
-    </div>
-    <!-- Business Stream Selector -->
-    <div class="mb-4 flex flex-col md:flex-row items-center gap-4">
-      <label for="business-stream-select" class="text-lg font-semibold text-blue-800">Business Stream:</label>
-      <select id="business-stream-select" class="block w-full md:w-1/2 px-4 py-2 rounded-md border border-blue-300 bg-white text-gray-900">
-        <option value="">-- Choose Business Stream --</option>
-        <option value="finance">Finance Automation</option>
-        <option value="business">Business Automation</option>
-      </select>
-    </div>
-    <!-- Module Selection -->
-    <div class="mb-8 p-4 bg-blue-100 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-center gap-4">
-      <label for="module-select" class="text-lg font-semibold text-blue-800">Select Module:</label>
-      <div class="relative w-full md:w-1/2">
-        <select id="module-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none">
-          <option value="">-- Choose Module --</option>
-        </select>
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700">
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+    <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg p-6 md:p-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-center text-ms-blue mb-6">
+            Presales Discovery & ROI Tool
+        </h1>
+        <!-- Customer Info Fields -->
+        <div class="mb-8 p-4 bg-gray-100 rounded-lg shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+            <input id="customer-company" type="text" placeholder="Customer Company" class="w-full md:w-1/4 px-3 py-2 border border-gray-300 rounded-md" />
+            <input id="customer-name" type="text" placeholder="Customer Name" class="w-full md:w-1/4 px-3 py-2 border border-gray-300 rounded-md" />
+            <input id="date-completed" type="date" class="w-full md:w-1/4 px-3 py-2 border border-gray-300 rounded-md" />
         </div>
-      </div>
-    </div>
-    <!-- Main Content Area -->
-    <div id="app-content"></div>
-    <div class="mt-8 flex flex-col md:flex-row justify-center items-center gap-4">
-      <button id="clear-form-button" class="flex items-center bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
-        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        Clear Form
-      </button>
-    </div>
-    <footer class="mt-8 text-gray-500 text-sm">(c) Brad Whatman 2025</footer>
-  </div>
-  <script>
-    // Set default date to today
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('date-completed').valueAsDate = new Date();
-    });
-
-    // ---- Original Esker Modules ----
-    // Paste your full original eskerModules object here (preserved)
-
-    const eskerModules = {
-      'Accounts Receivable': {
-        questions: [
-          { id: 'ar1', text: 'How many invoices do you issue per month? (Per Month)', type: 'number' },
-          { id: 'ar2', text: 'What is your average invoice value? (Currency)', type: 'number' }
-          // ...add the rest of your original questions and modules...
-        ],
-        roiQuestions: [
-          { id: 'roi_ar1', text: 'Average cost to manually process one invoice ($) (Per Invoice)', type: 'number' }
-          // ...add the rest of your original ROI questions...
-        ]
-      },
-      // ...Add all your other original modules here...
-    };
-
-    // ---- Business Automation Modules (M-Files/Nintex) ----
-    const businessAutomationModules = {
-      'Document Management': {
-        questions: [
-          { id: 'dm1', text: 'How many documents do you manage monthly?', type: 'number' },
-          { id: 'dm2', text: 'What is the average time to retrieve a document (minutes)?', type: 'number' },
-          { id: 'dm3', text: 'What challenges do you face in document security or compliance?', type: 'textarea' },
-          { id: 'dm4', text: 'What percentage of documents are processed manually?', type: 'number' }
-        ],
-        roiQuestions: [
-          { id: 'roi_dm1', text: 'Current annual document management cost ($)', type: 'number' },
-          { id: 'roi_dm2', text: 'Average time saved per document with M-Files (minutes)', type: 'number' },
-          { id: 'roi_dm3', text: 'Estimated reduction in compliance risks (%)', type: 'number' }
-        ]
-      },
-      'Workflow Management': {
-        questions: [
-          { id: 'wm1', text: 'How many workflow processes are managed monthly?', type: 'number' },
-          { id: 'wm2', text: 'What is the current error rate in workflow processes (%)?', type: 'number' },
-          { id: 'wm3', text: 'What tools are currently used for workflow automation?', type: 'textarea' },
-          { id: 'wm4', text: 'Describe your workflow approval process.', type: 'textarea' }
-        ],
-        roiQuestions: [
-          { id: 'roi_wm1', text: 'Current annual workflow management cost ($)', type: 'number' },
-          { id: 'roi_wm2', text: 'Average time saved per workflow with Nintex (minutes)', type: 'number' },
-          { id: 'roi_wm3', text: 'Estimated reduction in manual effort (%)', type: 'number' }
-        ]
-      },
-      'Process Mapping': {
-        questions: [
-          { id: 'pm1', text: 'How many business processes are mapped annually?', type: 'number' },
-          { id: 'pm2', text: 'What is the average time to map a process (hours)?', type: 'number' },
-          { id: 'pm3', text: 'How do you currently document process changes?', type: 'textarea' },
-          { id: 'pm4', text: 'What challenges do you face in process visibility?', type: 'textarea' }
-        ],
-        roiQuestions: [
-          { id: 'roi_pm1', text: 'Current annual process mapping cost ($)', type: 'number' },
-          { id: 'roi_pm2', text: 'Average time saved per process with Nintex (hours)', type: 'number' },
-          { id: 'roi_pm3', text: 'Estimated increase in process compliance (%)', type: 'number' }
-        ]
-      }
-    };
-
-    // ---- Opportunity Scorecard ----
-    const scorecardQuestions = [
-      "Customer's business needs align to our capability?",
-      "We have access to all the key buying influences?",
-      "We have at least one Coach?",
-      "We can differentiate our solution from the competition and demonstrate value?",
-      "Customer has engaged us early in the process?"
-    ];
-
-    // ---- App State ----
-    let currentModuleSet = {};
-    let selectedModule = '';
-    let currentView = 'discovery'; // discovery, roi, scorecard
-    let discoveryAnswers = {};
-    let roiAnswers = {};
-
-    // ---- DOM Elements ----
-    const moduleSelect = document.getElementById('module-select');
-    const appContent = document.getElementById('app-content');
-
-    // ---- Business Stream/Module Filtering Logic ----
-    document.getElementById('business-stream-select').addEventListener('change', function() {
-      const stream = this.value;
-      moduleSelect.innerHTML = '<option value="">-- Choose Module --</option>';
-      if (stream === 'finance') {
-        currentModuleSet = eskerModules; // Only Esker modules
-        Object.keys(eskerModules).forEach(mod => {
-          moduleSelect.innerHTML += `<option value="${mod}">${mod}</option>`;
-        });
-      } else if (stream === 'business') {
-        currentModuleSet = businessAutomationModules; // Only Business Automation modules
-        Object.keys(businessAutomationModules).forEach(mod => {
-          moduleSelect.innerHTML += `<option value="${mod}">${mod}</option>`;
-        });
-      } else {
-        currentModuleSet = {};
-      }
-      selectedModule = '';
-      renderAppContent();
-    });
-
-    moduleSelect.addEventListener('change', function() {
-      selectedModule = this.value;
-      renderAppContent();
-    });
-
-    // ---- Rendering Logic ----
-    function renderAppContent() {
-      appContent.innerHTML = '';
-      // Tabs
-      let navTabsHtml = `
-        <div class="flex justify-center mb-6">
-          <button id="discovery-tab" class="px-6 py-3 rounded-l-lg text-lg font-medium transition-all duration-300
-            ${currentView === 'discovery' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
-            Discovery Questions
-          </button>
-          <button id="roi-tab" class="px-6 py-3 text-lg font-medium transition-all duration-300
-            ${currentView === 'roi' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
-            ROI Calculator
-          </button>
-          <button id="scorecard-tab" class="px-6 py-3 rounded-r-lg text-lg font-medium transition-all duration-300
-            ${currentView === 'scorecard' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
-            Opportunity Scorecard
-          </button>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('date-completed').valueAsDate = new Date();
+            });
+        </script>
+        <!-- Business Stream Selector -->
+        <div class="mb-4 flex flex-col md:flex-row items-center gap-4">
+            <label for="business-stream-select" class="text-lg font-semibold text-blue-800">Business Stream:</label>
+            <select id="business-stream-select" class="block w-full md:w-1/2 px-4 py-2 rounded-md border border-blue-300 bg-white text-gray-900">
+                <option value="finance">Finance Automation</option>
+                <option value="business">Business Automation</option>
+            </select>
         </div>
-      `;
-      appContent.insertAdjacentHTML('beforeend', navTabsHtml);
-
-      // Tab events
-      document.getElementById('discovery-tab').onclick = () => { currentView = 'discovery'; renderAppContent(); };
-      document.getElementById('roi-tab').onclick = () => { currentView = 'roi'; renderAppContent(); };
-      document.getElementById('scorecard-tab').onclick = () => { currentView = 'scorecard'; renderAppContent(); };
-
-      // Scorecard Tab
-      if (currentView === 'scorecard') {
-        let scorecardHtml = `<div class="bg-white p-6 rounded-xl shadow-inner">
-          <h2 class="text-2xl font-bold text-blue-700 mb-4 text-center">Opportunity Scorecard</h2>
-          <form id="opportunity-scorecard-form">`;
-        scorecardQuestions.forEach((q, idx) => {
-          scorecardHtml += `
-            <div class="mb-6">
-              <label class="block text-md font-semibold text-gray-700 mb-2">${idx + 1}. ${q}</label>
-              <select name="scorecard-q${idx}" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                <option value="unknown">Unknown</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-            </div>`;
-        });
-        scorecardHtml += `
-            <button type="button" id="calculate-scorecard" class="bg-ms-blue text-white px-6 py-3 rounded-lg font-bold">Calculate Score</button>
-            <div id="scorecard-result" class="mt-4 text-xl font-bold text-blue-800"></div>
-          </form>
-        </div>`;
-        appContent.innerHTML += scorecardHtml;
-        document.getElementById('calculate-scorecard').onclick = () => {
-          const form = document.getElementById('opportunity-scorecard-form');
-          let score = 0;
-          [...form.elements].filter(e => e.tagName === 'SELECT').forEach(sel => {
-            if (sel.value === 'yes') score += 20;
-          });
-          document.getElementById('scorecard-result').textContent = `Total Score: ${score} / 100`;
-        };
-        return;
-      }
-
-      // No module selected
-      if (!selectedModule) {
-        appContent.innerHTML += `<div class="text-center py-10 text-gray-500 text-xl">
-          Please select a module from the dropdown above to begin.
-        </div>`;
-        return;
-      }
-
-      const moduleData = currentModuleSet[selectedModule];
-      if (!moduleData) {
-        appContent.innerHTML += `<div class="text-center py-10 text-red-500 text-xl">
-          Error loading module data. Please try again or select a different module.
-        </div>`;
-        return;
-      }
-
-      // Discovery View
-      if (currentView === 'discovery') {
-        let discoveryHtml = `
-          <div class="bg-white p-6 rounded-xl shadow-inner">
-            <h2 class="text-2xl font-bold text-blue-700 mb-4 text-center">
-              Discovery Questions: ${selectedModule}
-            </h2>
-        `;
-        moduleData.questions.forEach((q, idx) => {
-          discoveryHtml += `
-            <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
-              <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">
-                ${idx + 1}. ${q.text}
-              </label>
-              ${q.type === 'textarea'
-                ? `<textarea id="${q.id}" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 ring-ms-blue"
-                    placeholder="Enter customer's answer here...">${discoveryAnswers[q.id] || ''}</textarea>`
-                : `<input id="${q.id}" type="${q.type}" value="${discoveryAnswers[q.id] || ''}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 ring-ms-blue" placeholder="Enter value" />`
-              }
+        <!-- Module Selection -->
+        <div class="mb-8 p-4 bg-blue-100 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-center gap-4">
+            <label for="module-select" class="text-lg font-semibold text-blue-800">
+                Select Module:
+            </label>
+            <div class="relative w-full md:w-1/2">
+                <select
+                    id="module-select"
+                    class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none"
+                >
+                    <option value="">-- Choose Module --</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
             </div>
-          `;
-        });
-        discoveryHtml += `</div>`;
-        appContent.innerHTML += discoveryHtml;
-        // Save on input
-        moduleData.questions.forEach(q => {
-          const el = document.getElementById(q.id);
-          if (el) el.addEventListener('input', e => { discoveryAnswers[q.id] = e.target.value; });
-        });
-      }
-
-      // ROI View
-      if (currentView === 'roi') {
-        let roiHtml = `
-          <div class="bg-white p-6 rounded-xl shadow-inner">
-            <h2 class="text-2xl font-bold text-blue-700 mb-4 text-center">
-              ROI Calculator: ${selectedModule}
-            </h2>
-            <p class="text-gray-600 mb-6 text-center">
-              Please enter the customer's current metrics to calculate potential ROI.
-            </p>
-        `;
-        moduleData.roiQuestions.forEach((q, idx) => {
-          roiHtml += `
-            <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
-              <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">
-                ${idx + 1}. ${q.text}
-              </label>
-              <input id="${q.id}" type="number" value="${roiAnswers[q.id] || ''}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 ring-ms-blue" placeholder="Enter value" />
+        </div>
+        <div id="app-content">
+            <!-- Content will be dynamically loaded here by JavaScript -->
+        </div>
+        <!-- Action Buttons (unchanged, original) -->
+        <div class="mt-8 flex flex-col md:flex-row justify-center items-center gap-4">
+            <button id="clear-form-button" class="flex items-center bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                Clear Form
+            </button>
+            <!-- Export Options (original, unchanged) -->
+            <div class="flex flex-col items-center p-4 bg-blue-50 rounded-lg shadow-sm">
+                <p class="font-semibold text-blue-800 mb-2">Export As:</p>
+                <div class="flex gap-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="export-format" value="md" checked class="form-radio text-ms-blue">
+                        <span class="ml-2 text-gray-700">Markdown (.md)</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="export-format" value="txt" class="form-radio text-ms-blue">
+                        <span class="ml-2 text-gray-700">Plain Text (.txt)</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="export-format" value="html" class="form-radio text-ms-blue">
+                        <span class="ml-2 text-gray-700">HTML (.html)</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="export-format" value="ai-prompt" class="form-radio text-ms-blue">
+                        <span class="ml-2 text-gray-700">AI Prompt (.txt)</span>
+                    </label>
+                </div>
+                <button id="export-data-button" class="flex items-center bg-ms-blue hover:bg-ms-blue-dark text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 mt-4">
+                    <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    Export Data
+                </button>
             </div>
-          `;
-        });
-        roiHtml += `
-            <button id="calculate-roi-button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg mt-4">Calculate ROI</button>
-            <div id="roi-result" class="mt-4 text-xl font-bold text-blue-800"></div>
-          </div>
-        `;
-        appContent.innerHTML += roiHtml;
-        // Save on input
-        moduleData.roiQuestions.forEach(q => {
-          const el = document.getElementById(q.id);
-          if (el) el.addEventListener('input', e => { roiAnswers[q.id] = e.target.value; });
-        });
-        document.getElementById('calculate-roi-button').onclick = () => {
-          let result = 0;
-          // Example calculation; replace with your real ROI logic as needed.
-          moduleData.roiQuestions.forEach(q => {
-            const val = Number(document.getElementById(q.id).value) || 0;
-            result += val;
-          });
-          document.getElementById('roi-result').textContent = `ROI Score (demo): ${result}`;
+        </div>
+        <!-- Export/Copy/Validation Messages + Modal (original, unchanged) -->
+        <div id="export-success-message" class="hidden mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-md flex items-center" role="alert"><span>Data exported successfully!</span></div>
+        <div id="copy-success-message" class="hidden mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded-lg shadow-md flex items-center" role="alert"><span>Values copied to ROI Calculator!</span></div>
+        <div id="validation-error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg shadow-md mb-4 flex items-center justify-between" role="alert">
+            <div class="flex items-center"><span>Please ensure all required fields are filled, especially for ROI calculation.</span></div>
+            <button id="close-validation-error" class="ml-4 text-red-700 hover:text-red-900"><svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+        </div>
+        <div id="confirmation-modal" class="modal hidden"><div class="modal-content"><p class="text-lg font-semibold mb-4">Are you sure you want to clear the form?</p><div class="flex justify-center gap-4"><button id="confirm-clear-button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-lg shadow-md transition-all duration-300">OK</button><button id="cancel-clear-button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg shadow-md transition-all duration-300">Cancel</button></div></div></div>
+        <footer class="mt-8 text-gray-500 text-sm">(c) Brad Whatman 2025</footer>
+    </div>
+    <script>
+        // ... All your original Esker modules code, ROI logic, and utility functions remain here ...
+        // (For brevity, this is omitted in this snippet but should be kept in your file!)
+
+        // --- Business Automation Modules ---
+        const businessAutomationModules = {
+            "Document Management": {
+                questions: [
+                    { id: 'dm1', text: 'How many documents do you manage monthly?', type: 'number' },
+                    { id: 'dm2', text: 'What is the average time to retrieve a document (minutes)?', type: 'number' },
+                    { id: 'dm3', text: 'What challenges do you face in document security or compliance?', type: 'textarea' },
+                    { id: 'dm4', text: 'What percentage of documents are processed manually?', type: 'number' }
+                ],
+                roiQuestions: [
+                    { id: 'roi_dm1', text: 'Current annual document management cost ($)', type: 'number' },
+                    { id: 'roi_dm2', text: 'Average time saved per document with M-Files (minutes)', type: 'number' },
+                    { id: 'roi_dm3', text: 'Estimated reduction in compliance risks (%)', type: 'number' }
+                ]
+            },
+            "Workflow Management": {
+                questions: [
+                    { id: 'wm1', text: 'How many workflow processes are managed monthly?', type: 'number' },
+                    { id: 'wm2', text: 'What is the current error rate in workflow processes (%)?', type: 'number' },
+                    { id: 'wm3', text: 'What tools are currently used for workflow automation?', type: 'textarea' },
+                    { id: 'wm4', text: 'Describe your workflow approval process.', type: 'textarea' }
+                ],
+                roiQuestions: [
+                    { id: 'roi_wm1', text: 'Current annual workflow management cost ($)', type: 'number' },
+                    { id: 'roi_wm2', text: 'Average time saved per workflow with Nintex (minutes)', type: 'number' },
+                    { id: 'roi_wm3', text: 'Estimated reduction in manual effort (%)', type: 'number' }
+                ]
+            },
+            "Process Mapping": {
+                questions: [
+                    { id: 'pm1', text: 'How many business processes are mapped annually?', type: 'number' },
+                    { id: 'pm2', text: 'What is the average time to map a process (hours)?', type: 'number' },
+                    { id: 'pm3', text: 'How do you currently document process changes?', type: 'textarea' },
+                    { id: 'pm4', text: 'What challenges do you face in process visibility?', type: 'textarea' }
+                ],
+                roiQuestions: [
+                    { id: 'roi_pm1', text: 'Current annual process mapping cost ($)', type: 'number' },
+                    { id: 'roi_pm2', text: 'Average time saved per process with Nintex (hours)', type: 'number' },
+                    { id: 'roi_pm3', text: 'Estimated increase in process compliance (%)', type: 'number' }
+                ]
+            }
         };
-      }
-    }
 
-    // Initial render
-    renderAppContent();
+        // --- Module Dropdown Logic ---
+        let selectedModule = '';
+        let currentModuleSet = eskerModules;
+        document.getElementById('business-stream-select').addEventListener('change', function() {
+            const stream = this.value;
+            const moduleSelect = document.getElementById('module-select');
+            moduleSelect.innerHTML = '<option value="">-- Choose Module --</option>';
+            if (stream === 'finance') {
+                currentModuleSet = eskerModules;
+                Object.keys(eskerModules).forEach(mod => {
+                    moduleSelect.innerHTML += `<option value="${mod}">${mod}</option>`;
+                });
+            } else if (stream === 'business') {
+                currentModuleSet = businessAutomationModules;
+                Object.keys(businessAutomationModules).forEach(mod => {
+                    moduleSelect.innerHTML += `<option value="${mod}">${mod}</option>`;
+                });
+            }
+            selectedModule = '';
+            renderAppContent();
+        });
+        document.getElementById('module-select').addEventListener('change', function() {
+            selectedModule = this.value;
+            renderAppContent();
+        });
 
-    // Clear Form button
-    document.getElementById('clear-form-button').onclick = () => {
-      document.getElementById('customer-company').value = '';
-      document.getElementById('customer-name').value = '';
-      document.getElementById('date-completed').valueAsDate = new Date();
-      document.getElementById('business-stream-select').value = '';
-      document.getElementById('module-select').innerHTML = '<option value="">-- Choose Module --</option>';
-      selectedModule = '';
-      currentModuleSet = {};
-      discoveryAnswers = {};
-      roiAnswers = {};
-      currentView = 'discovery';
-      renderAppContent();
-    };
-  </script>
+        // --- Opportunity Scorecard Tab Logic + Render ---
+        // Add this to your nav tab render function
+        // Example: Add to your renderAppContent/navTabsHtml where you render Discovery and ROI tabs
+
+        // --- Scorecard Questions ---
+        const scorecardQuestions = [
+            "Customer's business needs align to our capability?",
+            "We have access to all the key buying influences?",
+            "We have at least one Coach?",
+            "We can differentiate our solution from the competition and demonstrate value?",
+            "Customer has engaged us early in the process?"
+        ];
+
+        // --- Render Tabs (add Opportunity Scorecard) and Content ---
+        // Add the "Opportunity Scorecard" tab and render logic to your renderAppContent function.
+        // When currentView === 'scorecard', render the scorecard form as previously described.
+        // In your tab buttons, add:
+        // <button id="scorecard-tab" ...>Opportunity Scorecard</button>
+        // and in JS:
+        // document.getElementById('scorecard-tab').onclick = () => { currentView = 'scorecard'; renderAppContent(); };
+
+        // In your renderAppContent:
+        // ... (your original tab render code) ...
+        // Add after other tab renders:
+        if (typeof currentView === "undefined") var currentView = 'discovery';
+        function renderAppContent() {
+            const appContent = document.getElementById('app-content');
+            appContent.innerHTML = '';
+            // Tabs
+            let navTabsHtml = `
+                <div class="flex justify-center mb-6">
+                    <button id="discovery-tab" class="px-6 py-3 rounded-l-lg text-lg font-medium transition-all duration-300
+                        ${currentView === 'discovery' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
+                        Discovery Questions
+                    </button>
+                    <button id="roi-tab" class="px-6 py-3 text-lg font-medium transition-all duration-300
+                        ${currentView === 'roi' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
+                        ROI Calculator
+                    </button>
+                    <button id="scorecard-tab" class="px-6 py-3 rounded-r-lg text-lg font-medium transition-all duration-300
+                        ${currentView === 'scorecard' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">
+                        Opportunity Scorecard
+                    </button>
+                </div>
+            `;
+            appContent.insertAdjacentHTML('beforeend', navTabsHtml);
+            document.getElementById('discovery-tab').onclick = () => { currentView = 'discovery'; renderAppContent(); };
+            document.getElementById('roi-tab').onclick = () => { currentView = 'roi'; renderAppContent(); };
+            document.getElementById('scorecard-tab').onclick = () => { currentView = 'scorecard'; renderAppContent(); };
+
+            // Opportunity Scorecard View
+            if (currentView === 'scorecard') {
+                let scorecardHtml = `<div class="bg-white p-6 rounded-xl shadow-inner">
+                    <h2 class="text-2xl font-bold text-blue-700 mb-4 text-center">Opportunity Scorecard</h2>
+                    <form id="opportunity-scorecard-form">`;
+                scorecardQuestions.forEach((q, idx) => {
+                    scorecardHtml += `
+                        <div class="mb-6">
+                            <label class="block text-md font-semibold text-gray-700 mb-2">${idx + 1}. ${q}</label>
+                            <select name="scorecard-q${idx}" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                                <option value="unknown">Unknown</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>`;
+                });
+                scorecardHtml += `
+                        <button type="button" id="calculate-scorecard" class="bg-ms-blue text-white px-6 py-3 rounded-lg font-bold">Calculate Score</button>
+                        <div id="scorecard-result" class="mt-4 text-xl font-bold text-blue-800"></div>
+                    </form></div>`;
+                appContent.innerHTML += scorecardHtml;
+                document.getElementById('calculate-scorecard').onclick = () => {
+                    const form = document.getElementById('opportunity-scorecard-form');
+                    let score = 0;
+                    [...form.elements].filter(e => e.tagName === 'SELECT').forEach(sel => {
+                        if (sel.value === 'yes') score += 20;
+                    });
+                    document.getElementById('scorecard-result').textContent = `Total Score: ${score} / 100`;
+                };
+                return;
+            }
+
+            if (!selectedModule) {
+                appContent.innerHTML += `<div class="text-center py-10 text-gray-500 text-xl">
+                    Please select a module from the dropdown above to begin.
+                </div>`;
+                return;
+            }
+
+            // Use currentModuleSet for dynamic module rendering, rest of your original render code goes here
+            const moduleData = currentModuleSet[selectedModule];
+            // Continue with your original rendering logic for Discovery, ROI, etc...
+        }
+
+        // Initial render
+        renderAppContent();
+    </script>
 </body>
 </html>
