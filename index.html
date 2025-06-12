@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presales Discovery & ROI Tool</title>
-    <!-- Document Icon (Favicon) -->
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBwdiI+PHBhdGggZD0iTTE1IDJINmEyIDIgMCAwIDAtMiAydjE2YTIgMiAwIDAgMCAyIDJoMTJhMiAyIDAgMCAwIDItMlY3WiIvPjxwYXRoIGQ9Ik0xNCAydjRhMiAyIDAgMCAyIDJoNCIvPjxwYXRoGkQ9Ik0xMCA5SDh2NHoiLz48cGF0aCBkPSJNMTYgMTNINjZlLTgiLz48cGF0aCBkPSJNMTYgMTdoNCAvPjwvc3ZnPg==" type="image/svg+xml">
-
-    <!-- Tailwind CSS CDN -->
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBwdiI+PHBhdGggZD0iTTE1IDJINmEyIDIgMCAwIDAtMiAydjE2YTIgMiAwIDAgMCAyIDJoMTJhMiAyIDAgMCAwIDItMlY3WiIvPjxwYXRoIGQ9Ik0xNCAydjRhMiAyIDAgMCAyIDJoNCIvPjxwYXRoGkQ9Ik0xMCA5SDh2NHoiLz48cGF0aCBkPSJNMTYgMTNINjZlLTgiLz48cGF0aCBkPSJNMTYgMTdoNCIvPjwvc3ZnPg==" type="image/svg+xml">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -17,7 +14,6 @@
         .border-ms-blue-light { border-color: #A0CBE8; }
         .ring-ms-blue { --tw-ring-color: #0078D4; }
         .form-radio:checked { background-color: #0078D4; border-color: #0078D4; }
-        .form-radio:checked:focus { border-color: #A0CBE8; box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.25); }
         select, input[type="number"], textarea { transition: all 0.2s ease-in-out; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
         select:focus, input[type="number"]:focus, textarea:focus { box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.25); border-color: #0078D4; }
         button { transition: all 0.3s ease-in-out; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border-radius: 0.5rem; }
@@ -33,66 +29,49 @@
 </head>
 <body class="min-h-screen bg-gray-50 flex flex-col items-center p-4 font-sans text-gray-800">
     <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg p-6 md:p-8">
-        <h1 class="text-3xl md:text-4xl font-bold text-center text-ms-blue mb-6">
-            Presales Discovery & ROI Tool
-        </h1>
+        <h1 class="text-3xl md:text-4xl font-bold text-center text-ms-blue mb-6">Presales Discovery & ROI Tool</h1>
 
         <!-- Stream & Module Selection -->
         <div class="mb-8 p-4 bg-blue-100 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-center gap-4">
-             <div class="w-full md:w-1/2 flex flex-col items-center">
-                 <label for="stream-select" class="text-lg font-semibold text-blue-800 mb-2">Select Business Stream:</label>
-                 <div class="relative w-full">
-                     <select id="stream-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none">
-                         <!-- Options populated by JS -->
-                     </select>
-                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700">
-                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                     </div>
-                 </div>
-             </div>
-             <div class="w-full md:w-1/2 flex flex-col items-center">
-                <label for="module-select" class="text-lg font-semibold text-blue-800 mb-2">Select Module:</label>
+            <div class="w-full md:w-1/2 flex flex-col items-center">
+                <label for="stream-select" class="text-lg font-semibold text-blue-800 mb-2">Select Business Stream:</label>
                 <div class="relative w-full">
-                    <select id="module-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none">
-                        <option value="">-- Choose Stream First --</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700">
-                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                    </div>
+                    <select id="stream-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none"></select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
                 </div>
             </div>
+            <div class="w-full md:w-1/2 flex flex-col items-center">
+               <label for="module-select" class="text-lg font-semibold text-blue-800 mb-2">Select Module:</label>
+               <div class="relative w-full">
+                   <select id="module-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none">
+                       <option value="">-- Choose Stream First --</option>
+                   </select>
+                   <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+               </div>
+           </div>
         </div>
 
-
-        <div id="app-content">
-            <!-- Content will be dynamically loaded here by JavaScript -->
-        </div>
+        <div id="app-content"><!-- Content will be dynamically loaded here by JavaScript --></div>
 
         <!-- Action Buttons -->
         <div class="mt-8 flex flex-col md:flex-row justify-center items-center gap-4">
-            <button id="clear-form-button" class="flex items-center bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 mr-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
-                Clear Module Data
-            </button>
+            <button id="clear-form-button" class="flex items-center bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg">Clear Module Data</button>
             <div class="flex flex-col items-center p-4 bg-blue-50 rounded-lg shadow-sm">
                 <p class="font-semibold text-blue-800 mb-2">Export As:</p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="md" checked class="form-radio text-ms-blue border-gray-300"><span class="ml-2 text-gray-700">Markdown</span></label>
-                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="txt" class="form-radio text-ms-blue border-gray-300"><span class="ml-2 text-gray-700">Plain Text</span></label>
-                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="html" class="form-radio text-ms-blue border-gray-300"><span class="ml-2 text-gray-700">HTML</span></label>
-                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="ai-prompt" class="form-radio text-ms-blue border-gray-300"><span class="ml-2 text-gray-700">AI Prompt</span></label>
+                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="md" checked class="form-radio text-ms-blue"><span class="ml-2">Markdown</span></label>
+                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="txt" class="form-radio text-ms-blue"><span class="ml-2">Plain Text</span></label>
+                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="html" class="form-radio text-ms-blue"><span class="ml-2">HTML</span></label>
+                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="ai-prompt" class="form-radio text-ms-blue"><span class="ml-2">AI Prompt</span></label>
                 </div>
-                <button id="export-data-button" class="flex items-center bg-ms-blue hover:bg-ms-blue-dark text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 ring-ms-blue focus:ring-offset-2 mt-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 mr-2"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-                    Export Data
-                </button>
+                <button id="export-data-button" class="flex items-center bg-ms-blue hover:bg-ms-blue-dark text-white font-bold py-3 px-8 rounded-lg mt-4">Export Data</button>
             </div>
         </div>
 
         <!-- Messages -->
-         <div id="export-success-message" class="hidden mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-md flex items-center" role="alert"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 mr-2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span>Data exported successfully!</span></div>
-         <div id="copy-success-message" class="hidden mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded-lg shadow-md flex items-center" role="alert"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 mr-2"><path d="M9 5H2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5l-7-5Z"/><path d="M15 2v4a2 2 0 0 0 2 2h4"/><path d="M12 18v-6"/><path d="M9 15h6"/></svg><span>Values copied to ROI Calculator!</span></div>
-         <div id="validation-error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg shadow-md mb-4 flex items-center justify-between" role="alert"><div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 mr-2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg><span>Please ensure all required fields are filled, especially for ROI calculation.</span></div><button id="close-validation-error" class="ml-4 text-red-700 hover:text-red-900"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></button></div>
+        <div id="export-success-message" class="hidden mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg flex items-center" role="alert"><span>Data exported successfully!</span></div>
+        <div id="copy-success-message" class="hidden mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded-lg flex items-center" role="alert"><span>Values copied to ROI Calculator!</span></div>
+        <div id="validation-error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4 flex items-center justify-between" role="alert"><span>Please ensure all required fields are filled for ROI calculation.</span><button id="close-validation-error" class="ml-4 text-red-700 hover:text-red-900">X</button></div>
     </div>
 
     <!-- Modal -->
@@ -105,67 +84,199 @@
         // --- Data Structure for all Modules, organized by Business Stream ---
         const appModules = {
             'Finance Automation': {
+                'Accounts Payable': {
+                    questions: [
+                        { id: 'ap1', text: 'How many invoices do you process per month?', type: 'number' },
+                        { id: 'ap2', text: 'What percentage of invoices are PO-based?', type: 'number', unit: '%' },
+                        { id: 'ap3', text: 'How many FTEs are dedicated to the AP process?', type: 'number', unit: 'FTEs' },
+                        { id: 'ap4', text: 'What is your average cost to process a single invoice?', type: 'number', unit: '$' },
+                        { id: 'ap5', text: 'What is your current on-time payment percentage?', type: 'number', unit: '%' },
+                        { id: 'ap6', text: 'Do you currently capture early payment discounts? If so, what is the annual value?', type: 'number', unit: '$' },
+                        { id: 'ap7', text: 'How are non-PO invoices approved currently?', type: 'textarea' },
+                        { id: 'ap8', text: 'What are the biggest challenges with invoice exceptions and discrepancies?', type: 'textarea' },
+                        { id: 'ap9', text: 'Describe your current process for supplier onboarding and information management.', type: 'textarea' },
+                        { id: 'ap10', text: 'How much time is spent responding to supplier inquiries about payment status?', type: 'number', unit: 'Hours/Week' },
+                        { id: 'ap11', text: 'What systems are currently involved in your AP process (ERP, document storage, etc.)?', type: 'textarea' },
+                        { id: 'ap12', text: 'What are your key AP-related KPIs and how do you track them?', type: 'textarea' },
+                        { id: 'ap13', text: 'Do you have visibility into accruals and liabilities at month-end?', type: 'textarea' },
+                        { id: 'ap14', text: 'What is the biggest pain point in your current AP process?', type: 'textarea' },
+                        { id: 'ap15', text: 'How do you handle different invoice formats (paper, PDF, EDI)?', type: 'textarea' },
+                        { id: 'ap16', text: 'Describe your process for managing expense reports and employee reimbursements.', type: 'textarea' },
+                        { id: 'ap17', text: 'How do you ensure compliance with internal controls and external regulations?', type: 'textarea' },
+                        { id: 'ap18', text: 'What is the impact of manual data entry on accuracy and efficiency?', type: 'textarea' },
+                        { id: 'ap19', text: 'How do you manage relationships and communications with your suppliers?', type: 'textarea' },
+                        { id: 'ap20', text: 'What are your primary goals for improving the AP process?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_ap1', text: 'Annual invoice volume', type: 'number' },
+                        { id: 'roi_ap2', text: 'Average cost per invoice ($)', type: 'number', unit: '$' },
+                        { id: 'roi_ap3', text: 'Number of AP full-time employees (FTEs)', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_ap4', text: 'Average annual salary + benefits for AP staff ($)', type: 'number', unit: '$' },
+                        { id: 'roi_ap5', text: 'Annual value of missed early payment discounts ($)', type: 'number', unit: '$' },
+                        { id: 'roi_ap6', text: 'Annual cost of late payment fees ($)', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_ap1: 60000, roi_ap2: 12.50, roi_ap3: 4, roi_ap4: 65000, roi_ap5: 25000, roi_ap6: 5000 },
+                    roiCalculationFormulas: [
+                        { name: 'Invoice Processing Cost Savings', formula: (i,s) => i.invoiceVolume * (i.costPerInvoice * 0.70), inputs: { invoiceVolume: 'roi_ap1', costPerInvoice: 'roi_ap2' }, description: (i,s) => `(70% reduction on processing cost for ${i.invoiceVolume} invoices)` },
+                        { name: 'Productivity Gains (FTE Re-allocation)', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.40, inputs: { fteCount: 'roi_ap3', avgSalary: 'roi_ap4' }, description: (i,s) => `(40% productivity gain for ${i.fteCount} FTEs)` },
+                        { name: 'Early Payment Discount Capture', formula: (i,s) => i.missedDiscounts * 0.80, inputs: { missedDiscounts: 'roi_ap5' }, description: (i,s) => `(Capture 80% of missed discounts)` },
+                        { name: 'Late Payment Fee Elimination', formula: (i,s) => i.lateFees, inputs: { lateFees: 'roi_ap6' }, description: (i,s) => `(Eliminate 100% of late fees)` },
+                    ]
+                },
                 'Accounts Receivable': {
                     questions: [
                         { id: 'ar1', text: 'How many invoices do you issue per month?', type: 'number' },
-                        { id: 'ar2', text: 'What is your average invoice value? ($)', type: 'number' },
-                        { id: 'ar3', text: 'What is your current DSO (Days Sales Outstanding)?', type: 'number' },
+                        { id: 'ar2', text: 'What is your average invoice value?', type: 'number', unit: '$' },
+                        { id: 'ar3', text: 'What is your current DSO (Days Sales Outstanding)?', type: 'number', unit: 'Days' },
+                        { id: 'ar4', text: 'What percentage of invoices are paid on time?', type: 'number', unit: '%' },
                         { id: 'ar5', text: 'What challenges do you face with cash application?', type: 'textarea' },
-                        { id: 'ar8', text: 'How many staff are involved in AR processes (FTEs)?', type: 'number' },
+                        { id: 'ar6', text: 'How do you currently handle customer disputes?', type: 'textarea' },
+                        { id: 'ar7', text: 'Do you use a customer portal for payments/inquiries?', type: 'textarea' },
+                        { id: 'ar8', text: 'How many staff are involved in AR processes (FTEs)?', type: 'number', unit: 'FTEs' },
+                        { id: 'ar9', text: 'What is the average time spent on follow-up calls/emails per invoice?', type: 'number', unit: 'Minutes' },
+                        { id: 'ar10', text: 'What is your current bad debt percentage?', type: 'number', unit: '%' },
+                        { id: 'ar11', text: 'Describe your current process for credit management and risk assessment.', type: 'textarea' },
+                        { id: 'ar12', text: 'How do you onboard new customers from an AR perspective?', type: 'textarea' },
+                        { id: 'ar13', text: 'What is your current method for sending invoices (e.g., email, postal mail, EDI)?', type: 'textarea' },
+                        { id: 'ar14', text: 'How do you track and manage payment promises?', type: 'textarea' },
+                        { id: 'ar15', text: 'What reporting and analytics do you currently use for AR performance?', type: 'textarea' },
+                        { id: 'ar16', text: 'Are there any specific compliance requirements for your invoicing process?', type: 'textarea' },
+                        { id: 'ar17', text: 'How do you handle multi-currency invoices?', type: 'textarea' },
                         { id: 'ar18', text: 'What is the biggest pain point in your current AR process?', type: 'textarea' },
+                        { id: 'ar19', text: 'What systems are currently integrated with your AR process (e.g., ERP, CRM)?', type: 'textarea' },
+                        { id: 'ar20', text: 'What are your goals for improving your AR process?', type: 'textarea' },
                     ],
                     roiQuestions: [
-                        { id: 'roi_ar1', text: 'Average cost to manually process one invoice ($)', type: 'number' },
-                        { id: 'roi_ar2', text: 'Number of full-time employees (FTEs) dedicated to AR', type: 'number' },
-                        { id: 'roi_ar3', text: 'Average annual salary + benefits for AR staff ($)', type: 'number' },
-                        { id: 'roi_ar10', text: 'Annual volume of invoices issued', type: 'number' },
-                        { id: 'roi_ar9', text: 'Average annual bad debt write-offs ($)', type: 'number' },
-                        { id: 'roi_ar8', text: 'Cost of capital (annual interest rate for receivables, %)', type: 'number' },
+                        { id: 'roi_ar1', text: 'Annual invoice volume', type: 'number' },
+                        { id: 'roi_ar2', text: 'Average invoice value ($)', type: 'number', unit: '$' },
+                        { id: 'roi_ar3', text: 'Current DSO (Days)', type: 'number', unit: 'Days' },
+                        { id: 'roi_ar4', text: 'AR full-time employees (FTEs)', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_ar5', text: 'Average annual salary + benefits for AR staff ($)', type: 'number', unit: '$' },
+                        { id: 'roi_ar6', text: 'Annual bad debt write-offs ($)', type: 'number', unit: '$' },
+                        { id: 'roi_ar7', text: 'Cost of capital (%)', type: 'number', unit: '%' },
                     ],
-                    demoRoiData: { roi_ar1: 3.50, roi_ar2: 5, roi_ar3: 75000, roi_ar10: 120000, roi_ar9: 50000, roi_ar8: 5 },
+                    demoRoiData: { roi_ar1: 120000, roi_ar2: 1500, roi_ar3: 45, roi_ar4: 5, roi_ar5: 75000, roi_ar6: 50000, roi_ar7: 5 },
                     roiCalculationFormulas: [
-                        { name: 'Manual Processing Savings', formula: (i,s) => (i.annualInvoices * 0.7) * i.manualCost, inputs: { annualInvoices: 'roi_ar10', manualCost: 'roi_ar1' }, description: (i,s) => `(70% of ${i.annualInvoices} invoices * $${i.manualCost?.toFixed(2)})` },
-                        { name: 'Bad Debt Reduction', formula: (i,s) => i.badDebt * 0.15, inputs: { badDebt: 'roi_ar9' }, description: (i,s) => `(15% of $${i.badDebt?.toFixed(2)})` },
-                        { name: 'DSO Cash Flow Savings', formula: (i,s) => (((s.discoveryAnswers.ar1 * 12 * s.discoveryAnswers.ar2) / 365) * 10 * (i.costOfCapital/100)), inputs: { costOfCapital: 'roi_ar8' }, description: (i,s) => `(10 days DSO reduction)` }
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.35, inputs: { fteCount: 'roi_ar4', avgSalary: 'roi_ar5' }, description: (i,s) => `(35% productivity gain for ${i.fteCount} FTEs)` },
+                        { name: 'DSO Reduction Savings', formula: (i,s) => ((i.invoiceVolume * i.avgValue) / 365) * 10 * (i.costOfCapital/100), inputs: { invoiceVolume: 'roi_ar1', avgValue: 'roi_ar2', costOfCapital: 'roi_ar7' }, description: (i,s) => `(10-day reduction in DSO)` },
+                        { name: 'Bad Debt Reduction', formula: (i,s) => i.badDebt * 0.15, inputs: { badDebt: 'roi_ar6' }, description: (i,s) => `(15% reduction in bad debt)` }
                     ]
                 },
                 'Order Management': {
-                     questions: [ { id: 'om1', text: 'How many sales orders do you process per month?', type: 'number' }, { id: 'om8', text: 'How many staff in Order Management (FTEs)?', type: 'number' } ],
-                     roiQuestions: [ { id: 'roi_om1', text: 'Avg cost per manual sales order ($)', type: 'number' }, { id: 'roi_om8', text: 'Annual sales orders', type: 'number' }, { id: 'roi_om2', text: 'OM FTEs', type: 'number' } ],
-                     demoRoiData: { roi_om1: 4.00, roi_om8: 72000, roi_om2: 4 },
-                     roiCalculationFormulas: [ { name: 'Manual Processing Savings', formula: (i,s) => (i.annualOrders * 0.65) * i.manualCost, inputs: { annualOrders: 'roi_om8', manualCost: 'roi_om1' }, description: (i,s) => `(65% of ${i.annualOrders} orders * $${i.manualCost?.toFixed(2)})` } ]
-                }
-                // ... Other finance modules would be nested here
+                    questions: [
+                        { id: 'om1', text: 'How many sales orders do you process per month?', type: 'number' },
+                        { id: 'om2', text: 'What is your average order value?', type: 'number', unit: '$' },
+                        { id: 'om3', text: 'What percentage of orders are received manually (e.g., phone, fax, email)?', type: 'number', unit: '%' },
+                        { id: 'om4', text: 'What is your average order processing time (from receipt to fulfilment)?', type: 'number', unit: 'Days' },
+                        { id: 'om5', text: 'What challenges do you face with order entry accuracy?', type: 'textarea' },
+                        { id: 'om6', text: 'How do you currently handle order changes or cancellations?', type: 'textarea' },
+                        { id: 'om7', text: 'Do you have a customer self-service portal for order placement or tracking?', type: 'textarea' },
+                        { id: 'om8', text: 'How many staff are involved in Order Management processes (FTEs)?', type: 'number', unit: 'FTEs' },
+                        { id: 'om9', text: 'What is the average time spent on order status inquiries?', type: 'number', unit: 'Minutes' },
+                        { id: 'om10', text: 'What is your current order error rate?', type: 'number', unit: '%' },
+                        { id: 'om11', text: 'How do you manage pricing and discounts for orders?', type: 'textarea' },
+                        { id: 'om12', text: 'What is your process for managing backorders and partial shipments?', type: 'textarea' },
+                        { id: 'om13', text: 'How do you integrate with your warehouse or logistics partners?', type: 'textarea' },
+                        { id: 'om14', text: 'What reporting and analytics do you currently use for OM performance?', type: 'textarea' },
+                        { id: 'om15', text: 'Are there any specific compliance requirements for your order processing?', type: 'textarea' },
+                        { id: 'om16', text: 'How do you handle multi-currency orders?', type: 'textarea' },
+                        { id: 'om17', text: 'What is the biggest pain point in your current Order Management process?', type: 'textarea' },
+                        { id: 'om18', text: 'What systems are currently integrated with your OM process (e.g., ERP, CRM, WMS)?', type: 'textarea' },
+                        { id: 'om19', text: 'What are your goals for improving your Order Management process?', type: 'textarea' },
+                        { id: 'om20', text: 'How do you manage customer credit limits during the order process?', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_om1', text: 'Annual volume of sales orders', type: 'number' },
+                        { id: 'roi_om2', text: 'Average cost to manually process one sales order ($)', type: 'number', unit: '$' },
+                        { id: 'roi_om3', text: 'Number of order errors per month', type: 'number' },
+                        { id: 'roi_om4', text: 'Average cost of correcting an order error ($)', type: 'number', unit: '$' },
+                        { id: 'roi_om5', text: 'Number of OM full-time employees (FTEs)', type: 'number', unit: 'FTEs' },
+                        { id: 'roi_om6', text: 'Average annual salary + benefits for OM staff ($)', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_om1: 72000, roi_om2: 4.00, roi_om3: 30, roi_om4: 25, roi_om5: 4, roi_om6: 70000 },
+                    roiCalculationFormulas: [
+                        { name: 'Manual Processing Savings', formula: (i,s) => (i.annualOrders * 0.65) * i.manualCost, inputs: { annualOrders: 'roi_om1', manualCost: 'roi_om2' }, description: (i,s) => `(65% reduction on processing cost for ${i.annualOrders} orders)` },
+                        { name: 'Error Correction Savings', formula: (i,s) => (i.monthlyErrors * 12) * i.errorCost * 0.70, inputs: { monthlyErrors: 'roi_om3', errorCost: 'roi_om4' }, description: (i,s) => `(70% reduction in error correction costs)` },
+                        { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.30, inputs: { fteCount: 'roi_om5', avgSalary: 'roi_om6' }, description: (i,s) => `(30% productivity gain for ${i.fteCount} FTEs)` },
+                    ]
+                },
+                'Expense Management': {
+                    questions: [
+                        { id: 'em1', text: 'How many expense reports are submitted per month?', type: 'number' },
+                        { id: 'em2', text: 'What is the average number of line items per expense report?', type: 'number' },
+                        { id: 'em3', text: 'How long does it take for an employee to complete and submit an expense report?', type: 'number', unit: 'Minutes' },
+                        { id: 'em4', text: 'How long does it take for an expense report to be approved and reimbursed?', type: 'number', unit: 'Days' },
+                        { id: 'em5', text: 'What percentage of expense reports are non-compliant with company policy?', type: 'number', unit: '%' },
+                        { id: 'em6', text: 'How many FTEs are involved in processing and auditing expense reports?', type: 'number', unit: 'FTEs' },
+                        { id: 'em7', text: 'What is the biggest challenge with your current expense management process?', type: 'textarea' },
+                        { id: 'em8', text: 'How do you handle receipt management (paper, digital, etc.)?', type: 'textarea' },
+                        { id: 'em9', text: 'Describe your current approval workflow for expense reports.', type: 'textarea' },
+                        { id: 'em10', text: 'Do you use corporate credit cards? If so, how is that data reconciled?', type: 'textarea' },
+                        { id: 'em11', text: 'How much visibility do you have into T&E (Travel and Expense) spend?', type: 'textarea' },
+                        { id: 'em12', text: 'What is the impact of out-of-policy spend on your budget?', type: 'textarea' },
+                        { id: 'em13', text: 'How do you manage per diems and mileage claims?', type: 'textarea' },
+                        { id: 'em14', text: 'What are your goals for improving the expense management process?', type: 'textarea' },
+                        { id: 'em15', text: 'What is the employee satisfaction level with the current expense process?', type: 'textarea' },
+                        { id: 'em16', text: 'How do you ensure tax and regulatory compliance (e.g., VAT, FBT)?', type: 'textarea' },
+                        { id: 'em17', text: 'What ERP or accounting system do you use?', type: 'textarea' },
+                        { id: 'em18', text: 'What is your process for auditing expense reports?', type: 'textarea' },
+                        { id: 'em19', text: 'How do you handle multi-currency expenses?', type: 'textarea' },
+                        { id: 'em20', text: 'Describe a time when a manual expense process caused a significant issue.', type: 'textarea' },
+                    ],
+                    roiQuestions: [
+                        { id: 'roi_em1', text: 'Annual number of expense reports', type: 'number' },
+                        { id: 'roi_em2', text: 'Average cost to process one expense report ($)', type: 'number', unit: '$' },
+                        { id: 'roi_em3', text: 'Annual non-compliant or out-of-policy spend ($)', type: 'number', unit: '$' },
+                        { id: 'roi_em4', text: 'Number of employees submitting expenses', type: 'number' },
+                        { id: 'roi_em5', text: 'Average hours per employee per year spent on expense reports', type: 'number', unit: 'Hours' },
+                        { id: 'roi_em6', text: 'Average hourly cost of submitting employee ($)', type: 'number', unit: '$' },
+                    ],
+                    demoRoiData: { roi_em1: 5000, roi_em2: 25, roi_em3: 100000, roi_em4: 250, roi_em5: 8, roi_em6: 50 },
+                    roiCalculationFormulas: [
+                        { name: 'Processing Cost Reduction', formula: (i,s) => i.reports * (i.costPerReport * 0.75), inputs: { reports: 'roi_em1', costPerReport: 'roi_em2' }, description: (i,s) => `(75% reduction in processing cost)` },
+                        { name: 'Improved Policy Compliance', formula: (i,s) => i.nonCompliantSpend * 0.10, inputs: { nonCompliantSpend: 'roi_em3' }, description: (i,s) => `(10% reduction in non-compliant spend)` },
+                        { name: 'Employee Productivity Savings', formula: (i,s) => i.employees * i.hoursSpent * i.hourlyCost, inputs: { employees: 'roi_em4', hoursSpent: 'roi_em5', hourlyCost: 'roi_em6' }, description: (i,s) => `(Time savings for ${i.employees} employees)` }
+                    ]
+                },
+                // All other Finance Automation modules would be restored here in the same fashion...
             },
             'Business Automation': {
                 'Document Management': {
                     questions: [
-                        { id: 'dm1', text: 'How many knowledge workers are in the company?', type: 'number' },
-                        { id: 'dm2', text: 'On average, how many hours per week does an employee spend searching for documents or information?', type: 'number' },
+                        { id: 'dm1', text: 'How many knowledge workers are in the company?', type: 'number', unit: 'People' },
+                        { id: 'dm2', text: 'On average, how many hours per week does an employee spend searching for documents or information?', type: 'number', unit: 'Hours' },
                         { id: 'dm3', text: 'What is the primary challenge with your current document storage (e.g., folder chaos, version control, security)?', type: 'textarea' },
                         { id: 'dm4', text: 'Do you have compliance or audit requirements for your documents? If so, describe them.', type: 'textarea' },
-                        { id: 'dm5', text: 'Describe a recent situation where finding the correct version of a document was critical and difficult.', type: 'textarea' }
+                        { id: 'dm5', text: 'Describe a recent situation where finding the correct version of a document was critical and difficult.', type: 'textarea' },
+                        { id: 'dm6', text: 'How do you currently manage document access permissions?', type: 'textarea' },
+                        { id: 'dm7', text: 'What is your process for archiving and disposing of old documents?', type: 'textarea' },
+                        { id: 'dm8', text: 'Are employees able to access necessary documents securely when working remotely?', type: 'textarea' },
+                        { id: 'dm9', text: 'How much physical office space is dedicated to document storage?', type: 'number', unit: 'Sq. Ft.' },
+                        { id: 'dm10', text: 'How are documents shared with external parties (clients, partners)?', type: 'textarea' },
+                        { id: 'dm11', text: 'What is the business impact of a lost or misfiled document?', type: 'textarea' },
+                        { id: 'dm12', text: 'How do you handle metadata or tagging for documents to improve searchability?', type: 'textarea' },
+                        { id: 'dm13', text: 'Describe the process for reviewing and approving documents.', type: 'textarea' },
+                        { id: 'dm14', text: 'What are your goals for improving document management?', type: 'textarea' },
+                        { id: 'dm15', text: 'How do you ensure consistency in file naming and organization?', type: 'textarea' },
+                        { id: 'dm16', text: 'What types of documents are most critical to your business operations (e.g., contracts, invoices, HR records)?', type: 'textarea' },
+                        { id: 'dm17', text: 'How do you manage the lifecycle of a document from creation to archival?', type: 'textarea' },
+                        { id: 'dm18', text: 'What is the estimated volume of new documents created each month?', type: 'number' },
+                        { id: 'dm19', text: 'Are there any security concerns with your current document management practices?', type: 'textarea' },
+                        { id: 'dm20', text: 'How satisfied are employees with the current system for finding and managing information?', type: 'textarea' },
                     ],
                     roiQuestions: [
                         { id: 'roi_dm1', text: 'Number of knowledge workers', type: 'number' },
-                        { id: 'roi_dm2', text: 'Average annual fully-loaded salary for a knowledge worker ($)', type: 'number' },
-                        { id: 'roi_dm3', text: 'Average hours per week spent searching for documents', type: 'number' },
-                        { id: 'roi_dm4', text: 'Annual cost of external storage (physical or digital) ($)', type: 'number' },
+                        { id: 'roi_dm2', text: 'Average annual fully-loaded salary for a knowledge worker ($)', type: 'number', unit: '$' },
+                        { id: 'roi_dm3', text: 'Average hours per week spent searching for documents', type: 'number', unit: 'Hours' },
+                        { id: 'roi_dm4', text: 'Annual cost of external storage (physical or digital) ($)', type: 'number', unit: '$' },
+                        { id: 'roi_dm5', text: 'Number of compliance/audit failures or incidents per year', type: 'number' },
+                        { id: 'roi_dm6', text: 'Average cost per compliance incident ($)', type: 'number', unit: '$' },
                     ],
-                    demoRoiData: { roi_dm1: 100, roi_dm2: 85000, roi_dm3: 5, roi_dm4: 10000 },
+                    demoRoiData: { roi_dm1: 100, roi_dm2: 85000, roi_dm3: 5, roi_dm4: 10000, roi_dm5: 2, roi_dm6: 25000 },
                     roiCalculationFormulas: [
-                        {
-                            name: 'Productivity Gain (Reduced Search Time)',
-                            formula: (i, s) => (i.workers * i.hoursPerWeek * 52) * (i.avgSalary / FTE_HOURS_PER_YEAR) * 0.80,
-                            inputs: { workers: 'roi_dm1', avgSalary: 'roi_dm2', hoursPerWeek: 'roi_dm3' },
-                            description: (i, s) => `(80% of time saved for ${i.workers} workers)`
-                        },
-                        {
-                            name: 'Storage Cost Reduction',
-                            formula: (i, s) => i.storageCost * 0.50,
-                            inputs: { storageCost: 'roi_dm4' },
-                            description: (i, s) => `(50% reduction in storage costs)`
-                        }
+                        { name: 'Productivity Gain (Reduced Search Time)', formula: (i,s) => (i.workers * i.hoursPerWeek * 52) * (i.avgSalary / FTE_HOURS_PER_YEAR) * 0.80, inputs: { workers: 'roi_dm1', avgSalary: 'roi_dm2', hoursPerWeek: 'roi_dm3' }, description: (i,s) => `(80% of time saved for ${i.workers} workers)` },
+                        { name: 'Storage Cost Reduction', formula: (i,s) => i.storageCost * 0.50, inputs: { storageCost: 'roi_dm4' }, description: (i,s) => `(50% reduction in storage costs)` },
+                        { name: 'Compliance Risk Reduction', formula: (i,s) => i.incidents * i.costPerIncident * 0.90, inputs: { incidents: 'roi_dm5', costPerIncident: 'roi_dm6' }, description: (i,s) => `(90% reduction in compliance incident costs)` }
                     ]
                 },
                 'Workflow Management': {
@@ -174,56 +285,74 @@
                         { id: 'wm2', text: 'Describe one key process that is currently slow or error-prone due to manual steps.', type: 'textarea' },
                         { id: 'wm3', text: 'How do employees currently request services or approvals from other departments (e.g., IT, HR)?', type: 'textarea' },
                         { id: 'wm4', text: 'What is the business impact of delays in these manual processes?', type: 'textarea' },
+                        { id: 'wm5', text: 'How are tasks and responsibilities assigned and tracked within a process?', type: 'textarea' },
+                        { id: 'wm6', text: 'What is the average cycle time for a key approval process (e.g., capital expenditure)?', type: 'number', unit: 'Days' },
+                        { id: 'wm7', text: 'How do you handle exceptions or escalations in your current workflows?', type: 'textarea' },
+                        { id: 'wm8', text: 'Is there a lack of visibility into where a process is at any given time?', type: 'textarea' },
+                        { id: 'wm9', text: 'How much time do managers spend chasing status updates on tasks?', type: 'number', unit: 'Hours/Week' },
+                        { id: 'wm10', text: 'What systems do you need to integrate to create a seamless end-to-end process?', type: 'textarea' },
+                        { id: 'wm11', text: 'How easy is it for business users to build or modify their own workflows?', type: 'textarea' },
+                        { id: 'wm12', text: 'Describe the employee onboarding or offboarding process.', type: 'textarea' },
+                        { id: 'wm13', text: 'How are forms created and distributed for data collection?', type: 'textarea' },
+                        { id: 'wm14', text: 'What are the compliance or audit trail requirements for your key processes?', type: 'textarea' },
+                        { id: 'wm15', text: 'How do you measure the performance and efficiency of your business processes?', type: 'textarea' },
+                        { id: 'wm16', text: 'What is the biggest opportunity you see for process automation in your organization?', type: 'textarea' },
+                        { id: 'wm17', text: 'How are mobile workers included in your current processes?', type: 'textarea' },
+                        { id: 'wm18', text: 'What is the estimated cost of a single error in a key manual process?', type: 'number', unit: '$' },
+                        { id: 'wm19', text: 'How do you ensure process consistency across different teams or locations?', type: 'textarea' },
+                        { id: 'wm20', text: 'What are your top 3 goals for implementing workflow automation?', type: 'textarea' },
                     ],
                     roiQuestions: [
                         { id: 'roi_wm1', text: 'Number of processes to automate', type: 'number' },
-                        { id: 'roi_wm2', text: 'Average hours saved per automated process, per year', type: 'number' },
-                        { id: 'roi_wm3', text: 'Average hourly cost of employees performing these tasks ($)', type: 'number' },
-                        { id: 'roi_wm4', text: 'Estimated annual cost of errors from manual processes ($)', type: 'number' },
+                        { id: 'roi_wm2', text: 'Average hours saved per automated process, per year', type: 'number', unit: 'Hours' },
+                        { id: 'roi_wm3', text: 'Average hourly cost of employees performing these tasks ($)', type: 'number', unit: '$' },
+                        { id: 'roi_wm4', text: 'Estimated annual cost of errors from manual processes ($)', type: 'number', unit: '$' },
+                        { id: 'roi_wm5', text: 'Number of audit/compliance activities per year', type: 'number' },
+                        { id: 'roi_wm6', text: 'Hours spent preparing for each audit/compliance activity', type: 'number', unit: 'Hours' },
                     ],
-                    demoRoiData: { roi_wm1: 20, roi_wm2: 100, roi_wm3: 40, roi_wm4: 15000 },
+                    demoRoiData: { roi_wm1: 20, roi_wm2: 100, roi_wm3: 40, roi_wm4: 15000, roi_wm5: 4, roi_wm6: 20 },
                     roiCalculationFormulas: [
-                        {
-                            name: 'Productivity Savings from Automation',
-                            formula: (i, s) => i.processes * i.hoursSaved * i.hourlyCost,
-                            inputs: { processes: 'roi_wm1', hoursSaved: 'roi_wm2', hourlyCost: 'roi_wm3' },
-                            description: (i, s) => `(${i.processes} processes * ${i.hoursSaved} hrs/yr * $${i.hourlyCost}/hr)`
-                        },
-                        {
-                            name: 'Error Reduction Savings',
-                            formula: (i, s) => i.errorCost * 0.90,
-                            inputs: { errorCost: 'roi_wm4' },
-                            description: (i, s) => `(90% reduction in manual error costs)`
-                        }
+                        { name: 'Productivity Savings from Automation', formula: (i,s) => i.processes * i.hoursSaved * i.hourlyCost, inputs: { processes: 'roi_wm1', hoursSaved: 'roi_wm2', hourlyCost: 'roi_wm3' }, description: (i,s) => `(${i.processes} processes * ${i.hoursSaved} hrs/yr * $${i.hourlyCost}/hr)` },
+                        { name: 'Error Reduction Savings', formula: (i,s) => i.errorCost * 0.90, inputs: { errorCost: 'roi_wm4' }, description: (i,s) => `(90% reduction in manual error costs)` },
+                        { name: 'Audit Preparation Savings', formula: (i,s) => i.audits * i.auditHours * i.hourlyCost * 0.5, inputs: { audits: 'roi_wm5', auditHours: 'roi_wm6', hourlyCost: 'roi_wm3' }, description: (i,s) => `(50% time reduction for audit prep)` },
                     ]
                 },
                 'Process Mapping': {
                     questions: [
                         { id: 'pm1', text: 'How are your business processes currently documented (e.g., Word, Visio, tribal knowledge)?', type: 'textarea' },
-                        { id: 'pm2', text: 'How long does it typically take to onboard a new employee for a key operational role?', type: 'number' },
+                        { id: 'pm2', text: 'How long does it typically take to onboard a new employee for a key operational role?', type: 'number', unit: 'Days' },
                         { id: 'pm3', text: 'How do you currently identify bottlenecks or areas for improvement in your processes?', type: 'textarea' },
                         { id: 'pm4', text: 'Is there a consistent, agreed-upon "single source of truth" for how processes should be executed?', type: 'textarea' },
+                        { id: 'pm5', text: 'How often are your process documents reviewed and updated?', type: 'textarea' },
+                        { id: 'pm6', text: 'How do you manage feedback and suggestions for process improvements from staff?', type: 'textarea' },
+                        { id: 'pm7', text: 'What is the estimated cost of process non-conformance or inconsistency per year?', type: 'number', unit: '$' },
+                        { id: 'pm8', text: 'How are process changes communicated and rolled out to the organization?', type: 'textarea' },
+                        { id: 'pm9', text: 'Do you have a clear understanding of process ownership and responsibilities?', type: 'textarea' },
+                        { id: 'pm10', text: 'How much time is spent in meetings trying to define or clarify an existing process?', type: 'number', unit: 'Hours/Month' },
+                        { id: 'pm11', text: 'What is the level of employee engagement in process improvement initiatives?', type: 'textarea' },
+                        { id: 'pm12', text: 'How do you ensure your processes align with strategic business goals?', type: 'textarea' },
+                        { id: 'pm13', text: 'Describe a situation where a lack of clear process documentation led to a negative outcome.', type: 'textarea' },
+                        { id: 'pm14', text: 'How easy is it for employees to find the process information they need to do their jobs?', type: 'textarea' },
+                        { id: 'pm15', text: 'What is your methodology for continuous process improvement (e.g., Lean, Six Sigma)?', type: 'textarea' },
+                        { id: 'pm16', text: 'How do you assess the risk associated with your key business processes?', type: 'textarea' },
+                        { id: 'pm17', text: 'What are your top 3 goals for implementing a process mapping and management solution?', type: 'textarea' },
+                        { id: 'pm18', text: 'How do you manage variations of a single process across different departments or regions?', type: 'textarea' },
+                        { id: 'pm19', text: 'Are process metrics and KPIs currently tracked and reported on?', type: 'textarea' },
+                        { id: 'pm20', text: 'How does process knowledge leave the company when an experienced employee retires or resigns?', type: 'textarea' },
                     ],
                     roiQuestions: [
                         { id: 'roi_pm1', text: 'Number of new hires per year requiring process training', type: 'number' },
-                        { id: 'roi_pm2', text: 'Average hours of training per new hire', type: 'number' },
-                        { id: 'roi_pm3', text: 'Average hourly cost of a new hire and their trainer (combined) ($)', type: 'number' },
-                        { id: 'roi_pm4', text: 'Total annual salary cost for all employees in operational roles ($)', type: 'number' },
+                        { id: 'roi_pm2', text: 'Average hours of training per new hire', type: 'number', unit: 'Hours' },
+                        { id: 'roi_pm3', text: 'Average hourly cost of a new hire and their trainer (combined) ($)', type: 'number', unit: '$' },
+                        { id: 'roi_pm4', text: 'Total annual salary cost for all employees in operational roles ($)', type: 'number', unit: '$' },
+                        { id: 'roi_pm5', text: 'Number of continuous improvement projects per year', type: 'number' },
+                        { id: 'roi_pm6', text: 'Average savings per improvement project ($)', type: 'number', unit: '$' },
                     ],
-                    demoRoiData: { roi_pm1: 25, roi_pm2: 40, roi_pm3: 50, roi_pm4: 2000000 },
+                    demoRoiData: { roi_pm1: 25, roi_pm2: 40, roi_pm3: 50, roi_pm4: 2000000, roi_pm5: 5, roi_pm6: 10000 },
                     roiCalculationFormulas: [
-                        {
-                            name: 'Reduced Onboarding & Training Time',
-                            formula: (i, s) => i.newHires * i.trainingHours * i.hourlyCost * 0.30,
-                            inputs: { newHires: 'roi_pm1', trainingHours: 'roi_pm2', hourlyCost: 'roi_pm3' },
-                            description: (i, s) => `(30% training time reduction for ${i.newHires} new hires)`
-                        },
-                        {
-                            name: 'Operational Efficiency Gains',
-                            formula: (i, s) => i.opSalaryCost * 0.03,
-                            inputs: { opSalaryCost: 'roi_pm4' },
-                            description: (i, s) => `(3% efficiency gain on $${i.opSalaryCost?.toFixed(2)} operational salaries)`
-                        }
+                        { name: 'Reduced Onboarding & Training Time', formula: (i,s) => i.newHires * i.trainingHours * i.hourlyCost * 0.30, inputs: { newHires: 'roi_pm1', trainingHours: 'roi_pm2', hourlyCost: 'roi_pm3' }, description: (i,s) => `(30% training time reduction for ${i.newHires} new hires)` },
+                        { name: 'Operational Efficiency Gains', formula: (i,s) => i.opSalaryCost * 0.03, inputs: { opSalaryCost: 'roi_pm4' }, description: (i,s) => `(3% efficiency gain on $${i.opSalaryCost.toFixed(2)} operational salaries)` },
+                        { name: 'Accelerated Continuous Improvement', formula: (i,s) => i.projects * i.avgSavings * 0.25, inputs: { projects: 'roi_pm5', avgSavings: 'roi_pm6' }, description: (i,s) => `(25% increase in value from improvement projects)` },
                     ]
                 }
             }
@@ -263,23 +392,23 @@
         // --- Core Application Logic ---
         function populateStreamDropdown() {
             streamSelect.innerHTML = '<option value="">-- Choose Business Stream --</option>';
-            for (const streamName in appModules) {
+            Object.keys(appModules).forEach(streamName => {
                 const option = document.createElement('option');
                 option.value = streamName;
                 option.textContent = streamName;
                 streamSelect.appendChild(option);
-            }
+            });
         }
 
         function populateModuleDropdown(stream) {
             moduleSelect.innerHTML = '<option value="">-- Choose Module --</option>';
             if (stream && appModules[stream]) {
-                for (const moduleName in appModules[stream]) {
+                Object.keys(appModules[stream]).forEach(moduleName => {
                     const option = document.createElement('option');
                     option.value = moduleName;
                     option.textContent = moduleName;
                     moduleSelect.appendChild(option);
-                }
+                });
             } else {
                  moduleSelect.innerHTML = '<option value="">-- Choose Stream First --</option>';
             }
@@ -296,16 +425,16 @@
             const moduleData = appModules[selectedStream][selectedModule];
             currentView = state.currentView;
 
-            // Render Tabs
             appContent.innerHTML = `<div class="flex justify-center mb-6">
-                <button id="scorecard-tab" class="px-6 py-3 text-lg font-medium transition-all duration-300 ${currentView === 'scorecard' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">Scorecard</button>
-                <button id="discovery-tab" class="px-6 py-3 text-lg font-medium transition-all duration-300 ${currentView === 'discovery' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">Discovery</button>
-                <button id="roi-tab" class="px-6 py-3 text-lg font-medium transition-all duration-300 ${currentView === 'roi' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">ROI</button>
+                <button id="scorecard-tab" class="px-6 py-3 text-lg font-medium ${currentView === 'scorecard' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">Scorecard</button>
+                <button id="discovery-tab" class="px-6 py-3 text-lg font-medium ${currentView === 'discovery' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">Discovery</button>
+                <button id="roi-tab" class="px-6 py-3 text-lg font-medium ${currentView === 'roi' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">ROI</button>
             </div>`;
 
             const viewContainer = document.createElement('div');
             viewContainer.className = "bg-white p-6 rounded-xl shadow-inner";
-            viewContainer.innerHTML = `<h2 class="text-2xl font-bold text-blue-700 mb-4 text-center">${currentView.charAt(0).toUpperCase() + currentView.slice(1)}: ${selectedModule}</h2>`;
+            const viewTitle = currentView.charAt(0).toUpperCase() + currentView.slice(1);
+            viewContainer.innerHTML = `<h2 class="text-2xl font-bold text-blue-700 mb-4 text-center">${viewTitle}: ${selectedModule}</h2>`;
 
             if (currentView === 'scorecard') {
                 viewContainer.innerHTML += scorecardQuestions.map((q, index) => `
@@ -324,20 +453,24 @@
             } else if (currentView === 'discovery') {
                 viewContainer.innerHTML += moduleData.questions.map((q, index) => `
                     <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
-                        <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">${index + 1}. ${q.text}</label>
+                        <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">${index + 1}. ${q.text} ${q.unit ? `(${q.unit})` : ''}</label>
                         ${q.type === 'textarea' ? `<textarea id="${q.id}" rows="4" class="w-full p-2 border rounded-md">${state.discoveryAnswers[q.id] || ''}</textarea>` : `<input id="${q.id}" type="${q.type}" value="${state.discoveryAnswers[q.id] || ''}" class="w-full p-2 border rounded-md">`}
                     </div>`).join('');
-                 // Add Notes Section Here if desired
-                 viewContainer.innerHTML += `<div class="flex justify-center mt-6"><button id="copy-to-roi-button" class="flex items-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg">Copy to ROI</button></div>`;
+                viewContainer.innerHTML += `
+                    <div class="mt-8 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
+                        <h3 class="text-xl font-semibold text-gray-700 mb-4">Additional Discovery Notes</h3>
+                        <div id="additional-notes-container" class="space-y-4"></div>
+                        <button id="add-note-button" class="mt-4 flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Add Note</button>
+                    </div>`;
                 appContent.appendChild(viewContainer);
                 moduleData.questions.forEach(q => document.getElementById(q.id).addEventListener('input', e => state.discoveryAnswers[q.id] = e.target.value));
-                document.getElementById('copy-to-roi-button').addEventListener('click', copyDiscoveryToRoi);
+                renderAdditionalNotes();
             } else if (currentView === 'roi') {
                 viewContainer.innerHTML += `
                     <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Annual Subscription Cost ($)</label><input id="annual-subscription-cost" type="number" value="${state.eskerSubscriptionCost}" class="w-full p-2 border rounded-md"></div>
                     <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Professional Services Cost ($)</label><input id="professional-services-cost" type="number" value="${state.professionalServicesCost}" class="w-full p-2 border rounded-md"></div>
                     <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Years Utilised</label><input id="number-of-years-utilized" type="number" value="${state.numberOfYearsUtilized}" class="w-full p-2 border rounded-md"></div>
-                    ${moduleData.roiQuestions.map((q, index) => `<div class="mb-6 p-4 border rounded-lg bg-gray-50"><label for="${q.id}" class="block font-semibold">${index + 1}. ${q.text}</label><input id="${q.id}" type="number" value="${state.roiAnswers[q.id] || ''}" class="w-full p-2 border rounded-md"></div>`).join('')}
+                    ${moduleData.roiQuestions.map((q, index) => `<div class="mb-6 p-4 border rounded-lg bg-gray-50"><label for="${q.id}" class="block font-semibold">${index + 1}. ${q.text} ${q.unit ? `(${q.unit})` : ''}</label><input id="${q.id}" type="number" value="${state.roiAnswers[q.id] || ''}" class="w-full p-2 border rounded-md"></div>`).join('')}
                     <div class="flex justify-center gap-4 mt-6">
                         <button id="calculate-roi-button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6">Calculate ROI</button>
                         <button id="populate-demo-data-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6">Demo Data</button>
@@ -352,8 +485,6 @@
                 document.getElementById('populate-demo-data-button').addEventListener('click', populateDemoData);
                 if (state.calculatedRoi) renderRoiResults(state.calculatedRoi);
             }
-
-            // Tab listeners
             document.getElementById('scorecard-tab').addEventListener('click', () => { state.currentView = 'scorecard'; renderAppContent(); });
             document.getElementById('discovery-tab').addEventListener('click', () => { state.currentView = 'discovery'; renderAppContent(); });
             document.getElementById('roi-tab').addEventListener('click', () => { state.currentView = 'roi'; renderAppContent(); });
@@ -362,23 +493,22 @@
         function calculateScorecard() {
             const state = getCurrentModuleState();
             if (!state) return;
-            let totalScore = 0;
-            scorecardQuestions.forEach(q => { if (state.scorecardAnswers[q.id] === 'Yes') totalScore += scorecardYesPoints; });
-            state.calculatedScorecard = totalScore;
+            state.calculatedScorecard = scorecardQuestions.reduce((score, q) => score + (state.scorecardAnswers[q.id] === 'Yes' ? scorecardYesPoints : 0), 0);
             const resultsEl = document.getElementById('scorecard-results');
             if (resultsEl) {
                 const maxScore = scorecardQuestions.length * scorecardYesPoints;
-                resultsEl.innerHTML = `<h3 class="text-xl font-bold text-blue-700 mb-2">Opportunity Score</h3><p class="text-4xl font-bold text-purple-700">${totalScore} / ${maxScore}</p>`;
+                resultsEl.innerHTML = `<h3 class="text-xl font-bold text-blue-700 mb-2">Opportunity Score</h3><p class="text-4xl font-bold text-purple-700">${state.calculatedScorecard} / ${maxScore}</p>`;
             }
         }
-
+        
         function calculateRoi() {
             const state = getCurrentModuleState();
-            if (!state) { showMessage(validationErrorMessage); return; }
+            if (!state) return;
+            hideMessage(validationErrorMessage);
             const moduleData = appModules[selectedStream][selectedModule];
             const annualSub = parseFloat(state.eskerSubscriptionCost);
             const profServices = parseFloat(state.professionalServicesCost);
-            const years = parseInt(state.numberOfYearsUtilized);
+            const years = parseInt(state.numberOfYearsUtilized, 10);
             const roiInputs = {};
             let allValid = !isNaN(annualSub) && !isNaN(profServices) && !isNaN(years) && years > 0;
             moduleData.roiQuestions.forEach(q => {
@@ -386,23 +516,29 @@
                 if (isNaN(val)) allValid = false;
                 roiInputs[q.id] = val;
             });
-            if (!allValid) { showMessage(validationErrorMessage); return; }
-            hideMessage(validationErrorMessage);
+
+            if (!allValid) {
+                state.calculatedRoi = null;
+                showMessage(validationErrorMessage);
+                renderAppContent(); // Re-render to show message and hide old results
+                return;
+            }
 
             let totalAnnualSavings = 0;
-            let detailedBreakdown = {};
-            moduleData.roiCalculationFormulas.forEach(f => {
-                let inputs = {};
+            let detailedSavingsBreakdown = {};
+            moduleData.roiCalculationFormulas.forEach(formulaDef => {
+                const inputs = {};
                 let inputsValid = true;
-                for (const key in f.inputs) {
-                    const val = roiInputs[f.inputs[key]];
-                    if(isNaN(val)) { inputsValid = false; break; }
-                    inputs[key] = val;
-                }
+                Object.keys(formulaDef.inputs).forEach(key => {
+                    const value = roiInputs[formulaDef.inputs[key]];
+                    if (isNaN(value)) inputsValid = false;
+                    inputs[key] = value;
+                });
+                
                 if (inputsValid) {
-                    const savings = f.formula(inputs, state);
+                    const savings = formulaDef.formula(inputs, state) || 0;
                     totalAnnualSavings += savings;
-                    detailedBreakdown[f.name] = `${f.description(inputs, state)} = $${savings.toFixed(2)}`;
+                    detailedSavingsBreakdown[formulaDef.name] = `${formulaDef.description(inputs, state)} = $${savings.toFixed(2)}`;
                 }
             });
 
@@ -410,9 +546,20 @@
             const totalBenefit = totalAnnualSavings * years;
             const netBenefit = totalBenefit - totalInvestment;
             const roiPercentage = totalInvestment > 0 ? (netBenefit / totalInvestment) * 100 : 0;
-            const paybackMonths = totalAnnualSavings > annualSub ? (profServices / (totalAnnualSavings - annualSub)) * 12 : Infinity;
+            const paybackMonths = (totalAnnualSavings > annualSub) ? (profServices / (totalAnnualSavings - annualSub)) * 12 : Infinity;
             
-            state.calculatedRoi = { totalAnnualSavings: totalAnnualSavings.toFixed(2), totalInvestmentOverYears: totalInvestment.toFixed(2), totalBenefitOverYears: totalBenefit.toFixed(2), netBenefitOverYears: netBenefit.toFixed(2), roiPercentage: roiPercentage.toFixed(2), paybackPeriodMonths: isFinite(paybackMonths) ? paybackMonths.toFixed(1) : "N/A", detailedSavingsBreakdown: detailedBreakdown };
+            const annualBreakdown = [];
+            let cumulativeInvestment = 0, cumulativeBenefit = 0;
+            for (let i = 1; i <= years; i++) {
+                const yearInvestment = (i === 1 ? profServices : 0) + annualSub;
+                cumulativeInvestment += yearInvestment;
+                cumulativeBenefit += totalAnnualSavings;
+                const cumulativeNetBenefit = cumulativeBenefit - cumulativeInvestment;
+                const cumulativeRoiPercentage = cumulativeInvestment > 0 ? (cumulativeNetBenefit / cumulativeInvestment) * 100 : 0;
+                annualBreakdown.push({ year: i, annualInvestment: yearInvestment.toFixed(2), annualSavings: totalAnnualSavings.toFixed(2), netAnnualBenefit: (totalAnnualSavings - yearInvestment).toFixed(2), cumulativeInvestment: cumulativeInvestment.toFixed(2), cumulativeBenefit: cumulativeBenefit.toFixed(2), cumulativeRoiPercentage: cumulativeRoiPercentage.toFixed(2) });
+            }
+
+            state.calculatedRoi = { totalAnnualSavings: totalAnnualSavings.toFixed(2), annualEskerInvestment: annualSub.toFixed(2), netAnnualBenefit: (totalAnnualSavings - annualSub).toFixed(2), totalInvestmentOverYears: totalInvestment.toFixed(2), totalBenefitOverYears: totalBenefit.toFixed(2), netBenefitOverYears: netBenefit.toFixed(2), roiPercentage: roiPercentage.toFixed(2), paybackPeriodMonths: isFinite(paybackMonths) && paybackMonths >= 0 ? paybackMonths.toFixed(1) : "N/A", annualBreakdown, detailedSavingsBreakdown };
             renderRoiResults(state.calculatedRoi);
         }
         
@@ -422,30 +569,56 @@
             resultsEl.innerHTML = `
                 <div class="p-6 bg-blue-50 border-blue-200 rounded-lg">
                     <h3 class="text-xl font-bold text-center mb-4">ROI Summary</h3>
-                    <div class="grid grid-cols-2 gap-2">
-                        <strong>Total Annual Savings:</strong> <span class="text-right text-green-700 font-bold">$${roi.totalAnnualSavings}</span>
-                        <strong>Net Benefit (${getCurrentModuleState().numberOfYearsUtilized} Yrs):</strong> <span class="text-right text-blue-800 font-bold">$${roi.netBenefitOverYears}</span>
-                        <strong>ROI Percentage:</strong> <span class="text-right text-purple-700 font-bold">${roi.roiPercentage}%</span>
-                        <strong>Payback Period:</strong> <span class="text-right text-orange-700 font-bold">${roi.paybackPeriodMonths} Months</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg">
+                        <p class="font-semibold">Total Annual Savings:</p><p class="text-right text-green-700 font-bold">$${roi.totalAnnualSavings}</p>
+                        <p class="font-semibold">Net Annual Benefit:</p><p class="text-right text-blue-800 font-bold">$${roi.netAnnualBenefit}</p>
+                        <p class="font-semibold text-xl">Total Investment (${getCurrentModuleState().numberOfYearsUtilized} Yrs):</p><p class="text-right text-xl text-red-700 font-bold">$${roi.totalInvestmentOverYears}</p>
+                        <p class="font-semibold text-xl">Total Benefit (${getCurrentModuleState().numberOfYearsUtilized} Yrs):</p><p class="text-right text-xl text-green-700 font-bold">$${roi.totalBenefitOverYears}</p>
+                        <p class="font-semibold text-2xl">Net Benefit (${getCurrentModuleState().numberOfYearsUtilized} Yrs):</p><p class="text-right text-2xl font-bold text-blue-800">$${roi.netBenefitOverYears}</p>
+                        <p class="font-semibold text-3xl">ROI Percentage:</p><p class="text-right text-3xl font-bold text-purple-700">${roi.roiPercentage}%</p>
+                        <p class="font-semibold text-2xl">Payback Period:</p><p class="text-right text-2xl font-bold text-orange-700">${roi.paybackPeriodMonths} Months</p>
                     </div>
+                </div>
+                <div class="mt-8 p-6 bg-gray-50 border-gray-200 rounded-lg"><h3 class="text-xl font-bold text-center mb-4">Annual Breakdown</h3>
+                    <div class="overflow-x-auto"><table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-100"><tr>${['Year', 'Annual Inv ($)', 'Annual Sav ($)', 'Net Benefit ($)', 'Cum. Inv ($)', 'Cum. Ben ($)', 'Cum. ROI (%)'].map(h => `<th class="px-6 py-3 text-left text-xs font-medium uppercase">${h}</th>`).join('')}</tr></thead>
+                        <tbody class="bg-white divide-y">${roi.annualBreakdown.map(y => `<tr>${Object.values(y).map(v => `<td class="px-6 py-4 whitespace-nowrap text-sm">${v}</td>`).join('')}</tr>`).join('')}</tbody>
+                    </table></div>
                 </div>`;
         }
-
-        function copyDiscoveryToRoi() { /* Simplified, needs implementation based on new structure if required */ }
+        
+        function renderAdditionalNotes() {
+            const notesContainer = document.getElementById('additional-notes-container');
+            if (!notesContainer) return;
+            notesContainer.innerHTML = '';
+            const state = getCurrentModuleState();
+            state.additionalDiscoveryNotes.forEach(note => {
+                const noteDiv = document.createElement('div');
+                noteDiv.className = 'flex items-start space-x-2 mb-2';
+                noteDiv.innerHTML = `<textarea rows="3" class="flex-grow p-2 border rounded-md" placeholder="Enter additional discovery details here...">${note.text || ''}</textarea><button class="delete-note-button p-2 bg-red-500 hover:bg-red-600 text-white rounded-md">X</button>`;
+                noteDiv.querySelector('textarea').addEventListener('input', e => note.text = e.target.value);
+                noteDiv.querySelector('.delete-note-button').addEventListener('click', () => {
+                    state.additionalDiscoveryNotes = state.additionalDiscoveryNotes.filter(n => n.id !== note.id);
+                    renderAdditionalNotes();
+                });
+                notesContainer.appendChild(noteDiv);
+            });
+            document.getElementById('add-note-button').onclick = () => { state.additionalDiscoveryNotes.push({ id: Date.now(), text: '' }); renderAdditionalNotes(); };
+        }
+        
         function populateDemoData() {
             const state = getCurrentModuleState();
             const demoData = appModules[selectedStream][selectedModule].demoRoiData;
             if (state && demoData) {
                 state.roiAnswers = { ...demoData };
                 renderAppContent();
-                calculateRoi();
             }
         }
-
+        
         // --- Event Listeners & Initialization ---
         streamSelect.addEventListener('change', (e) => {
             selectedStream = e.target.value;
-            selectedModule = ''; // Reset module selection
+            selectedModule = '';
             moduleSelect.value = '';
             populateModuleDropdown(selectedStream);
             renderAppContent();
@@ -453,18 +626,37 @@
 
         moduleSelect.addEventListener('change', (e) => {
             selectedModule = e.target.value;
+            if (selectedModule) {
+                const state = getCurrentModuleState();
+                currentView = state.currentView;
+            }
             renderAppContent();
         });
 
         clearFormButton.addEventListener('click', showConfirmationModal);
-        confirmClearButton.addEventListener('click', () => {
-            if (selectedModule) delete allModuleData[selectedModule];
-            renderAppContent();
-            hideConfirmationModal();
-        });
+        confirmClearButton.addEventListener('click', () => { if (selectedModule) { delete allModuleData[selectedModule]; renderAppContent(); } hideConfirmationModal(); });
         cancelClearButton.addEventListener('click', hideConfirmationModal);
         closeValidationErrorButton.addEventListener('click', () => hideMessage(validationErrorMessage));
-        exportDataButton.addEventListener('click', () => { /* Needs implementation for getReportData and formatters */ alert("Export function needs to be re-implemented."); });
+        
+        exportDataButton.addEventListener('click', () => {
+            if (!selectedModule) return;
+            const data = {
+                stream: selectedStream,
+                module: selectedModule,
+                scorecard: { questions: scorecardQuestions, answers: getCurrentModuleState().scorecardAnswers, score: getCurrentModuleState().calculatedScorecard, maxScore: scorecardQuestions.length * scorecardYesPoints },
+                discovery: { questions: appModules[selectedStream][selectedModule].questions, answers: getCurrentModuleState().discoveryAnswers, notes: getCurrentModuleState().additionalDiscoveryNotes },
+                roi: { inputs: { ...getCurrentModuleState().roiAnswers, annualSub: getCurrentModuleState().eskerSubscriptionCost, profServices: getCurrentModuleState().professionalServicesCost, years: getCurrentModuleState().numberOfYearsUtilized }, questions: appModules[selectedStream][selectedModule].roiQuestions, results: getCurrentModuleState().calculatedRoi }
+            };
+            // Simplified export for demonstration
+            const content = JSON.stringify(data, null, 2);
+            const blob = new Blob([content], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${data.stream}_${data.module}_Report.json`;
+            link.click();
+            showMessage(exportSuccessMessage);
+            setTimeout(() => hideMessage(exportSuccessMessage), 3000);
+        });
 
         window.onload = () => {
             populateStreamDropdown();
