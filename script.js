@@ -859,7 +859,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         const roiConfig = roiQuestions[type]?.[module];
-        if (roiConfig && roiSection.querySelector('#roiResult')) {
+        if (roiConfig && roiSection.querySelector('#annualCost')) { // Check if ROI tab was rendered
              const roiInputsConfig = roiConfig.formulas.reduce((acc, formula) => {
                 Object.values(formula.inputs).forEach(id => acc[id] = true);
                 return acc;
