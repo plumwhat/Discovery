@@ -28,55 +28,80 @@
     </style>
 </head>
 <body class="min-h-screen bg-gray-50 flex flex-col items-center p-4 font-sans text-gray-800">
-    <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg p-6 md:p-8">
-        <h1 class="text-3xl md:text-4xl font-bold text-center text-ms-blue mb-6">Presales Discovery & ROI Tool</h1>
+    
+    <div id="app-container" class="w-full max-w-4xl">
+        <!-- Main Tool UI -->
+        <div id="tool-ui" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-center text-ms-blue mb-6">Discovery, Scorecard, Qualification & ROI Tool</h1>
 
-        <!-- Stream & Module Selection -->
-        <div class="mb-8 p-4 bg-blue-100 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-center gap-4">
-             <div class="w-full md:w-1/2 flex flex-col items-center">
-                 <label for="stream-select" class="text-lg font-semibold text-blue-800 mb-2">Select Business Stream:</label>
-                 <div class="relative w-full">
-                     <select id="stream-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none"></select>
-                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
-                 </div>
-             </div>
-             <div class="w-full md:w-1/2 flex flex-col items-center">
-               <label for="module-select" class="text-lg font-semibold text-blue-800 mb-2">Select Module:</label>
-               <div class="relative w-full">
-                   <select id="module-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue focus:border-transparent appearance-none">
-                       <option value="">-- Choose Stream First --</option>
-                   </select>
-                   <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
-               </div>
-           </div>
-        </div>
-
-        <div id="app-content"><!-- Content will be dynamically loaded here by JavaScript --></div>
-
-        <!-- Action Buttons -->
-        <div class="mt-8 flex flex-col md:flex-row justify-center items-center gap-4">
-            <button id="clear-form-button" class="flex items-center bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg">Clear Module Data</button>
-            <div class="flex flex-col items-center p-4 bg-blue-50 rounded-lg shadow-sm">
-                <p class="font-semibold text-blue-800 mb-2">Export As:</p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="md" checked class="form-radio text-ms-blue"><span class="ml-2">Markdown</span></label>
-                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="txt" class="form-radio text-ms-blue"><span class="ml-2">Plain Text</span></label>
-                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="html" class="form-radio text-ms-blue"><span class="ml-2">HTML</span></label>
-                    <label class="inline-flex items-center"><input type="radio" name="export-format" value="ai-prompt" class="form-radio text-ms-blue"><span class="ml-2">AI Prompt</span></label>
+            <!-- Role, Stream & Module Selection -->
+            <div class="mb-8 p-4 bg-blue-100 rounded-lg shadow-md flex flex-col lg:flex-row items-center justify-center gap-4">
+                <div class="w-full lg:w-1/3 flex flex-col items-center">
+                    <label for="role-select" class="text-lg font-semibold text-blue-800 mb-2">Select Role:</label>
+                    <div class="relative w-full">
+                        <select id="role-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue appearance-none"></select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
                 </div>
-                <button id="export-data-button" class="flex items-center bg-ms-blue hover:bg-ms-blue-dark text-white font-bold py-3 px-8 rounded-lg mt-4">Export Data</button>
+                <div class="w-full lg:w-1/3 flex flex-col items-center">
+                    <label for="stream-select" class="text-lg font-semibold text-blue-800 mb-2">Select Business Stream:</label>
+                    <div class="relative w-full">
+                        <select id="stream-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue appearance-none"></select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/3 flex flex-col items-center">
+                   <label for="module-select" class="text-lg font-semibold text-blue-800 mb-2">Select Module:</label>
+                   <div class="relative w-full">
+                       <select id="module-select" class="block w-full px-4 py-2 pr-8 rounded-md border border-blue-300 bg-white text-gray-900 focus:outline-none focus:ring-2 ring-ms-blue appearance-none">
+                           <option value="">-- Choose Role & Stream First --</option>
+                       </select>
+                       <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-700"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+                   </div>
+               </div>
+            </div>
+
+            <div id="app-content"><!-- Content will be dynamically loaded here by JavaScript --></div>
+
+            <div class="mt-8 flex flex-col md:flex-row justify-center items-center gap-4">
+                <button id="clear-form-button" class="flex items-center bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg">Clear Module Data</button>
+                <div class="flex flex-col items-center p-4 bg-blue-50 rounded-lg shadow-sm">
+                    <p class="font-semibold text-blue-800 mb-2">Export As:</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <label class="inline-flex items-center"><input type="radio" name="export-format" value="md" checked class="form-radio text-ms-blue"><span class="ml-2">Markdown</span></label>
+                        <label class="inline-flex items-center"><input type="radio" name="export-format" value="txt" class="form-radio text-ms-blue"><span class="ml-2">Plain Text</span></label>
+                        <label class="inline-flex items-center"><input type="radio" name="export-format" value="html" class="form-radio text-ms-blue"><span class="ml-2">HTML</span></label>
+                        <label class="inline-flex items-center"><input type="radio" name="export-format" value="ai-prompt" class="form-radio text-ms-blue"><span class="ml-2">AI Prompt</span></label>
+                    </div>
+                    <button id="export-data-button" class="flex items-center bg-ms-blue hover:bg-ms-blue-dark text-white font-bold py-3 px-8 rounded-lg mt-4">Export Data</button>
+                </div>
+            </div>
+            <div id="messages-container" class="mt-4 space-y-2">
+                <div id="export-success-message" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg flex items-center" role="alert"><span>Data exported successfully!</span></div>
+                <div id="copy-success-message" class="hidden bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded-lg flex items-center" role="alert"><span>Values copied to ROI Calculator!</span></div>
+                <div id="validation-error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg flex items-center justify-between" role="alert"><span>Please ensure all required fields are filled for ROI calculation.</span><button id="close-validation-error" class="ml-4 text-red-700 hover:text-red-900">X</button></div>
             </div>
         </div>
 
-        <!-- Messages -->
-        <div id="export-success-message" class="hidden mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg flex items-center" role="alert"><span>Data exported successfully!</span></div>
-        <div id="copy-success-message" class="hidden mt-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded-lg flex items-center" role="alert"><span>Values copied to ROI Calculator!</span></div>
-        <div id="validation-error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4 flex items-center justify-between" role="alert"><span>Please ensure all required fields are filled for ROI calculation.</span><button id="close-validation-error" class="ml-4 text-red-700 hover:text-red-900">X</button></div>
+        <!-- Admin Panel UI (Initially Hidden) -->
+        <div id="admin-ui" class="hidden bg-white rounded-xl shadow-lg p-6 md:p-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-center text-ms-blue mb-2">Admin Panel</h1>
+            <h2 class="text-xl text-center text-gray-600 mb-6">Qualification Thresholds for: <span id="admin-module-name" class="font-semibold"></span></h2>
+            <div id="admin-content" class="space-y-4"></div>
+            <div class="mt-8 flex justify-center gap-4">
+                <button id="admin-back-button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg">Back to Tool</button>
+                <button id="admin-save-button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg">Save Changes</button>
+                <button id="admin-reset-button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg">Reset to Defaults</button>
+            </div>
+        </div>
     </div>
-
-    <!-- Modal -->
+    
+    <!-- Modal & Footer -->
     <div id="confirmation-modal" class="modal hidden"><div class="modal-content"><p class="text-lg font-semibold mb-4">Are you sure you want to clear all data for this module?</p><div class="flex justify-center gap-4"><button id="confirm-clear-button" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-lg">OK</button><button id="cancel-clear-button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-5 rounded-lg">Cancel</button></div></div></div>
-    <footer class="mt-8 text-gray-500 text-sm">(c) Brad Whatman 2025</footer>
+    <footer class="mt-8 text-center">
+        <button id="admin-button" class="text-gray-500 hover:text-ms-blue text-sm underline">Admin</button>
+        <p class="text-gray-500 text-sm mt-2">(c) Brad Whatman 2025</p>
+    </footer>
 
     <script>
         const FTE_HOURS_PER_YEAR = 2080;
@@ -120,7 +145,19 @@
                         { name: 'Productivity Gains (FTE Re-allocation)', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.40, inputs: { fteCount: 'roi_ap3', avgSalary: 'roi_ap4' }, description: (i,s) => `(40% productivity gain for ${i.fteCount} FTEs)` },
                         { name: 'Early Payment Discount Capture', formula: (i,s) => i.missedDiscounts * 0.80, inputs: { missedDiscounts: 'roi_ap5' }, description: (i,s) => `(Capture 80% of missed discounts)` },
                         { name: 'Late Payment Fee Elimination', formula: (i,s) => i.lateFees, inputs: { lateFees: 'roi_ap6' }, description: (i,s) => `(Eliminate 100% of late fees)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'ap_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'ap_qual_2', text: 'What is the primary driver for this project?', options: ['Cost Reduction', 'Process Efficiency', 'Visibility/Control', 'Compliance', 'Supplier Relations'] },
+                            { id: 'ap_qual_3', text: 'How are invoices received today?', options: ['Primarily Paper', 'Primarily Email/PDF', 'Mix of Paper/Email', 'Using a Supplier Portal', 'EDI'] },
+                            { id: 'ap_qual_4', text: 'Is there a defined budget for this project?', options: ['Yes, Approved', 'Yes, Budgetary', 'No, Seeking Estimates', 'Unknown'] },
+                            { id: 'ap_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] }
+                        ],
+                        metricQuestions: [
+                            { id: 'ap_metric_1', text: 'Invoice Volume per Month', thresholds: { qualified: 1000, review: 250 } }
+                        ]
+                    }
                 },
                 'Accounts Receivable': {
                     questions: [
@@ -159,7 +196,20 @@
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.35, inputs: { fteCount: 'roi_ar4', avgSalary: 'roi_ar5' }, description: (i,s) => `(35% productivity gain for ${i.fteCount} FTEs)` },
                         { name: 'DSO Reduction Savings', formula: (i,s) => ((i.invoiceVolume * i.avgValue) / 365) * 10 * (i.costOfCapital/100), inputs: { invoiceVolume: 'roi_ar1', avgValue: 'roi_ar2', costOfCapital: 'roi_ar7' }, description: (i,s) => `(10-day reduction in DSO)` },
                         { name: 'Bad Debt Reduction', formula: (i,s) => i.badDebt * 0.15, inputs: { badDebt: 'roi_ar6' }, description: (i,s) => `(15% reduction in bad debt)` }
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'ar_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'ar_qual_2', text: 'What is the primary driver for this project?', options: ['Reduce DSO', 'Improve Cash Flow', 'Automate Collections', 'Customer Self-Service', 'Reduce Disputes'] },
+                            { id: 'ar_qual_3', text: 'What is your biggest collections challenge?', options: ['Prioritizing calls', 'Inefficient follow-up', 'Dispute resolution', 'Lack of visibility'] },
+                            { id: 'ar_qual_4', text: 'Is there executive sponsorship for improving cash collection?', options: ['Yes, strong', 'Somewhat', 'No', 'Unknown'] },
+                            { id: 'ar_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] }
+                        ],
+                        metricQuestions: [
+                            { id: 'ar_metric_1', text: 'Days Sales Outstanding (DSO)', thresholds: { qualified: 45, review: 60 }, direction: 'lower' },
+                            { id: 'ar_metric_2', text: 'Number of AR Staff (FTEs)', thresholds: { qualified: 3, review: 1 } }
+                        ]
+                    }
                 },
                 'Order Management': {
                     questions: [
@@ -197,7 +247,20 @@
                         { name: 'Manual Processing Savings', formula: (i,s) => (i.annualOrders * 0.65) * i.manualCost, inputs: { annualOrders: 'roi_om1', manualCost: 'roi_om2' }, description: (i,s) => `(65% reduction on processing cost for ${i.annualOrders} orders)` },
                         { name: 'Error Correction Savings', formula: (i,s) => (i.monthlyErrors * 12) * i.errorCost * 0.70, inputs: { monthlyErrors: 'roi_om3', errorCost: 'roi_om4' }, description: (i,s) => `(70% reduction in error correction costs)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.30, inputs: { fteCount: 'roi_om5', avgSalary: 'roi_om6' }, description: (i,s) => `(30% productivity gain for ${i.fteCount} FTEs)` },
-                    ]
+                    ],
+                     qualification: {
+                        qualifyingQuestions: [
+                            { id: 'om_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'om_qual_2', text: 'What is the primary driver for this project?', options: ['Reduce Errors', 'Speed Up Processing', 'Improve Visibility', 'Customer Experience'] },
+                            { id: 'om_qual_3', text: 'How are orders received today?', options: ['Primarily Email/PDF', 'EDI', 'Fax/Mail', 'Web Portal'] },
+                            { id: 'om_qual_4', text: 'How complex are your orders (e.g., number of line items)?', options: ['Low (<5)', 'Medium (5-20)', 'High (20+)', 'Varies Greatly'] },
+                            { id: 'om_qual_5', text: 'Is there a defined budget for this project?', options: ['Yes, Approved', 'Yes, Budgetary', 'No, Seeking Estimates', 'Unknown'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'om_metric_1', text: 'Orders per Month', thresholds: { qualified: 500, review: 100 } },
+                            { id: 'om_metric_2', text: 'Order Error Rate (%)', thresholds: { qualified: 2, review: 5 }, direction: 'lower' }
+                        ]
+                    }
                 },
                 'Procurement': {
                     questions: [
@@ -233,7 +296,20 @@
                     roiCalculationFormulas: [
                         { name: 'Maverick Spend Savings', formula: (i,s) => i.totalSpend * (i.maverickPct/100) * 0.10, inputs: { totalSpend: 'roi_p2', maverickPct: 'roi_p3' }, description: (i,s) => `(10% savings on ${i.maverickPct}% of spend)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.25, inputs: { fteCount: 'roi_p4', avgSalary: 'roi_p5' }, description: (i,s) => `(25% productivity gain for ${i.fteCount} FTEs)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'p_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'p_qual_2', text: 'What is the primary driver for this project?', options: ['Control Maverick Spend', 'Improve Cycle Times', 'Increase Visibility', 'Enhance Compliance'] },
+                            { id: 'p_qual_3', text: 'How are purchases approved today?', options: ['Email Chains', 'Paper Forms', 'ERP Workflow', 'Informal'] },
+                            { id: 'p_qual_4', text: 'Is there a centralized procurement department?', options: ['Yes', 'No', 'Partially'] },
+                            { id: 'p_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'p_metric_1', text: 'Maverick Spend (%)', thresholds: { qualified: 10, review: 25 }, direction: 'lower' },
+                            { id: 'p_metric_2', text: 'Annual Spend ($M)', thresholds: { qualified: 5, review: 1 } }
+                        ]
+                    }
                 },
                 'Expense Management': {
                     questions: [
@@ -271,7 +347,20 @@
                         { name: 'Processing Cost Reduction', formula: (i,s) => i.reports * (i.costPerReport * 0.75), inputs: { reports: 'roi_em1', costPerReport: 'roi_em2' }, description: (i,s) => `(75% reduction in processing cost)` },
                         { name: 'Improved Policy Compliance', formula: (i,s) => i.nonCompliantSpend * 0.10, inputs: { nonCompliantSpend: 'roi_em3' }, description: (i,s) => `(10% reduction in non-compliant spend)` },
                         { name: 'Employee Productivity Savings', formula: (i,s) => i.employees * i.hoursSpent * i.hourlyCost, inputs: { employees: 'roi_em4', hoursSpent: 'roi_em5', hourlyCost: 'roi_em6' }, description: (i,s) => `(Time savings for ${i.employees} employees)` }
-                    ]
+                    ],
+                     qualification: {
+                        qualifyingQuestions: [
+                            { id: 'em_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'em_qual_2', text: 'What is the primary driver for this project?', options: ['Improve Employee Experience', 'Increase Policy Compliance', 'Gain Spend Visibility', 'Faster Reimbursement'] },
+                            { id: 'em_qual_3', text: 'How are receipts currently managed?', options: ['Manual (Paper)', 'Scans/Photos Emailed', 'Existing App', 'No System'] },
+                            { id: 'em_qual_4', text: 'Do you have a large mobile or traveling workforce?', options: ['Yes, significant', 'Some', 'Very Few', 'No'] },
+                            { id: 'em_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'em_metric_1', text: 'Number of Expense Reports per Month', thresholds: { qualified: 200, review: 50 } },
+                            { id: 'em_metric_2', text: 'Policy Non-Compliance Rate (%)', thresholds: { qualified: 5, review: 15 }, direction: 'lower' }
+                        ]
+                    }
                 },
                 'Cash Application': {
                     questions: [
@@ -307,7 +396,20 @@
                     roiCalculationFormulas: [
                         { name: 'Manual Application Savings', formula: (i,s) => i.annualPayments * (i.manualPct/100) * i.manualCost, inputs: { annualPayments: 'roi_ca1', manualPct: 'roi_ca2', manualCost: 'roi_ca3' }, description: (i,s) => `(Processing savings on ${i.manualPct}% of payments)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.50, inputs: { fteCount: 'roi_ca4', avgSalary: 'roi_ca5' }, description: (i,s) => `(50% productivity gain for ${i.fteCount} FTEs)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'ca_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'ca_qual_2', text: 'What is the primary driver for this project?', options: ['Increase Match Rate', 'Reduce Unapplied Cash', 'Speed Up Application', 'Improve Accuracy'] },
+                            { id: 'ca_qual_3', text: 'What is your primary payment method from customers?', options: ['ACH/Wire', 'Cheque', 'Credit Card', 'Mixed'] },
+                            { id: 'ca_qual_4', text: 'Do you deal with complex remittances (e.g., many-to-many)?', options: ['Yes, frequently', 'Sometimes', 'Rarely', 'No'] },
+                            { id: 'ca_qual_5', text: 'Is there a defined budget for this project?', options: ['Yes, Approved', 'Yes, Budgetary', 'No, Seeking Estimates', 'Unknown'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'ca_metric_1', text: 'Manual Application Rate (%)', thresholds: { qualified: 30, review: 60 }, direction: 'lower' },
+                            { id: 'ca_metric_2', text: 'Cash Application FTEs', thresholds: { qualified: 2, review: 1 } }
+                        ]
+                    }
                 },
                 'Collections Management': {
                     questions: [
@@ -341,7 +443,20 @@
                     roiCalculationFormulas: [
                         { name: 'Bad Debt Reduction', formula: (i,s) => i.badDebt * 0.20, inputs: { badDebt: 'roi_cm1' }, description: (i,s) => `(20% reduction in bad debt)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.40, inputs: { fteCount: 'roi_cm2', avgSalary: 'roi_cm3' }, description: (i,s) => `(40% productivity gain for ${i.fteCount} FTEs)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'cm_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'cm_qual_2', text: 'What is the primary driver for this project?', options: ['Reduce DSO', 'Automate Communications', 'Improve Collector Efficiency', 'Better Reporting'] },
+                            { id: 'cm_qual_3', text: 'How do you currently prioritize collection efforts?', options: ['Largest Balance', 'Oldest Invoices', 'No Formal System', 'Risk-Based Scoring'] },
+                            { id: 'cm_qual_4', text: 'Is your collections process consistent across all collectors?', options: ['Yes, highly', 'Somewhat', 'No, varies by collector', 'N/A - 1 person'] },
+                            { id: 'cm_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'cm_metric_1', text: 'Number of Collectors (FTEs)', thresholds: { qualified: 2, review: 1 } },
+                            { id: 'cm_metric_2', text: 'Current DSO', thresholds: { qualified: 45, review: 60 }, direction: 'lower' }
+                        ]
+                    }
                 },
                 'Credit Management': {
                     questions: [
@@ -377,7 +492,20 @@
                         { name: 'Bad Debt Reduction', formula: (i,s) => i.badDebt * 0.10, inputs: { badDebt: 'roi_crm1' }, description: (i,s) => `(10% reduction in bad debt)` },
                         { name: 'Reduced Lost Sales', formula: (i,s) => i.lostSales * 0.20, inputs: { lostSales: 'roi_crm2' }, description: (i,s) => `(20% reduction in lost sales)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.50, inputs: { fteCount: 'roi_crm3', avgSalary: 'roi_crm4' }, description: (i,s) => `(50% productivity gain for ${i.fteCount} FTEs)` }
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'crm_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'crm_qual_2', text: 'What is the primary driver for this project?', options: ['Reduce Bad Debt', 'Faster Onboarding', 'Automate Credit Checks', 'Standardize Policy'] },
+                            { id: 'crm_qual_3', text: 'Do you use third-party credit rating agencies?', options: ['Yes, integrated', 'Yes, manually', 'No', 'Sometimes'] },
+                            { id: 'crm_qual_4', text: 'Is your credit policy documented and consistently applied?', options: ['Yes', 'Somewhat', 'No'] },
+                            { id: 'crm_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'crm_metric_1', text: 'New Credit Applications per Month', thresholds: { qualified: 50, review: 10 } },
+                            { id: 'crm_metric_2', text: 'Bad Debt as % of Revenue', thresholds: { qualified: 0.5, review: 1.5 }, direction: 'lower' }
+                        ]
+                    }
                 },
                 'Customer Inquiry': {
                     questions: [
@@ -412,7 +540,20 @@
                     roiCalculationFormulas: [
                         { name: 'Manual Inquiry Savings', formula: (i,s) => i.annualInquiries * i.manualCost * 0.50, inputs: { annualInquiries: 'roi_ci1', manualCost: 'roi_ci2' }, description: (i,s) => `(50% automation of inquiry resolution)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.30, inputs: { fteCount: 'roi_ci3', avgSalary: 'roi_ci4' }, description: (i,s) => `(30% productivity gain for ${i.fteCount} FTEs)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'ci_qual_1', text: 'What are the top 3 types of customer inquiries?', options: ['Invoice Copy', 'Order Status', 'Payment Status', 'Dispute', 'Other'] },
+                            { id: 'ci_qual_2', text: 'What is the primary driver for this project?', options: ['Improve Customer Satisfaction', 'Reduce Agent Workload', 'Faster Resolution', 'Provide 24/7 Service'] },
+                            { id: 'ci_qual_3', text: 'Do you currently have a customer self-service portal?', options: ['Yes, with limited function', 'Yes, fully functional', 'No', 'In development'] },
+                            { id: 'ci_qual_4', text: 'How many systems must an agent typically access to resolve one inquiry?', options: ['1', '2', '3', '4+'] },
+                            { id: 'ci_qual_5', text: 'Is there executive sponsorship for improving customer service?', options: ['Yes, strong', 'Somewhat', 'No', 'Unknown'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'ci_metric_1', text: 'Inquiries per Month', thresholds: { qualified: 500, review: 100 } },
+                            { id: 'ci_metric_2', text: 'First Contact Resolution (%)', thresholds: { qualified: 70, review: 50 }, direction: 'lower' }
+                        ]
+                    }
                 },
                 'Supplier Management': {
                     questions: [
@@ -449,7 +590,20 @@
                         { name: 'Manual Onboarding Savings', formula: (i,s) => i.onboardings * i.manualCost * 0.60, inputs: { onboardings: 'roi_sm1', manualCost: 'roi_sm2' }, description: (i,s) => `(60% automation of onboarding)` },
                         { name: 'Non-Compliance Savings', formula: (i,s) => i.nonComplianceCost * 0.20, inputs: { nonComplianceCost: 'roi_sm3' }, description: (i,s) => `(20% reduction in non-compliance costs)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.30, inputs: { fteCount: 'roi_sm4', avgSalary: 'roi_sm5' }, description: (i,s) => `(30% productivity gain for ${i.fteCount} FTEs)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'sm_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'sm_qual_2', text: 'What is the primary driver for this project?', options: ['Improve Data Quality', 'Reduce Supplier Risk', 'Automate Onboarding', 'Better Communication'] },
+                            { id: 'sm_qual_3', text: 'How do you manage supplier certificates (e.g., insurance)?', options: ['Manually in Folders', 'Spreadsheet Tracking', 'No Formal System'] },
+                            { id: 'sm_qual_4', text: 'Do you have a supplier portal today?', options: ['Yes', 'No', 'Planning To'] },
+                            { id: 'sm_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'sm_metric_1', text: 'Number of Active Suppliers', thresholds: { qualified: 500, review: 100 } },
+                            { id: 'sm_metric_2', text: 'New Suppliers Onboarded per Year', thresholds: { qualified: 50, review: 10 } }
+                        ]
+                    }
                 },
                 'Sourcing': {
                     questions: [
@@ -484,7 +638,20 @@
                     roiCalculationFormulas: [
                         { name: 'Additional Savings from Sourcing', formula: (i,s) => i.totalSpend * ((i.currentSavings/100) * 0.03), inputs: { totalSpend: 'roi_s1', currentSavings: 'roi_s2' }, description: (i,s) => `(Target 3% additional savings on spend)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.20, inputs: { fteCount: 'roi_s3', avgSalary: 'roi_s4' }, description: (i,s) => `(20% productivity gain for ${i.fteCount} FTEs)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 's_qual_1', text: 'What is your primary spend category?', options: ['Direct Materials', 'Indirect/MRO', 'Services', 'CAPEX'] },
+                            { id: 's_qual_2', text: 'What is the primary driver for this project?', options: ['Increase Savings', 'Improve Process Efficiency', 'Enhance Transparency', 'Supplier Collaboration'] },
+                            { id: 's_qual_3', text: 'How do you currently manage sourcing events?', options: ['Email and Spreadsheets', 'Basic eSourcing Tool', 'Advanced Sourcing Suite', 'ERP Module'] },
+                            { id: 's_qual_4', text: 'Is there a formal category management strategy in place?', options: ['Yes', 'In Development', 'No'] },
+                            { id: 's_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] },
+                        ],
+                        metricQuestions: [
+                            { id: 's_metric_1', text: 'Annual Sourcing Events', thresholds: { qualified: 20, review: 5 } },
+                            { id: 's_metric_2', text: 'Annual Spend Under Management ($M)', thresholds: { qualified: 10, review: 2 } }
+                        ]
+                    }
                 },
                 'Claims & Deductions': {
                     questions: [
@@ -519,7 +686,20 @@
                     roiCalculationFormulas: [
                         { name: 'Invalid Claims Savings', formula: (i,s) => i.invalidValue * 0.25, inputs: { invalidValue: 'roi_cd2' }, description: (i,s) => `(25% reduction in invalid claims)` },
                         { name: 'Productivity Gains', formula: (i,s) => (i.fteCount * i.avgSalary) * 0.50, inputs: { fteCount: 'roi_cd3', avgSalary: 'roi_cd4' }, description: (i,s) => `(50% productivity gain for ${i.fteCount} FTEs)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'cd_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'cd_qual_2', text: 'What is the primary driver for this project?', options: ['Reduce Invalid Deductions', 'Speed Up Resolution', 'Improve Visibility', 'Identify Root Cause'] },
+                            { id: 'cd_qual_3', text: 'What are the most common types of deductions?', options: ['Shortages', 'Damages', 'Pricing Discrepancies', 'Promotional Allowances'] },
+                            { id: 'cd_qual_4', text: 'How is documentation (e.g., PODs) gathered for validation?', options: ['Manually from carriers', 'Email requests', 'Automated system', 'Not gathered'] },
+                            { id: 'cd_qual_5', text: 'Is there a defined budget for this project?', options: ['Yes, Approved', 'Yes, Budgetary', 'No, Seeking Estimates', 'Unknown'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'cd_metric_1', text: 'Number of Claims/Deductions per Month', thresholds: { qualified: 100, review: 20 } },
+                            { id: 'cd_metric_2', text: 'Average Days to Resolve a Claim', thresholds: { qualified: 15, review: 30 }, direction: 'lower' }
+                        ]
+                    }
                 },
                 'Invoice Delivery': {
                     questions: [
@@ -552,7 +732,20 @@
                     demoRoiData: { roi_id1: 150000, roi_id2: 1.50, roi_id3: 40 },
                     roiCalculationFormulas: [
                         { name: 'Manual Delivery Savings', formula: (i,s) => i.annualInvoices * (i.manualPct/100) * i.manualCost * 0.80, inputs: { annualInvoices: 'roi_id1', manualCost: 'roi_id2', manualPct: 'roi_id3' }, description: (i,s) => `(80% savings on manual delivery costs)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'id_qual_1', text: 'What is your primary ERP system?', options: ['SAP', 'Oracle', 'Microsoft Dynamics', 'NetSuite', 'Other', 'None'] },
+                            { id: 'id_qual_2', text: 'What is the primary driver for this project?', options: ['Reduce Costs', 'Meet Customer Demands', 'E-invoicing Compliance', 'Improve Delivery Speed'] },
+                            { id: 'id_qual_3', text: 'What delivery channels are most requested by your customers?', options: ['Email (PDF)', 'Portal', 'EDI', 'PEPPOL/E-invoice Network'] },
+                            { id: 'id_qual_4', text: 'Are you facing any upcoming e-invoicing mandates?', options: ['Yes, within 1 year', 'Yes, 1-2 years', 'Not currently', 'Unknown'] },
+                            { id: 'id_qual_5', text: 'How do you handle invoice archiving and retrieval?', options: ['Paper Files', 'Network Folders', 'Document Management System', 'ERP Archive'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'id_metric_1', text: 'Invoices Delivered per Month', thresholds: { qualified: 1000, review: 250 } },
+                            { id: 'id_metric_2', text: 'Percentage of Invoices Sent Manually (%)', thresholds: { qualified: 25, review: 50 }, direction: 'lower' }
+                        ]
+                    }
                 }
             },
             'Business Automation': {
@@ -592,7 +785,20 @@
                         { name: 'Productivity Gain (Reduced Search Time)', formula: (i,s) => (i.workers * i.hoursPerWeek * 52) * (i.avgSalary / FTE_HOURS_PER_YEAR) * 0.80, inputs: { workers: 'roi_dm1', avgSalary: 'roi_dm2', hoursPerWeek: 'roi_dm3' }, description: (i,s) => `(80% of time saved for ${i.workers} workers)` },
                         { name: 'Storage Cost Reduction', formula: (i,s) => i.storageCost * 0.50, inputs: { storageCost: 'roi_dm4' }, description: (i,s) => `(50% reduction in storage costs)` },
                         { name: 'Compliance Risk Reduction', formula: (i,s) => i.incidents * i.costPerIncident * 0.90, inputs: { incidents: 'roi_dm5', costPerIncident: 'roi_dm6' }, description: (i,s) => `(90% reduction in compliance incident costs)` }
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'dm_qual_1', text: 'What is your primary content repository today?', options: ['Network Drives', 'SharePoint', 'Google Drive', 'Dropbox', 'Other DMS'] },
+                            { id: 'dm_qual_2', text: 'What is the main driver for a new DMS?', options: ['Search & Findability', 'Version Control', 'Security & Compliance', 'Remote Access'] },
+                            { id: 'dm_qual_3', text: 'Which departments have the most critical need?', options: ['Legal', 'Finance', 'HR', 'Engineering/R&D', 'Company-Wide'] },
+                            { id: 'dm_qual_4', text: 'Is integration with other systems (e.g., ERP, CRM) important?', options: ['Critical', 'Important', 'Nice to have', 'Not needed'] },
+                            { id: 'dm_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'dm_metric_1', text: 'Number of Knowledge Workers', thresholds: { qualified: 50, review: 15 } },
+                            { id: 'dm_metric_2', text: 'Hours/Week Spent Searching', thresholds: { qualified: 3, review: 1 } }
+                        ]
+                    }
                 },
                 'Workflow Management': {
                     questions: [
@@ -630,7 +836,20 @@
                         { name: 'Productivity Savings from Automation', formula: (i,s) => i.processes * i.hoursSaved * i.hourlyCost, inputs: { processes: 'roi_wm1', hoursSaved: 'roi_wm2', hourlyCost: 'roi_wm3' }, description: (i,s) => `(${i.processes} processes * ${i.hoursSaved} hrs/yr * $${i.hourlyCost}/hr)` },
                         { name: 'Error Reduction Savings', formula: (i,s) => i.errorCost * 0.90, inputs: { errorCost: 'roi_wm4' }, description: (i,s) => `(90% reduction in manual error costs)` },
                         { name: 'Audit Preparation Savings', formula: (i,s) => i.audits * i.auditHours * i.hourlyCost * 0.5, inputs: { audits: 'roi_wm5', auditHours: 'roi_wm6', hourlyCost: 'roi_wm3' }, description: (i,s) => `(50% time reduction for audit prep)` },
-                    ]
+                    ],
+                     qualification: {
+                        qualifyingQuestions: [
+                            { id: 'wm_qual_1', text: 'What is your primary collaboration platform?', options: ['Microsoft 365/SharePoint', 'Google Workspace', 'Salesforce', 'Other'] },
+                            { id: 'wm_qual_2', text: 'What is the primary driver for workflow automation?', options: ['Operational Efficiency', 'Reduce Errors', 'Improve Visibility', 'Employee Experience'] },
+                            { id: 'wm_qual_3', text: 'Who will be building the workflows?', options: ['IT Department Only', 'Citizen Developers / Power Users', 'Both', 'Unsure'] },
+                            { id: 'wm_qual_4', text: 'What is an example of a high-value process to automate first?', options: ['HR Onboarding', 'Capital Expense Request', 'Contract Review', 'IT Service Request'] },
+                            { id: 'wm_qual_5', text: 'Do you require mobile access for forms and approvals?', options: ['Yes, critical', 'Yes, nice to have', 'No'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'wm_metric_1', text: 'Number of Manual Processes to Automate', thresholds: { qualified: 10, review: 3 } },
+                            { id: 'wm_metric_2', text: 'Number of Employees Involved', thresholds: { qualified: 50, review: 10 } }
+                        ]
+                    }
                 },
                 'Process Mapping': {
                     questions: [
@@ -668,7 +887,20 @@
                         { name: 'Reduced Onboarding & Training Time', formula: (i,s) => i.newHires * i.trainingHours * i.hourlyCost * 0.30, inputs: { newHires: 'roi_pm1', trainingHours: 'roi_pm2', hourlyCost: 'roi_pm3' }, description: (i,s) => `(30% training time reduction for ${i.newHires} new hires)` },
                         { name: 'Operational Efficiency Gains', formula: (i,s) => i.opSalaryCost * 0.03, inputs: { opSalaryCost: 'roi_pm4' }, description: (i,s) => `(3% efficiency gain on $${i.opSalaryCost.toFixed(2)} operational salaries)` },
                         { name: 'Accelerated Continuous Improvement', formula: (i,s) => i.projects * i.avgSavings * 0.25, inputs: { projects: 'roi_pm5', avgSavings: 'roi_pm6' }, description: (i,s) => `(25% increase in value from improvement projects)` },
-                    ]
+                    ],
+                    qualification: {
+                        qualifyingQuestions: [
+                            { id: 'pm_qual_1', text: 'What is the primary driver for this initiative?', options: ['Standardization', 'Continuous Improvement', 'Regulatory Compliance', 'Training/Onboarding'] },
+                            { id: 'pm_qual_2', text: 'Is there an existing Process Excellence or CI team?', options: ['Yes, established', 'Yes, new', 'No, but planned', 'No'] },
+                            { id: 'pm_qual_3', text: 'How are processes documented today?', options: ['Visio/Word', 'SharePoint', 'Tribal Knowledge', 'Mix'] },
+                            { id: 'pm_qual_4', text: 'Is there executive support for a process-centric culture?', options: ['Yes, strong', 'Somewhat', 'No', 'Unknown'] },
+                            { id: 'pm_qual_5', text: 'What is the project timeline?', options: ['< 3 Months', '3-6 Months', '6-12 Months', '> 12 Months', 'Undefined'] },
+                        ],
+                        metricQuestions: [
+                            { id: 'pm_metric_1', text: 'Number of Employees', thresholds: { qualified: 100, review: 25 } },
+                            { id: 'pm_metric_2', text: 'Number of core operational processes', thresholds: { qualified: 20, review: 5 } }
+                        ]
+                    }
                 }
             }
         };
@@ -701,10 +933,13 @@
         const scorecardYesPoints = 20;
 
         let allModuleData = {};
+        let selectedRole = 'Sales'; // Default Role
         let selectedStream = '';
         let selectedModule = '';
         let currentView = 'scorecard';
+        let currentScreen = 'tool'; // 'tool' or 'admin'
 
+        const roleSelect = document.getElementById('role-select');
         const streamSelect = document.getElementById('stream-select');
         const moduleSelect = document.getElementById('module-select');
         const appContent = document.getElementById('app-content');
@@ -717,12 +952,39 @@
         const confirmationModal = document.getElementById('confirmation-modal');
         const confirmClearButton = document.getElementById('confirm-clear-button');
         const cancelClearButton = document.getElementById('cancel-clear-button');
+        const adminButton = document.getElementById('admin-button');
+        const appContainer = document.getElementById('app-container');
 
-        const getCurrentModuleState = () => selectedModule ? (allModuleData[selectedModule] || (allModuleData[selectedModule] = { discoveryAnswers: {}, roiAnswers: {}, eskerSubscriptionCost: '', professionalServicesCost: '', numberOfYearsUtilized: '3', additionalDiscoveryNotes: [], calculatedRoi: null, scorecardAnswers: {}, calculatedScorecard: null, currentView: 'scorecard' })) : null;
+        const roleTabVisibility = {
+            'Sales': ['scorecard', 'discovery', 'roi'],
+            'Presales': ['discovery', 'qualification', 'roi'],
+            'SDR/SAD': ['qualification']
+        };
+
+        const getCurrentModuleState = () => selectedModule ? (allModuleData[selectedModule] || (allModuleData[selectedModule] = { discoveryAnswers: {}, roiAnswers: {}, eskerSubscriptionCost: '', professionalServicesCost: '', numberOfYearsUtilized: '3', additionalDiscoveryNotes: [], calculatedRoi: null, scorecardAnswers: {}, calculatedScorecard: null, qualificationAnswers: {}, qualificationMetricAnswers: {}, customThresholds: {}, currentView: roleTabVisibility[selectedRole][0] })) : null;
         const showMessage = (el) => el.classList.remove('hidden');
         const hideMessage = (el) => el.classList.add('hidden');
         const showConfirmationModal = () => { confirmationModal.style.display = 'flex'; }
         const hideConfirmationModal = () => { confirmationModal.style.display = 'none'; }
+
+        function getPlaceholder(q) {
+            if (q.type === 'textarea') return 'Enter text response...';
+            if (q.type === 'number') {
+                return `Enter value ${q.unit ? '(' + q.unit + ')' : ''}`;
+            }
+            return '';
+        }
+
+        function populateRoleDropdown() {
+            roleSelect.innerHTML = '';
+            Object.keys(roleTabVisibility).forEach(roleName => {
+                const option = document.createElement('option');
+                option.value = roleName;
+                option.textContent = roleName;
+                roleSelect.appendChild(option);
+            });
+            roleSelect.value = selectedRole;
+        }
 
         function populateStreamDropdown() {
             streamSelect.innerHTML = '<option value="">-- Choose Business Stream --</option>';
@@ -748,39 +1010,55 @@
             }
         }
 
-        function getPlaceholder(q) {
-            if (q.type === 'textarea') return 'Enter text response...';
-            if (q.type === 'number') {
-                return `Enter value ${q.unit ? '(' + q.unit + ')' : ''}`;
+        function renderScreen() {
+            if(currentScreen === 'admin') {
+                document.getElementById('tool-ui').classList.add('hidden');
+                document.getElementById('admin-ui').classList.remove('hidden');
+                renderAdminPanel();
+            } else {
+                document.getElementById('tool-ui').classList.remove('hidden');
+                document.getElementById('admin-ui').classList.add('hidden');
+                renderAppContent();
             }
-            return '';
         }
 
         function renderAppContent() {
             appContent.innerHTML = '';
             if (!selectedModule) {
-                appContent.innerHTML = `<div class="text-center py-10 text-gray-500 text-xl">Please select a stream and module to begin.</div>`;
+                appContent.innerHTML = `<div class="text-center py-10 text-gray-500 text-xl">Please select a role, stream, and module to begin.</div>`;
                 return;
             }
 
             const state = getCurrentModuleState();
             const moduleData = appModules[selectedStream][selectedModule];
+            const visibleTabs = roleTabVisibility[selectedRole];
+            
+            if (!visibleTabs.includes(state.currentView)) {
+                state.currentView = visibleTabs[0];
+            }
             currentView = state.currentView;
 
-            appContent.innerHTML = `<div class="flex justify-center mb-6">
-                <button id="scorecard-tab" class="px-6 py-3 text-lg font-medium ${currentView === 'scorecard' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">Scorecard</button>
-                <button id="discovery-tab" class="px-6 py-3 text-lg font-medium ${currentView === 'discovery' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">Discovery</button>
-                <button id="roi-tab" class="px-6 py-3 text-lg font-medium ${currentView === 'roi' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">ROI</button>
-            </div>`;
-            
-            document.getElementById('scorecard-tab').addEventListener('click', () => { state.currentView = 'scorecard'; renderAppContent(); });
-            document.getElementById('discovery-tab').addEventListener('click', () => { state.currentView = 'discovery'; renderAppContent(); });
-            document.getElementById('roi-tab').addEventListener('click', () => { state.currentView = 'roi'; renderAppContent(); });
+            let tabButtonsHtml = visibleTabs.map(tabKey => {
+                const tabName = tabKey.charAt(0).toUpperCase() + tabKey.slice(1);
+                const isActive = currentView === tabKey;
+                return `<button data-view="${tabKey}" class="tab-button px-4 py-3 text-lg font-medium ${isActive ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">${tabName}</button>`;
+            }).join('');
+            appContent.innerHTML = `<div class="flex justify-center mb-6">${tabButtonsHtml}</div>`;
+
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const newView = e.target.dataset.view;
+                    if(state.currentView !== newView) {
+                        state.currentView = newView;
+                        renderAppContent();
+                    }
+                });
+            });
 
             const viewContainer = document.createElement('div');
             viewContainer.className = "bg-white p-6 rounded-xl shadow-inner";
             const viewTitle = currentView.charAt(0).toUpperCase() + currentView.slice(1);
-            viewContainer.innerHTML = `<h2 class="text-2xl font-bold text-blue-700 mb-4 text-center">${viewTitle}: ${selectedModule}</h2>`;
+            viewContainer.innerHTML = `<h2 class="text-2xl font-bold text-blue-700 mb-6 text-center">${viewTitle}: ${selectedModule}</h2>`;
 
             if (currentView === 'scorecard') {
                 viewContainer.innerHTML += scorecardQuestions.map((q, index) => `
@@ -816,7 +1094,7 @@
                 }
                 renderAdditionalNotes();
             } else if (currentView === 'roi') {
-                viewContainer.innerHTML += `
+                 viewContainer.innerHTML += `
                     <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Annual Subscription Cost ($)</label><input id="annual-subscription-cost" type="number" value="${state.eskerSubscriptionCost}" class="w-full p-2 border rounded-md" placeholder="Enter value ($)"></div>
                     <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Professional Services Cost ($)</label><input id="professional-services-cost" type="number" value="${state.professionalServicesCost}" class="w-full p-2 border rounded-md" placeholder="Enter value ($)"></div>
                     <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Years Utilised</label><input id="number-of-years-utilized" type="number" value="${state.numberOfYearsUtilized}" class="w-full p-2 border rounded-md" placeholder="Enter value (Years)"></div>
@@ -834,6 +1112,32 @@
                 document.getElementById('calculate-roi-button').addEventListener('click', calculateRoi);
                 document.getElementById('populate-demo-data-button').addEventListener('click', populateDemoData);
                 if (state.calculatedRoi) renderRoiResults(state.calculatedRoi);
+            } else if (currentView === 'qualification') {
+                const qualData = moduleData.qualification;
+                // Section 1: Qualitative Questions
+                viewContainer.innerHTML += `<h3 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Qualifying Questions</h3>`;
+                viewContainer.innerHTML += qualData.qualifyingQuestions.map((q, index) => `
+                    <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
+                        <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">${index + 1}. ${q.text}</label>
+                        <select id="${q.id}" class="block w-full px-4 py-2 rounded-md border border-gray-300 bg-white">
+                            <option value="">-- Select an Option --</option>
+                            ${q.options.map(opt => `<option value="${opt}" ${state.qualificationAnswers[q.id] === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                        </select>
+                    </div>`).join('');
+
+                // Section 2: Quantitative Metrics
+                viewContainer.innerHTML += `<h3 class="text-xl font-semibold text-gray-800 mb-4 mt-8 border-b pb-2">Quantitative Metrics</h3>`;
+                viewContainer.innerHTML += qualData.metricQuestions.map((q, index) => `
+                     <div class="mb-4 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
+                        <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">${q.text}</label>
+                        <input id="${q.id}" type="number" value="${state.qualificationMetricAnswers[q.id] || ''}" class="w-full p-2 border rounded-md" placeholder="${getPlaceholder(q)}">
+                    </div>`).join('');
+                viewContainer.innerHTML += `<div id="qualification-results" class="mt-8 p-6 bg-blue-50 border-blue-200 rounded-lg shadow-md text-center"></div>`;
+                
+                appContent.appendChild(viewContainer);
+                qualData.qualifyingQuestions.forEach(q => document.getElementById(q.id).addEventListener('change', e => { state.qualificationAnswers[q.id] = e.target.value; calculateQualification(); }));
+                qualData.metricQuestions.forEach(q => document.getElementById(q.id).addEventListener('input', e => { state.qualificationMetricAnswers[q.id] = e.target.value; calculateQualification(); }));
+                calculateQualification();
             }
         }
 
@@ -847,8 +1151,51 @@
                 resultsEl.innerHTML = `<h3 class="text-xl font-bold text-blue-700 mb-2">Opportunity Score</h3><p class="text-4xl font-bold text-purple-700">${state.calculatedScorecard} / ${maxScore}</p>`;
             }
         }
+
+        function calculateQualification() {
+            const state = getCurrentModuleState();
+            if (!state || !selectedModule) return;
+            const moduleData = appModules[selectedStream][selectedModule];
+            const qualData = moduleData.qualification;
+            if (!qualData) return;
+
+            let finalStatus = 'Qualified';
+            let statuses = [];
+            qualData.metricQuestions.forEach(q => {
+                const value = parseFloat(state.qualificationMetricAnswers[q.id]);
+                const thresholds = state.customThresholds[q.id] || q.thresholds;
+                let status = 'Not Qualified';
+                if (!isNaN(value)) {
+                    if (q.direction === 'lower') { // Lower is better
+                        if (value <= thresholds.qualified) status = 'Qualified';
+                        else if (value <= thresholds.review) status = 'Requires Review';
+                    } else { // Higher is better
+                        if (value >= thresholds.qualified) status = 'Qualified';
+                        else if (value >= thresholds.review) status = 'Requires Review';
+                    }
+                }
+                statuses.push(status);
+            });
+
+            if (statuses.includes('Not Qualified')) {
+                finalStatus = 'Not Qualified';
+            } else if (statuses.includes('Requires Review')) {
+                finalStatus = 'Requires Review';
+            }
+            
+            const resultsEl = document.getElementById('qualification-results');
+            if(resultsEl) {
+                const colorClasses = {
+                    'Qualified': 'bg-green-500 text-white',
+                    'Requires Review': 'bg-yellow-500 text-white',
+                    'Not Qualified': 'bg-red-500 text-white'
+                };
+                resultsEl.innerHTML = `<h3 class="text-xl font-bold text-blue-700 mb-2">Overall Qualification Status</h3><p class="text-2xl font-bold p-2 rounded-lg inline-block ${colorClasses[finalStatus]}">${finalStatus}</p>`;
+            }
+        }
         
         function calculateRoi() {
+            // ... (Full ROI calculation logic as in previous versions)
             const state = getCurrentModuleState();
             if (!state) return;
             hideMessage(validationErrorMessage);
@@ -986,92 +1333,116 @@
             }
         }
         
+        function renderAdminPanel() {
+            const adminContent = document.getElementById('admin-content');
+            adminContent.innerHTML = '';
+            if (!selectedModule) {
+                adminContent.innerHTML = `<p class="text-center text-gray-500">Select a module from the main tool to edit its thresholds.</p>`;
+                document.getElementById('admin-module-name').textContent = 'No Module Selected';
+                return;
+            }
+            document.getElementById('admin-module-name').textContent = selectedModule;
+
+            const state = getCurrentModuleState();
+            const qualMetrics = appModules[selectedStream][selectedModule].qualification.metricQuestions;
+            
+            let content = qualMetrics.map(q => {
+                const customThresholds = state.customThresholds[q.id] || {};
+                const defaultThresholds = q.thresholds;
+                return `
+                <div class="p-4 border rounded-lg bg-gray-50 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                    <p class="md:col-span-1 font-semibold">${q.text}</p>
+                    <div class="md:col-span-1">
+                        <label for="${q.id}-qualified" class="block text-sm font-medium text-gray-700">Qualified Threshold</label>
+                        <input type="number" id="${q.id}-qualified" value="${customThresholds.qualified ?? defaultThresholds.qualified}" class="w-full p-2 border rounded-md">
+                    </div>
+                    <div class="md:col-span-1">
+                        <label for="${q.id}-review" class="block text-sm font-medium text-gray-700">Review Threshold</label>
+                        <input type="number" id="${q.id}-review" value="${customThresholds.review ?? defaultThresholds.review}" class="w-full p-2 border rounded-md">
+                    </div>
+                </div>`;
+            }).join('');
+            adminContent.innerHTML = content;
+        }
+
         function getReportData() {
             const state = getCurrentModuleState();
             if (!state) return null;
             const moduleData = appModules[selectedStream][selectedModule];
-            return {
+            const visibleTabs = roleTabVisibility[selectedRole];
+            const data = {
+                role: selectedRole,
                 stream: selectedStream,
                 moduleName: selectedModule,
-                scorecard: { questions: scorecardQuestions, answers: state.scorecardAnswers, score: state.calculatedScorecard, maxScore: scorecardQuestions.length * scorecardYesPoints },
-                discovery: { questions: moduleData.questions, answers: state.discoveryAnswers, notes: state.additionalDiscoveryNotes },
-                roi: { questions: moduleData.roiQuestions, inputs: { ...state.roiAnswers, annualSub: state.eskerSubscriptionCost, profServices: state.professionalServicesCost, years: state.numberOfYearsUtilized }, results: state.calculatedRoi }
+                scorecard: visibleTabs.includes('scorecard') ? { questions: scorecardQuestions, answers: state.scorecardAnswers, score: state.calculatedScorecard, maxScore: scorecardQuestions.length * scorecardYesPoints } : null,
+                discovery: visibleTabs.includes('discovery') ? { questions: moduleData.questions, answers: state.discoveryAnswers, notes: state.additionalDiscoveryNotes } : null,
+                qualification: visibleTabs.includes('qualification') ? { qualitative: { questions: moduleData.qualification.qualifyingQuestions, answers: state.qualificationAnswers }, quantitative: { questions: moduleData.qualification.metricQuestions, answers: state.qualificationMetricAnswers } } : null,
+                roi: visibleTabs.includes('roi') ? { questions: moduleData.roiQuestions, inputs: { ...state.roiAnswers, annualSub: state.eskerSubscriptionCost, profServices: state.professionalServicesCost, years: state.numberOfYearsUtilized }, results: state.calculatedRoi } : null
             };
+            return data;
         }
 
         function generateAIPromptContent(data) {
-            let prompt = `You are an expert business analyst providing concise and actionable insights on process improvement and technology adoption. Your task is to analyse the provided information for a client interested in optimising their ${data.moduleName} process and evaluating the opportunity fit.
+            let prompt = `You are an expert business analyst... (Full prompt logic here as in original file, adapted for new data structure)`;
+            prompt = `You are an expert business analyst providing concise and actionable insights on process improvement and technology adoption. Your task is to analyse the provided information for a client interested in optimising their ${data.moduleName} process and evaluating the opportunity fit.
 
-Based on the detailed information below, please provide:
-1.  **Opportunity Scorecard Analysis:** Based on the Yes/No/Unknown answers and the total score (${data.scorecard.score} out of ${data.scorecard.maxScore}), analyse the overall fit and strength of this opportunity. Highlight any specific "No" answers that represent significant risks or challenges for a successful project.
-2.  **Key Challenges and Opportunities from Discovery:** Provide a concise summary of the most critical pain points and areas for improvement identified from the discovery answers.
-3.  **Summary of Financial Benefits and Investments:** Highlight the most significant financial benefits (savings) and the total investment over the specified years, based on the ROI calculation output. Include the overall Net Benefit and ROI Percentage.
-4.  **Strategic Recommendations for Process Improvement and Technology Adoption:** Describe how a suitable digital solution can address the identified challenges and achieve the calculated benefits within the ${data.moduleName} process. Explicitly link recommendations back to points raised in the Discovery or ROI sections.
+Based on the detailed information below for the **${data.role}** role, please provide:
+`;
+            if(data.scorecard) {
+                prompt += `1.  **Opportunity Scorecard Analysis:** Based on the Yes/No/Unknown answers and the total score (${data.scorecard.score} out of ${data.scorecard.maxScore}), analyse the overall fit and strength of this opportunity. Highlight any specific "No" answers that represent significant risks or challenges for a successful project.\n`;
+            }
+            if(data.qualification) {
+                prompt += `1.  **Qualification Analysis:** Based on the answers provided, summarize the key qualification criteria. Highlight any red flags or areas that require further investigation before proceeding.\n`;
+            }
+             if(data.discovery) {
+                prompt += `2.  **Key Challenges and Opportunities from Discovery:** Provide a concise summary of the most critical pain points and areas for improvement identified from the discovery answers.\n`;
+            }
+             if(data.roi && data.roi.results) {
+                prompt += `3.  **Summary of Financial Benefits and Investments:** Highlight the most significant financial benefits (savings) and the total investment over the specified years, based on the ROI calculation output. Include the overall Net Benefit and ROI Percentage.\n`;
+            }
+            prompt += `4.  **Strategic Recommendations for Process Improvement and Technology Adoption:** Describe how a suitable digital solution can address the identified challenges and achieve the calculated benefits within the ${data.moduleName} process. Explicitly link recommendations back to points raised in the Discovery, Qualification or ROI sections.
     **Important:** Frame recommendations generally (e.g., 'an automation platform', 'a digital solution', 'a cloud-based system').
 5.  **Ensure all spelling in your response aligns with Australian English.**
-6.  **If you cannot provide a comprehensive response for a specific section based on the information provided (e.g., ROI not calculated, or critical discovery questions unanswered), please explicitly state 'Insufficient data to provide a comprehensive response for [specific section].' Do not guess or make up information.**
+6.  **If you cannot provide a comprehensive response for a specific section based on the information provided, please explicitly state 'Insufficient data to provide a comprehensive response for [specific section].' Do not guess or make up information.**
 
 ---
 ### Business Stream: ${data.stream}
 ### Module: ${data.moduleName}
 ---
-### Opportunity Scorecard Information:
-Total Score: ${data.scorecard.score !== null ? data.scorecard.score : '--'} / ${data.scorecard.maxScore}
-
-Question & Answer Breakdown:\n`;
-            data.scorecard.questions.forEach(q => {
-                prompt += `- ${q.text}: ${data.scorecard.answers[q.id] || 'Unknown'}\n`;
-            });
-
-            prompt += `
----
-### Client Discovery Information:
 `;
-            data.discovery.questions.forEach(q => {
-                prompt += `\nQuestion: ${q.text}\nAnswer: ${data.discovery.answers[q.id] || 'N/A'}`;
-            });
-            if (data.discovery.notes && data.discovery.notes.length > 0) {
-                prompt += `\n\nAdditional Discovery Notes:`;
-                data.discovery.notes.forEach((note, index) => {
-                    prompt += `\n- Note ${index + 1}: ${note.text || 'N/A'}`;
-                });
+            if(data.scorecard) {
+                prompt += `### Opportunity Scorecard Information:\nTotal Score: ${data.scorecard.score !== null ? data.scorecard.score : '--'} / ${data.scorecard.maxScore}\n`;
+                data.scorecard.questions.forEach(q => { prompt += `- ${q.text}: ${data.scorecard.answers[q.id] || 'Unknown'}\n`; });
+                prompt += `\n---\n`;
             }
-
-            prompt += `\n---
-### ROI Calculation Data:
-`;
-            if (data.roi.results) {
+            if(data.qualification) {
+                 prompt += `### Qualification Information:\n`;
+                 prompt += `**Qualifying Questions:**\n`;
+                 data.qualification.qualitative.questions.forEach(q => { prompt += `- ${q.text}: ${data.qualification.qualitative.answers[q.id] || 'Not Answered'}\n`; });
+                 prompt += `\n**Quantitative Metrics:**\n`;
+                 data.qualification.quantitative.questions.forEach(q => { prompt += `- ${q.text}: ${data.qualification.quantitative.answers[q.id] || 'Not Answered'}\n`; });
+                 prompt += `\n---\n`;
+            }
+            if(data.discovery) {
+                prompt += `### Client Discovery Information:\n`;
+                data.discovery.questions.forEach(q => { prompt += `\nQuestion: ${q.text}\nAnswer: ${data.discovery.answers[q.id] || 'N/A'}`; });
+                if (data.discovery.notes && data.discovery.notes.length > 0) {
+                    prompt += `\n\nAdditional Discovery Notes:`;
+                    data.discovery.notes.forEach((note, index) => { prompt += `\n- Note ${index + 1}: ${note.text || 'N/A'}`; });
+                }
+                prompt += `\n---\n`;
+            }
+            if (data.roi && data.roi.results) {
                 const roi = data.roi;
-                prompt += `
-**Investment Inputs:**
-- Annual Subscription Cost: $${roi.inputs.annualSub || 'N/A'}
-- Professional Services Upfront Cost: $${roi.inputs.profServices || 'N/A'}
-- Number of Years Software Will Be Utilised For: ${roi.inputs.years || 'N/A'} Years
-
-**Detailed ROI Question Inputs:**
-`;
-                roi.questions.forEach(q => {
-                    prompt += `- ${q.text}: ${roi.inputs[q.id] || 'N/A'}\n`;
-                });
-
-                prompt += `
-**Calculated ROI Summary (${roi.inputs.years || 3} Years):**
-- Total Annual Savings: $${roi.results.totalAnnualSavings}
-- Net Annual Benefit: $${roi.results.netAnnualBenefit}
-- Total Investment: $${roi.results.totalInvestmentOverYears}
-- Total Benefit: $${roi.results.totalBenefitOverYears}
-- Net Benefit: $${roi.results.netBenefitOverYears}
-- ROI Percentage: ${roi.results.roiPercentage}%
-- Payback Period: ${roi.results.paybackPeriodMonths} Months
-
-**Detailed Annual Savings Breakdown:**
-`;
-                Object.entries(roi.results.detailedSavingsBreakdown).forEach(([key, value]) => {
-                    prompt += `- ${key}: ${value}\n`;
-                });
-
+                prompt += `### ROI Calculation Data:\n`;
+                prompt += `**Investment Inputs:**\n- Annual Subscription Cost: $${roi.inputs.annualSub || 'N/A'}\n- Professional Services Upfront Cost: $${roi.inputs.profServices || 'N/A'}\n- Number of Years Software Will Be Utilised For: ${roi.inputs.years || 'N/A'} Years\n\n`;
+                prompt += `**Detailed ROI Question Inputs:**\n`;
+                roi.questions.forEach(q => { prompt += `- ${q.text}: ${roi.inputs[q.id] || 'N/A'}\n`; });
+                prompt += `\n**Calculated ROI Summary (${roi.inputs.years || 3} Years):**\n- Total Annual Savings: $${roi.results.totalAnnualSavings}\n- Net Annual Benefit: $${roi.results.netAnnualBenefit}\n- Total Investment: $${roi.results.totalInvestmentOverYears}\n- Total Benefit: $${roi.results.totalBenefitOverYears}\n- Net Benefit: $${roi.results.netBenefitOverYears}\n- ROI Percentage: ${roi.results.roiPercentage}%\n- Payback Period: ${roi.results.paybackPeriodMonths} Months\n\n`;
+                prompt += `**Detailed Annual Savings Breakdown:**\n`;
+                Object.entries(roi.results.detailedSavingsBreakdown).forEach(([key, value]) => { prompt += `- ${key}: ${value}\n`; });
             } else {
-                prompt += `\nROI has not been calculated.`;
+                prompt += `\nROI has not been calculated.\n`;
             }
             prompt += `\n---
 Please provide your analysis now.`;
@@ -1090,16 +1461,9 @@ Please provide your analysis now.`;
                 filename = `${data.stream}_${data.moduleName}_AI_Prompt`.replace(/\s/g, '_') + '.txt';
                 mimeType = 'text/plain;charset=utf-8';
             } else {
-                 // Using JSON as a placeholder for other text formats for simplicity
-                 // In a real scenario you would have full formatters for md and txt
-                 content = JSON.stringify(data, null, 2);
-                 filename += `.${format === 'md' ? 'md' : 'txt'}`;
+                 content = `Export for ${format} not fully implemented in this example. Data:\n\n${JSON.stringify(data, null, 2)}`;
+                 filename += `.${format}`;
                  mimeType = 'text/plain;charset=utf-8';
-                 if(format === 'html'){
-                     content = `<pre>${content}</pre>`; // basic html wrapper
-                     filename = filename.replace('.txt', '.html');
-                     mimeType = 'text/html;charset=utf-8';
-                 }
             }
             
             const blob = new Blob([content], { type: mimeType });
@@ -1110,6 +1474,12 @@ Please provide your analysis now.`;
             showMessage(exportSuccessMessage);
             setTimeout(() => hideMessage(exportSuccessMessage), 3000);
         }
+
+        // --- Event Listeners & Initialization ---
+        roleSelect.addEventListener('change', e => {
+            selectedRole = e.target.value;
+            renderAppContent();
+        });
 
         streamSelect.addEventListener('change', (e) => {
             selectedStream = e.target.value;
@@ -1133,8 +1503,30 @@ Please provide your analysis now.`;
         cancelClearButton.addEventListener('click', hideConfirmationModal);
         closeValidationErrorButton.addEventListener('click', () => hideMessage(validationErrorMessage));
         exportDataButton.addEventListener('click', exportData);
+        adminButton.addEventListener('click', () => { currentScreen = 'admin'; renderScreen(); });
+        document.getElementById('admin-back-button').addEventListener('click', () => { currentScreen = 'tool'; renderScreen(); });
+        document.getElementById('admin-save-button').addEventListener('click', () => {
+            const state = getCurrentModuleState();
+            if(!state) return;
+            appModules[selectedStream][selectedModule].qualification.metricQuestions.forEach(q => {
+                const qualValue = document.getElementById(`${q.id}-qualified`).value;
+                const revValue = document.getElementById(`${q.id}-review`).value;
+                if(!state.customThresholds[q.id]) state.customThresholds[q.id] = {};
+                state.customThresholds[q.id].qualified = parseFloat(qualValue);
+                state.customThresholds[q.id].review = parseFloat(revValue);
+            });
+            alert('Custom thresholds saved for this session.');
+        });
+        document.getElementById('admin-reset-button').addEventListener('click', () => {
+            const state = getCurrentModuleState();
+            if(!state) return;
+            state.customThresholds = {};
+            renderAdminPanel();
+            alert('Thresholds for this module have been reset to default.');
+        });
 
         window.onload = () => {
+            populateRoleDropdown();
             populateStreamDropdown();
             renderAppContent();
         };
