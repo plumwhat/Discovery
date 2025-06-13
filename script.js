@@ -864,6 +864,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 Object.values(formula.inputs).forEach(id => acc[id] = true);
                 return acc;
              }, {});
+             moduleState.roi.inputs = {};
              Object.keys(roiInputsConfig).forEach(id => {
                 const input = roiSection.querySelector(`#${id}`);
                 if (input) moduleState.roi.inputs[id] = input.value;
