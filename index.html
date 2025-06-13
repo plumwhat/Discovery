@@ -81,7 +81,6 @@
     <script>
         const FTE_HOURS_PER_YEAR = 2080;
 
-        // --- Data Structure for all Modules, organized by Business Stream ---
         const appModules = {
             'Finance Automation': {
                 'Accounts Payable': {
@@ -674,38 +673,15 @@
             }
         };
 
-        const discoveryToRoiMapping = {
-            'Finance Automation': {
-                'Accounts Payable': [ { discoveryId: 'ap1', roiId: 'roi_ap1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'ap3', roiId: 'roi_ap3' }, { discoveryId: 'ap4', roiId: 'roi_ap2' } ],
-                'Accounts Receivable': [ { discoveryId: 'ar1', roiId: 'roi_ar1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'ar2', roiId: 'roi_ar2' }, { discoveryId: 'ar3', roiId: 'roi_ar3' }, { discoveryId: 'ar8', roiId: 'roi_ar4' } ],
-                'Order Management': [ { discoveryId: 'om1', roiId: 'roi_om1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'om8', roiId: 'roi_om5' } ],
-                'Procurement': [ { discoveryId: 'p1', roiId: 'roi_p1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'p7', roiId: 'roi_p4' } ],
-                'Expense Management': [ { discoveryId: 'em1', roiId: 'roi_em1', transform: v => (parseFloat(v) || 0) * 12 } ],
-                'Cash Application': [ { discoveryId: 'ca6', roiId: 'roi_ca4' } ],
-                'Collections Management': [ { discoveryId: 'cm8', roiId: 'roi_cm2' } ],
-                'Credit Management': [ { discoveryId: 'crm6', roiId: 'roi_crm3' } ],
-                'Customer Inquiry': [ { discoveryId: 'ci5', roiId: 'roi_ci3' } ],
-                'Supplier Management': [ { discoveryId: 'sm7', roiId: 'roi_sm4' } ],
-                'Sourcing': [ { discoveryId: 's7', roiId: 'roi_s3' } ],
-                'Claims & Deductions': [ { discoveryId: 'cd7', roiId: 'roi_cd3' } ],
-                'Invoice Delivery': [ { discoveryId: 'id1', roiId: 'roi_id1', transform: v => (parseFloat(v) || 0) * 12 } ]
-            },
-            'Business Automation': {
-                'Document Management': [ { discoveryId: 'dm1', roiId: 'roi_dm1' }, { discoveryId: 'dm2', roiId: 'roi_dm3' } ]
-            }
-        };
-
         const scorecardQuestions = [ { id: 'os1', text: "Customer's business needs align to our capability?" }, { id: 'os2', text: 'We have access to all the key buying influences?' }, { id: 'os3', text: 'We have at least one Coach?' }, { id: 'os4', text: 'We can differentiate our solution from the competition and demonstrate value?' }, { id: 'os5', text: 'Customer has engaged us early in the process?' }, ];
         const scorecardAnswerOptions = ['Yes', 'No', 'Unknown'];
         const scorecardYesPoints = 20;
 
-        // --- State Management ---
         let allModuleData = {};
         let selectedStream = '';
         let selectedModule = '';
         let currentView = 'scorecard';
 
-        // --- DOM Elements ---
         const streamSelect = document.getElementById('stream-select');
         const moduleSelect = document.getElementById('module-select');
         const appContent = document.getElementById('app-content');
@@ -719,14 +695,12 @@
         const confirmClearButton = document.getElementById('confirm-clear-button');
         const cancelClearButton = document.getElementById('cancel-clear-button');
 
-        // --- Helper Functions ---
         const getCurrentModuleState = () => selectedModule ? (allModuleData[selectedModule] || (allModuleData[selectedModule] = { discoveryAnswers: {}, roiAnswers: {}, eskerSubscriptionCost: '', professionalServicesCost: '', numberOfYearsUtilized: '3', additionalDiscoveryNotes: [], calculatedRoi: null, scorecardAnswers: {}, calculatedScorecard: null, currentView: 'scorecard' })) : null;
         const showMessage = (el) => el.classList.remove('hidden');
         const hideMessage = (el) => el.classList.add('hidden');
         const showConfirmationModal = () => { confirmationModal.style.display = 'flex'; }
         const hideConfirmationModal = () => { confirmationModal.style.display = 'none'; }
 
-        // --- Core Application Logic ---
         function populateStreamDropdown() {
             streamSelect.innerHTML = '<option value="">-- Choose Business Stream --</option>';
             Object.keys(appModules).forEach(streamName => {
@@ -749,6 +723,14 @@
             } else {
                  moduleSelect.innerHTML = '<option value="">-- Choose Stream First --</option>';
             }
+        }
+
+        function getPlaceholder(q) {
+            if (q.type === 'textarea') return 'Enter text response...';
+            if (q.type === 'number') {
+                return `Enter value ${q.unit ? '(' + q.unit + ')' : ''}`;
+            }
+            return '';
         }
 
         function renderAppContent() {
@@ -778,9 +760,7 @@
                     <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
                         <label class="block text-md font-semibold text-gray-700 mb-2">${index + 1}. ${q.text}</label>
                         <div class="flex flex-wrap gap-x-6 gap-y-2">
-                            ${scorecardAnswerOptions.map(option => `
-                                <label class="inline-flex items-center"><input type="radio" name="${q.id}" value="${option}" class="form-radio h-5 w-5 text-ms-blue" ${state.scorecardAnswers[q.id] === option ? 'checked' : ''}> <span class="ml-2">${option}</span></label>
-                            `).join('')}
+                            ${scorecardAnswerOptions.map(option => `<label class="inline-flex items-center"><input type="radio" name="${q.id}" value="${option}" class="form-radio h-5 w-5 text-ms-blue" ${state.scorecardAnswers[q.id] === option ? 'checked' : ''}> <span class="ml-2">${option}</span></label>`).join('')}
                         </div>
                     </div>`).join('');
                 viewContainer.innerHTML += `<div id="scorecard-results" class="mt-8 p-6 bg-blue-50 border-blue-200 rounded-lg shadow-md text-center"></div>`;
@@ -790,8 +770,8 @@
             } else if (currentView === 'discovery') {
                 viewContainer.innerHTML += moduleData.questions.map((q, index) => `
                     <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
-                        <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">${index + 1}. ${q.text} ${q.unit ? `<span class="font-normal text-gray-500">(${q.unit})</span>` : ''}</label>
-                        ${q.type === 'textarea' ? `<textarea id="${q.id}" rows="4" class="w-full p-2 border rounded-md">${state.discoveryAnswers[q.id] || ''}</textarea>` : `<input id="${q.id}" type="${q.type}" value="${state.discoveryAnswers[q.id] || ''}" class="w-full p-2 border rounded-md">`}
+                        <label for="${q.id}" class="block text-md font-semibold text-gray-700 mb-2">${index + 1}. ${q.text}</label>
+                        ${q.type === 'textarea' ? `<textarea id="${q.id}" rows="4" class="w-full p-2 border rounded-md" placeholder="${getPlaceholder(q)}">${state.discoveryAnswers[q.id] || ''}</textarea>` : `<input id="${q.id}" type="${q.type}" value="${state.discoveryAnswers[q.id] || ''}" class="w-full p-2 border rounded-md" placeholder="${getPlaceholder(q)}">`}
                     </div>`).join('');
                 viewContainer.innerHTML += `
                     <div class="mt-8 p-4 border border-gray-200 rounded-lg bg-gray-50 shadow-sm">
@@ -810,10 +790,10 @@
                 renderAdditionalNotes();
             } else if (currentView === 'roi') {
                 viewContainer.innerHTML += `
-                    <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Annual Subscription Cost ($)</label><input id="annual-subscription-cost" type="number" value="${state.eskerSubscriptionCost}" class="w-full p-2 border rounded-md"></div>
-                    <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Professional Services Cost ($)</label><input id="professional-services-cost" type="number" value="${state.professionalServicesCost}" class="w-full p-2 border rounded-md"></div>
-                    <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Years Utilised</label><input id="number-of-years-utilized" type="number" value="${state.numberOfYearsUtilized}" class="w-full p-2 border rounded-md"></div>
-                    ${moduleData.roiQuestions.map((q, index) => `<div class="mb-6 p-4 border rounded-lg bg-gray-50"><label for="${q.id}" class="block font-semibold">${index + 1}. ${q.text} ${q.unit ? `<span class="font-normal text-gray-500">(${q.unit})</span>` : ''}</label><input id="${q.id}" type="number" value="${state.roiAnswers[q.id] || ''}" class="w-full p-2 border rounded-md"></div>`).join('')}
+                    <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Annual Subscription Cost ($)</label><input id="annual-subscription-cost" type="number" value="${state.eskerSubscriptionCost}" class="w-full p-2 border rounded-md" placeholder="Enter value ($)"></div>
+                    <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Professional Services Cost ($)</label><input id="professional-services-cost" type="number" value="${state.professionalServicesCost}" class="w-full p-2 border rounded-md" placeholder="Enter value ($)"></div>
+                    <div class="mb-6 p-4 border-ms-blue-light rounded-lg bg-blue-50"><label class="block font-semibold">Years Utilised</label><input id="number-of-years-utilized" type="number" value="${state.numberOfYearsUtilized}" class="w-full p-2 border rounded-md" placeholder="Enter value (Years)"></div>
+                    ${moduleData.roiQuestions.map((q, index) => `<div class="mb-6 p-4 border rounded-lg bg-gray-50"><label for="${q.id}" class="block font-semibold">${index + 1}. ${q.text}</label><input id="${q.id}" type="number" value="${state.roiAnswers[q.id] || ''}" class="w-full p-2 border rounded-md" placeholder="${getPlaceholder(q)}"></div>`).join('')}
                     <div class="flex justify-center gap-4 mt-6">
                         <button id="calculate-roi-button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6">Calculate ROI</button>
                         <button id="populate-demo-data-button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6">Demo Data</button>
@@ -846,7 +826,7 @@
         
         function calculateRoi() {
             const state = getCurrentModuleState();
-            if (!state) { showMessage(validationErrorMessage); return; }
+            if (!state) return;
             hideMessage(validationErrorMessage);
             const moduleData = appModules[selectedStream][selectedModule];
             const annualSub = parseFloat(state.eskerSubscriptionCost);
@@ -960,7 +940,7 @@
 
             mappings.forEach(map => {
                 const discoveryValue = state.discoveryAnswers[map.discoveryId];
-                if (discoveryValue !== undefined) {
+                if (discoveryValue !== undefined && discoveryValue !== '') {
                     let valueToCopy = map.transform ? map.transform(discoveryValue) : discoveryValue;
                     state.roiAnswers[map.roiId] = valueToCopy;
                 }
@@ -968,7 +948,7 @@
             showMessage(copySuccessMessage);
             setTimeout(() => hideMessage(copySuccessMessage), 3000);
             if (currentView === 'discovery') {
-                state.currentView = 'roi'; // Switch to ROI tab to see results
+                state.currentView = 'roi';
             }
             renderAppContent();
         }
@@ -982,24 +962,21 @@
             }
         }
         
-        // --- Export Functions ---
         function getReportData() {
             const state = getCurrentModuleState();
             if (!state) return null;
             const moduleData = appModules[selectedStream][selectedModule];
-            const data = {
+            return {
                 stream: selectedStream,
                 moduleName: selectedModule,
                 scorecard: { questions: scorecardQuestions, answers: state.scorecardAnswers, score: state.calculatedScorecard, maxScore: scorecardQuestions.length * scorecardYesPoints },
                 discovery: { questions: moduleData.questions, answers: state.discoveryAnswers, notes: state.additionalDiscoveryNotes },
                 roi: { questions: moduleData.roiQuestions, inputs: { ...state.roiAnswers, annualSub: state.eskerSubscriptionCost, profServices: state.professionalServicesCost, years: state.numberOfYearsUtilized }, results: state.calculatedRoi }
             };
-            return data;
         }
 
         function generateAIPromptContent(data) {
             let prompt = `You are an expert business analyst... (Full prompt logic here as in original file, adapted for new data structure)`;
-             // This is the full restored prompt logic, adapted for the new data structure
             prompt = `You are an expert business analyst providing concise and actionable insights on process improvement and technology adoption. Your task is to analyse the provided information for a client interested in optimising their ${data.moduleName} process and evaluating the opportunity fit.
 
 Based on the detailed information below, please provide:
@@ -1090,10 +1067,10 @@ Please provide your analysis now.`;
                 filename = `${data.stream}_${data.moduleName}_AI_Prompt`.replace(/\s/g, '_') + '.txt';
                 mimeType = 'text/plain;charset=utf-8';
             } else {
-                // Simplified text/md/html for brevity, but they would use full formatters
-                content = JSON.stringify(data, null, 2);
-                filename += '.json';
-                mimeType = 'application/json';
+                 // Simplified text/md/html for demonstration purposes. In a real scenario, you'd have full formatters.
+                 content = JSON.stringify(data, null, 2);
+                 filename += '.json';
+                 mimeType = 'application/json';
             }
             
             const blob = new Blob([content], { type: mimeType });
@@ -1105,7 +1082,6 @@ Please provide your analysis now.`;
             setTimeout(() => hideMessage(exportSuccessMessage), 3000);
         }
 
-        // --- Event Listeners & Initialization ---
         streamSelect.addEventListener('change', (e) => {
             selectedStream = e.target.value;
             selectedModule = '';
