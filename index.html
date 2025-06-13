@@ -673,6 +673,29 @@
             }
         };
 
+        const discoveryToRoiMapping = {
+            'Finance Automation': {
+                'Accounts Payable': [ { discoveryId: 'ap1', roiId: 'roi_ap1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'ap3', roiId: 'roi_ap3' }, { discoveryId: 'ap4', roiId: 'roi_ap2' } ],
+                'Accounts Receivable': [ { discoveryId: 'ar1', roiId: 'roi_ar1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'ar2', roiId: 'roi_ar2' }, { discoveryId: 'ar3', roiId: 'roi_ar3' }, { discoveryId: 'ar8', roiId: 'roi_ar4' } ],
+                'Order Management': [ { discoveryId: 'om1', roiId: 'roi_om1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'om8', roiId: 'roi_om5' } ],
+                'Procurement': [ { discoveryId: 'p1', roiId: 'roi_p1', transform: v => (parseFloat(v) || 0) * 12 }, { discoveryId: 'p7', roiId: 'roi_p4' } ],
+                'Expense Management': [ { discoveryId: 'em1', roiId: 'roi_em1', transform: v => (parseFloat(v) || 0) * 12 } ],
+                'Cash Application': [ { discoveryId: 'ca6', roiId: 'roi_ca4' } ],
+                'Collections Management': [ { discoveryId: 'cm8', roiId: 'roi_cm2' } ],
+                'Credit Management': [ { discoveryId: 'crm6', roiId: 'roi_crm3' } ],
+                'Customer Inquiry': [ { discoveryId: 'ci5', roiId: 'roi_ci3' } ],
+                'Supplier Management': [ { discoveryId: 'sm7', roiId: 'roi_sm4' } ],
+                'Sourcing': [ { discoveryId: 's7', roiId: 'roi_s3' } ],
+                'Claims & Deductions': [ { discoveryId: 'cd7', roiId: 'roi_cd3' } ],
+                'Invoice Delivery': [ { discoveryId: 'id1', roiId: 'roi_id1', transform: v => (parseFloat(v) || 0) * 12 } ]
+            },
+            'Business Automation': {
+                'Document Management': [ { discoveryId: 'dm1', roiId: 'roi_dm1' }, { discoveryId: 'dm2', roiId: 'roi_dm3' } ],
+                'Workflow Management': [ ],
+                'Process Mapping': [ ]
+            }
+        };
+
         const scorecardQuestions = [ { id: 'os1', text: "Customer's business needs align to our capability?" }, { id: 'os2', text: 'We have access to all the key buying influences?' }, { id: 'os3', text: 'We have at least one Coach?' }, { id: 'os4', text: 'We can differentiate our solution from the competition and demonstrate value?' }, { id: 'os5', text: 'Customer has engaged us early in the process?' }, ];
         const scorecardAnswerOptions = ['Yes', 'No', 'Unknown'];
         const scorecardYesPoints = 20;
@@ -749,6 +772,10 @@
                 <button id="discovery-tab" class="px-6 py-3 text-lg font-medium ${currentView === 'discovery' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">Discovery</button>
                 <button id="roi-tab" class="px-6 py-3 text-lg font-medium ${currentView === 'roi' ? 'bg-ms-blue text-white shadow-md' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}">ROI</button>
             </div>`;
+            
+            document.getElementById('scorecard-tab').addEventListener('click', () => { state.currentView = 'scorecard'; renderAppContent(); });
+            document.getElementById('discovery-tab').addEventListener('click', () => { state.currentView = 'discovery'; renderAppContent(); });
+            document.getElementById('roi-tab').addEventListener('click', () => { state.currentView = 'roi'; renderAppContent(); });
 
             const viewContainer = document.createElement('div');
             viewContainer.className = "bg-white p-6 rounded-xl shadow-inner";
@@ -808,9 +835,6 @@
                 document.getElementById('populate-demo-data-button').addEventListener('click', populateDemoData);
                 if (state.calculatedRoi) renderRoiResults(state.calculatedRoi);
             }
-            document.getElementById('scorecard-tab').addEventListener('click', () => { state.currentView = 'scorecard'; renderAppContent(); });
-            document.getElementById('discovery-tab').addEventListener('click', () => { state.currentView = 'discovery'; renderAppContent(); });
-            document.getElementById('roi-tab').addEventListener('click', () => { state.currentView = 'roi'; renderAppContent(); });
         }
 
         function calculateScorecard() {
@@ -976,8 +1000,7 @@
         }
 
         function generateAIPromptContent(data) {
-            let prompt = `You are an expert business analyst... (Full prompt logic here as in original file, adapted for new data structure)`;
-            prompt = `You are an expert business analyst providing concise and actionable insights on process improvement and technology adoption. Your task is to analyse the provided information for a client interested in optimising their ${data.moduleName} process and evaluating the opportunity fit.
+            let prompt = `You are an expert business analyst providing concise and actionable insights on process improvement and technology adoption. Your task is to analyse the provided information for a client interested in optimising their ${data.moduleName} process and evaluating the opportunity fit.
 
 Based on the detailed information below, please provide:
 1.  **Opportunity Scorecard Analysis:** Based on the Yes/No/Unknown answers and the total score (${data.scorecard.score} out of ${data.scorecard.maxScore}), analyse the overall fit and strength of this opportunity. Highlight any specific "No" answers that represent significant risks or challenges for a successful project.
@@ -1067,10 +1090,16 @@ Please provide your analysis now.`;
                 filename = `${data.stream}_${data.moduleName}_AI_Prompt`.replace(/\s/g, '_') + '.txt';
                 mimeType = 'text/plain;charset=utf-8';
             } else {
-                 // Simplified text/md/html for demonstration purposes. In a real scenario, you'd have full formatters.
+                 // Using JSON as a placeholder for other text formats for simplicity
+                 // In a real scenario you would have full formatters for md and txt
                  content = JSON.stringify(data, null, 2);
-                 filename += '.json';
-                 mimeType = 'application/json';
+                 filename += `.${format === 'md' ? 'md' : 'txt'}`;
+                 mimeType = 'text/plain;charset=utf-8';
+                 if(format === 'html'){
+                     content = `<pre>${content}</pre>`; // basic html wrapper
+                     filename = filename.replace('.txt', '.html');
+                     mimeType = 'text/html;charset=utf-8';
+                 }
             }
             
             const blob = new Blob([content], { type: mimeType });
