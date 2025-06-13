@@ -1,0 +1,97 @@
+body { 
+    font-family: 'Inter', sans-serif; 
+}
+
+.bg-ms-blue { 
+    background-color: #0078D4; 
+}
+
+.hover\:bg-ms-blue-dark:hover { 
+    background-color: #005B9C; 
+}
+
+.text-ms-blue { 
+    color: #0078D4; 
+}
+
+.border-ms-blue-light { 
+    border-color: #A0CBE8; 
+}
+
+.ring-ms-blue { 
+    --tw-ring-color: #0078D4; 
+}
+
+.form-radio:checked { 
+    background-color: #0078D4; 
+    border-color: #0078D4; 
+}
+
+select, input[type="number"], textarea { 
+    transition: all 0.2s ease-in-out; 
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+}
+
+select:focus, input[type="number"]:focus, textarea:focus { 
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.25); 
+    border-color: #0078D4; 
+}
+
+button { 
+    transition: all 0.3s ease-in-out; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+    border-radius: 0.5rem; 
+}
+
+button:hover { 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+    transform: translateY(-2px); 
+}
+
+.modal { 
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.modal-content { 
+    background-color: #fefefe; 
+    margin: auto; 
+    padding: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+    max-width: 400px; 
+    width: 90%; 
+    text-align: center; 
+}
+
+#app-content .flex button { 
+    border-radius: 0.5rem; 
+}
+
+#app-content .flex button + button { 
+    margin-left: -1px; 
+}
+
+#app-content .flex button:first-child { 
+    border-top-right-radius: 0; 
+    border-bottom-right-radius: 0; 
+}
+
+#app-content .flex button:last-child { 
+    border-top-left-radius: 0; 
+    border-bottom-left-radius: 0; 
+}
+
+#app-content .flex button:not(:first-child):not(:last-child) { 
+    border-radius: 0; 
+}
